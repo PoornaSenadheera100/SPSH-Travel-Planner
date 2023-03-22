@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Application Frameworks Group Project - MERN Stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PoornaSenadheera100/SPSH-Travel-Planner.git"
+  },
+  "author": "Vihansa S.A.S (IT21134180), Senadheera P.V.P.P (IT21126888), Wijeratne D.M.S.D (IT21138386), Christy H.M (IT21127946)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PoornaSenadheera100/SPSH-Travel-Planner/issues"
+  },
+  "homepage": "https://github.com/PoornaSenadheera100/SPSH-Travel-Planner#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.2"
+  }
+}
