@@ -14,19 +14,21 @@ app.use(bodyParser.json());
 
 const URL = process.env.MONGODB_URL;
 
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 
 mongoose.connect(URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 const connection = mongoose.connection;
-connection.once("open", ()=>{
-    console.log("MongoDB Connection Success!");
+connection.once("open", () => {
+  console.log("MongoDB Connection Success!");
 });
 
+const adminRouter = require("./routes/admin.js");
+app.use("/admin", adminRouter);
 
-app.listen(PORT, ()=>{
-    console.log(`Server is up and running on PORT : ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is up and running on PORT : ${PORT}`);
 });
