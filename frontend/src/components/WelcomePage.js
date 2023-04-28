@@ -6,7 +6,10 @@ export default function WelcomePage() {
   );
 
   const providerLoginTitle = (
-    <h2 className="fw-bold mb-2 text-uppercase">Service Provider</h2>
+    <>
+      <h2 className="fw-bold mb-2 text-uppercase">Service Provider</h2>
+      <br />
+    </>
   );
 
   const travellerLoginSubTitle = (
@@ -24,15 +27,27 @@ export default function WelcomePage() {
     </p>
   );
 
+  const travellerFormWidth = "60%";
+
   return (
     <div>
-      <Login
-        title={travellerLoginTitle}
-        subtitle={travellerLoginSubTitle}
-        signupBtn={signupBtn}
-      />
+      <div style={{ float: "right" }}>
+        <Login title={providerLoginTitle} formWidth="90%" />
+      </div>
 
-      <Login title={providerLoginTitle} />
+      <div style={{ float: "right", width: "50%" }}>
+        <center>
+          <Login
+            title={travellerLoginTitle}
+            subtitle={travellerLoginSubTitle}
+            signupBtn={signupBtn}
+            formWidth={travellerFormWidth}
+          />
+        </center>
+      </div>
+      <div style={{ float: "right", width: "30%" }}>
+        <p style={{ color: "white" }}>Invisible</p>
+      </div>
     </div>
   );
 }
