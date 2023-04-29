@@ -8,10 +8,28 @@ export default function AdminHomePage() {
       <div className="col-4">
         <button
           type="button"
-          class="btn btn-primary btn-lg"
+          class="btn btn-success btn-lg"
           style={{ width: "90%", height: "30%" }}
         >
           Add Service Provider
+        </button>
+        <br />
+        <br />
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          style={{ width: "90%", height: "30%" }}
+        >
+          Manage Service Providers
+        </button>
+        <br />
+        <br />
+        <button
+          type="button"
+          class="btn btn-warning btn-lg"
+          style={{ width: "90%", height: "30%" }}
+        >
+          Manage Tourists
         </button>
       </div>
       <div className="col">
