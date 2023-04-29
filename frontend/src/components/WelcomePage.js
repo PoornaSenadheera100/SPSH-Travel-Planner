@@ -21,7 +21,7 @@ export default function WelcomePage() {
       <br />
       <br />
       Create a new account <br />
-      <a href="/buyersignup" className="btn btn-outline-light btn-lg px-5">
+      <a href="/signup" className="btn btn-outline-light btn-lg px-5">
         Sign Up
       </a>
     </p>
