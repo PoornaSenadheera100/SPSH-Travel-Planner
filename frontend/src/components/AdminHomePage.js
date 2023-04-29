@@ -5,7 +5,15 @@ export default function AdminHomePage() {
   const title = "test";
   return (
     <div className="container row">
-      <div className="col-4">Buttons</div>
+      <div className="col-4">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          style={{ width: "90%", height: "30%" }}
+        >
+          Add Service Provider
+        </button>
+      </div>
       <div className="col">
         <Router>
           <Route
