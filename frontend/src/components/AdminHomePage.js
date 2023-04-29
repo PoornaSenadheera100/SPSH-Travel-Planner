@@ -9,13 +9,15 @@ export default function AdminHomePage() {
         <p style={{ color: "white" }}>Invisible</p>
       </div>
       <div className="col-4">
-        <button
-          type="button"
-          class="btn btn-success btn-lg"
-          style={{ width: "90%", height: "30%" }}
-        >
-          Add Service Provider
-        </button>
+        <a href="/admin/addserviceprovider">
+          <button
+            type="button"
+            class="btn btn-success btn-lg"
+            style={{ width: "90%", height: "30%" }}
+          >
+            Add Service Provider
+          </button>
+        </a>
         <br />
         <br />
         <button
@@ -45,7 +47,6 @@ export default function AdminHomePage() {
                 <CreateForm {...props} title="Add Service Provider" />
               )}
             />
-            {/* <Route path="/signup" exact component={SignupPage} /> */}
           </Router>
         </div>
       </div>
