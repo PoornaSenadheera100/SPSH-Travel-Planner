@@ -5,7 +5,7 @@ export default function CreateForm(props) {
   const [name, setName] = useState({});
   const [email, setEmail] = useState({});
   const [phone, setPhone] = useState({});
-  const [delChrg, setDelChrg] = useState();
+  const [nic, setNic] = useState({});
   const [password, setPassword] = useState({});
   const [rePassword, setRePassword] = useState({});
 
@@ -13,10 +13,6 @@ export default function CreateForm(props) {
 
   return (
     <div>
-      <a href="/adminhome/managesellers">
-        <Button variant="dark">Back</Button>
-      </a>
-
       <center>
         <h1>{props.title}</h1>
       </center>
@@ -66,17 +62,15 @@ export default function CreateForm(props) {
 
         <br></br>
 
-        <label htmlFor="delChrg">Delivery Charge (Rs.)</label>
+        <label htmlFor="nic">NIC</label>
         <input
-          type="number"
-          id="delChrg"
+          type="text"
+          id="nic"
           class="form-control"
-          placeholder="Delivery Charge"
-          min="0"
-          step="0.01"
+          placeholder="NIC"
           required
           onChange={(e) => {
-            setDelChrg(e.target.value);
+            setNic(e.target.value);
           }}
         />
 
@@ -118,6 +112,10 @@ export default function CreateForm(props) {
         >
           Submit
         </button>
+
+        <a href="/adminhome/managesellers">
+          <Button variant="dark">Back</Button>
+        </a>
       </form>
     </div>
   );
