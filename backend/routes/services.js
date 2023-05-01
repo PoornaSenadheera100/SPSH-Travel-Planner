@@ -114,31 +114,41 @@ router.route("/get/:Service_ProviderId/:ServiceId").get(async(req,res) =>{
     })
 })
 
-/*
+
 //UPDATE ROUTE
-router.route("/update/:SupplierID/:ProductId").put(async(req,res)=>{
+router.route("/update/:Service_ProviderId/:ServiceId").put(async(req,res)=>{
     
     //The supplier ID and Product ID is fetched and stored in variables.
-    let supplierID = req.params.SupplierID;
-    let productId = req.params.ProductId;
+    let service_ProviderId = req.params.Service_ProviderId;
+    let serviceId = req.params.ServiceId;
 
     
-    const {SupplierID,ProductId,Name,Description,Price,Quantity,Image} = req.body;
+    const {Service_ProviderId,ServiceId,ServiceName,
+        ServiceLocation,
+        ServicePrice,
+        ServiceDuration,
+        AvailableTime,
+        AvailableDates,
+        Capacity,
+        Image} = req.body;
 
-    const updateItem = {
-        SupplierID,
-        ProductId,
-        Name,
-        Description,
-        Price,
-        Quantity,
+    const updateService = {
+        Service_ProviderId,
+        ServiceId,
+        ServiceName,
+        ServiceLocation,
+        ServicePrice,
+        ServiceDuration,
+        AvailableTime,
+        AvailableDates,
+        Capacity,
         Image
     }
     //const update = 
-    await Item.findOneAndUpdate({ SupplierID: supplierID, ProductId: productId },
-        updateItem)
+    await Service.findOneAndUpdate({ Service_ProviderId: service_ProviderId, ServiceId: serviceId },
+        updateService)
     .then(()=>{
-        res.status(200).send({status : "Item Updated"})
+        res.status(200).send({status : "Service Updated"})
         //,item: update
     }).catch((err) => {
         console.log(err);
@@ -147,6 +157,7 @@ router.route("/update/:SupplierID/:ProductId").put(async(req,res)=>{
 
 })
 
+/*
 // RETRIEVE ALL ITEMS ROUTE.
 router.route("/").get((req, res)=>{
     Item.find().then((items)=>{
