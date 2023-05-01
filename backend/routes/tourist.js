@@ -36,5 +36,15 @@ route.route("/").get((req,res)=>{
     })
 })
 
+//Get one tourists information by providing the email
+router.route("/get/email/:email").get(async(req, res)=>{
+    let email = req.params.email;
+    await Seller.find({"email": `${email}`}).then((seller)=>{
+        res.json(seller);
+    }).catch((err)=>{
+        console.log(err.message);
+        res.status(500).send({status: "Error with get the seller", error: err.message});
+    })
+})
 
 module.exports = router;
