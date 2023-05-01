@@ -48,7 +48,10 @@ export default function UserHome() {
       <div>
         {/* Display Component based on location */}
         {locations.map((city) => {
-          if (location.toLowerCase() === city.toLowerCase()) {
+          if (
+            city.toLowerCase().includes(location.toLowerCase()) &&
+            location.toLowerCase() != ""
+          ) {
             return <UserServicesComponent city={city} />;
           }
         })}
