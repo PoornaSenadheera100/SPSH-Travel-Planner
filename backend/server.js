@@ -29,6 +29,9 @@ connection.once("open", () => {
 const adminRouter = require("./routes/admin.js");
 app.use("/admin", adminRouter);
 
+const serviceProviderRouter = require("./routes/serviceprovider.js");
+app.use("/serviceprovider", serviceProviderRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is up and running on PORT : ${PORT}`);
 });
