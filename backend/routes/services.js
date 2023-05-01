@@ -100,20 +100,21 @@ router.route("/delete/:Service_ProviderId/:ServiceId").delete(async(req, res)=>{
     })
 })
 
-/*
+
 //RETRIEVEING ONE SPECIFIC DETAIL
-router.route("/get/:SupplierId/:ProductId").get(async(req,res) =>{ 
-    let SupplierId = req.params.SupplierId;
-    let ProductId = req.params.ProductId;
-    const item = await Item.find({"SupplierId": `${SupplierId}`, "ProductId": `${ProductId}`})
-    .then((item)=>{
-        res.status(200).send({status:"Item fetched",item})
+router.route("/get/:Service_ProviderId/:ServiceId").get(async(req,res) =>{ 
+    let Service_ProviderId = req.params.Service_ProviderId;
+    let ServiceId = req.params.ServiceId;
+    const service = await Service.find({"Service_ProviderId": `${Service_ProviderId}`, "ServiceId": `${ServiceId}`})
+    .then((service)=>{
+        res.status(200).send({status:"Service fetched",service})
     }).catch((err)=>{
         console.log(err.message);
-        res.status(500).send({status:"Error with getting one item",error:err.message});
+        res.status(500).send({status:"Error with getting one service",error:err.message});
     })
 })
 
+/*
 //UPDATE ROUTE
 router.route("/update/:SupplierID/:ProductId").put(async(req,res)=>{
     
