@@ -157,16 +157,17 @@ router.route("/update/:Service_ProviderId/:ServiceId").put(async(req,res)=>{
 
 })
 
-/*
+
 // RETRIEVE ALL ITEMS ROUTE.
 router.route("/").get((req, res)=>{
-    Item.find().then((items)=>{
-        res.json(items);
+    Service.find().then((items)=>{
+        res.json(services);
     }).catch((err)=>{
         console.log(err);
     })
 })
 
+/*
 // Retrieve a single item
 router.route("/getitem/:ProductId").get(async(req, res)=>{
 
