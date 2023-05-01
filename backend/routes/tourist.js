@@ -27,5 +27,14 @@ router.route("/add").post((req, res)=>{
     })
 })
 
+//Get all tourist 
+route.route("/").get((req,res)=>{
+    Tourist.find().then((tourist)=>{
+        res.json(tourist);
+    }).catch((err)=>{
+        console.log(err);
+    })
+})
+
 
 module.exports = router;
