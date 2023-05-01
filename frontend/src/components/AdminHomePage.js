@@ -9,7 +9,7 @@ export default function AdminHomePage() {
   }
 
   return (
-    <div className="row">
+    <div className="row" style={{ height: "100%" }}>
       <div style={{ width: "1px" }}>
         <p style={{ color: "white" }}>Invisible</p>
       </div>
@@ -71,7 +71,7 @@ export default function AdminHomePage() {
               <List
                 {...props}
                 title="Manage Service Providers"
-                getURL=""
+                getURL="http://localhost:8070/serviceprovider/"
                 column1name="Name"
                 viewURL=""
                 updateURL=""
