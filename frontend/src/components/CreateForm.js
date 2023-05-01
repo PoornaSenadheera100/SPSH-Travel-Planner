@@ -113,9 +113,9 @@ export default function CreateForm(props) {
           Submit
         </button>
 
-        <a href="/adminhome/managesellers">
+        {/* <a href="/adminhome/managesellers">
           <Button variant="dark">Back</Button>
-        </a>
+        </a> */}
       </form>
     </div>
   );
