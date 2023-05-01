@@ -67,4 +67,15 @@ router.route("/update/:paramemail").put(async(req, res)=>{
     })
 })
 
+// Delete tourist by email
+router.route("/delete/email/:paraemail").delete(async(req, res)=>{
+    let touristEmail = req.params.paraemail;
+
+    await Buyer.findOneAndDelete({"email" : touristEmail}).then(()=>{
+        res.status(200).send({status: "Tourist Deleted"});
+    }).catch((err)=>{
+        console.log(err.message);
+        res.status(500).send({status: "Error occured when deleting tourist", error: err.message});
+    })
+})
 module.exports = router;
