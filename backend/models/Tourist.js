@@ -27,4 +27,9 @@ const touristSchema = new Schema({
         required : true
     },
 })
+// create a model based on the tourist schema
+const Tourist = mongoose.model("Tourist", touristSchema);
+
+// export the Buyer model to be used in other parts of the application
+module.exports = Tourist;
 
