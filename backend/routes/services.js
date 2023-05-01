@@ -73,13 +73,13 @@ router.route("/add").post(upload.single('Image'),(req, res)=>{
    
 })
 
-/*
+
 //RETRIEVE DETAILS ROUTE.
-router.route("/:SupplierId").get(async(req, res)=>{
+router.route("/:Service_ProviderId").get(async(req, res)=>{
 
-    let SupplierId = req.params.SupplierId;
+    let Service_ProviderId = req.params.Service_ProviderId;
 
-    const retrieve = await Item.find({"SupplierId": SupplierId}).then((item)=>{
+    const retrieve = await Service.find({"Service_ProviderId": Service_ProviderId}).then((item)=>{
         res.json(item);
     }).catch((err)=>{
         console.log(err);
@@ -87,6 +87,7 @@ router.route("/:SupplierId").get(async(req, res)=>{
     })
 })
 
+/*
 //DELETE ROUTE.
 router.route("/delete/:SupplierId/:ProductId").delete(async(req, res)=>{
     let SupplierId = req.params.SupplierId;
