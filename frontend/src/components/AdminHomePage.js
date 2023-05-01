@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import CreateForm from "./CreateForm";
 import Button from "react-bootstrap/Button";
 import List from "./List";
+import ViewUser from "./ViewUser";
 
 export default function AdminHomePage() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
@@ -84,10 +85,24 @@ export default function AdminHomePage() {
                 title="Manage Service Providers"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
-                viewURL=""
+                viewURL="http://localhost:3000/admin/manageserviceproviders/view"
                 updateURL=""
                 deleteURL=""
                 afterDeleteURL=""
+              />
+            )}
+          />
+
+          <Route
+            path="/admin/manageserviceproviders/view/:email"
+            exact
+            render={(props) => (
+              <ViewUser
+                {...props}
+                title="Service Provider"
+                // getURL="http://localhost:8070/serviceprovider/"
+                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
+                backBtnURL="http://localhost:3000/admin/manageserviceproviders"
               />
             )}
           />
