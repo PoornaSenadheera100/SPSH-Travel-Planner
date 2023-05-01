@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let Item = require("../models/Service");
+let Service = require("../models/Service");
 const multer = require("multer");
 //import file system.
 const fs = require('fs');
