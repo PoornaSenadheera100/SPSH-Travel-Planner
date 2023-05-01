@@ -44,7 +44,7 @@ const serviceSchema = new mongoose.Schema({
     type: Number, 
     required: true
   }, 
-  ServiceImage:{
+  Image:{
     //Buffer is similar to "Array" data type.
     //type:String
     data: Buffer,
