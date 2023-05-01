@@ -47,4 +47,24 @@ router.route("/get/email/:email").get(async(req, res)=>{
     })
 })
 
+//Get one specific tourist and update 
+router.route("/update/:paramemail").put(async(req, res)=>{
+    let paramemail = req.params.paramemail;
+    const {name,nic, email, phone, password} = req.body;
+    const updateTourist = {
+        name,
+        nic,
+        email,
+        phone,
+        password
+    }
+
+    await Tourist.findOneAndUpdate({"email" : paramemail}, updateTourist).then(()=>{
+        res.status(200).send({status: "Tourist Updated"});
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).send({status: "Error with updating the tourist", error: err.message});
+    })
+})
+
 module.exports = router;
