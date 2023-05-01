@@ -167,18 +167,18 @@ router.route("/").get((req, res)=>{
     })
 })
 
-/*
+
 // Retrieve a single item
-router.route("/getitem/:ProductId").get(async(req, res)=>{
+router.route("/getservice/:ServiceId").get(async(req, res)=>{
 
-    let ProductId = req.params.ProductId;
+    let ServiceId = req.params.ServiceId;
 
-    const retrieve = await Item.find({"ProductId": ProductId}).then((item)=>{
-        res.json(item);
+    const retrieve = await Item.find({"ServiceId": ServiceId}).then((service)=>{
+        res.json(service);
     }).catch((err)=>{
         console.log(err);
         res.status(500).send({status:"Error in retrieving details."});
     })
 })
-*/
+
 module.exports = router;
