@@ -14,11 +14,22 @@ export default function AdminHomePage() {
         <p style={{ color: "white" }}>Invisible</p>
       </div>
       <div className="col-4">
+        <a href="/admin/managerequests">
+          <button
+            type="button"
+            class="btn btn-info btn-lg"
+            style={{ width: "90%", height: "17%" }}
+          >
+            Manage Requests
+          </button>
+        </a>
+        <br />
+        <br />
         <a href="/admin/addserviceprovider">
           <button
             type="button"
             class="btn btn-success btn-lg"
-            style={{ width: "90%", height: "30%" }}
+            style={{ width: "90%", height: "17%" }}
           >
             Add Service Provider
           </button>
@@ -29,7 +40,7 @@ export default function AdminHomePage() {
           <button
             type="button"
             class="btn btn-primary btn-lg"
-            style={{ width: "90%", height: "30%" }}
+            style={{ width: "90%", height: "17%" }}
           >
             Manage Service Providers
           </button>
@@ -39,7 +50,7 @@ export default function AdminHomePage() {
         <button
           type="button"
           class="btn btn-warning btn-lg"
-          style={{ width: "90%", height: "30%" }}
+          style={{ width: "90%", height: "17%" }}
         >
           Manage Tourists
         </button>
