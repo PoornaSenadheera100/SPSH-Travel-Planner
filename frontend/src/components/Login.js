@@ -1,11 +1,46 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function Login(props) {
   const [email, setEmail] = useState({});
   const [password, setPassword] = useState({});
 
+  function validate(e) {
+    e.preventDefault();
+    if (props.title.props.children === "SPSH Travel Planner") {
+      validateTraveller();
+    } else {
+      if (email === "admin@spsh.lk") {
+        validateAdmin();
+      } else {
+        validateSP();
+      }
+    }
+  }
+
+  function validateTraveller() {}
+
+  function validateSP() {}
+
+  function validateAdmin() {
+    axios
+      .get(`http://localhost:8070/admin/get/email/${email}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data[0].password === password) {
+          sessionStorage.setItem("sAyurCenNimda", Math.random().toString());
+          window.location.replace(`http://localhost:3000/adminhome`);
+        } else {
+          alert("Invalid Credentials!");
+        }
+      })
+      .catch((err) => {
+        alert("Invalid Credentials!");
+      });
+  }
+
   return (
-    <form style={{ width: props.formWidth }}>
+    <form style={{ width: props.formWidth }} onSubmit={validate}>
       <div className="card bg-dark text-white" style={{ borderRadius: "1rem" }}>
         <div className="card-body p-5 text-center">
           <div className="mb-md-5 mt-md-4 pb-5">
