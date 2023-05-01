@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CreateForm from "./CreateForm";
 import Button from "react-bootstrap/Button";
+import List from "./List";
 
 export default function AdminHomePage() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
@@ -24,13 +25,15 @@ export default function AdminHomePage() {
         </a>
         <br />
         <br />
-        <button
-          type="button"
-          class="btn btn-primary btn-lg"
-          style={{ width: "90%", height: "30%" }}
-        >
-          Manage Service Providers
-        </button>
+        <a href="/admin/manageserviceproviders">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            style={{ width: "90%", height: "30%" }}
+          >
+            Manage Service Providers
+          </button>
+        </a>
         <br />
         <br />
         <button
@@ -58,6 +61,23 @@ export default function AdminHomePage() {
             exact
             render={(props) => (
               <CreateForm {...props} title="Add Service Provider" />
+            )}
+          />
+
+          <Route
+            path="/admin/manageserviceproviders"
+            exact
+            render={(props) => (
+              <List
+                {...props}
+                title="Manage Service Providers"
+                getURL=""
+                column1name="Name"
+                viewURL=""
+                updateURL=""
+                deleteURL=""
+                afterDeleteURL=""
+              />
             )}
           />
         </Router>
