@@ -47,7 +47,7 @@ export default function AddService() {
       .get("http://localhost:8070/service/")
       .then((res) => {
         console.log(res.data);
-        setProductIds(res.data.ProductId);
+        setServiceIds(res.data.ProductId);
       })
       .catch((err) => {
         alert(err.message);
