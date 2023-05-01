@@ -24,7 +24,10 @@ export default function Login(props) {
 
   function validateAdmin() {
     axios
-      .get(`http://localhost:8070/admin/get/email/${email}`)
+      // .get(`http://localhost:8070/admin/get/email/${email}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/admin/get/email/${email}`
+      )
       .then((res) => {
         console.log(res.data);
         if (res.data[0].password === password) {

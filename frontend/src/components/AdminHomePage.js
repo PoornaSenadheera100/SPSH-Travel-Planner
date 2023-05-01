@@ -82,7 +82,8 @@ export default function AdminHomePage() {
               <List
                 {...props}
                 title="Manage Service Providers"
-                getURL="http://localhost:8070/serviceprovider/"
+                // getURL="http://localhost:8070/serviceprovider/"
+                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
                 viewURL=""
                 updateURL=""
                 deleteURL=""
