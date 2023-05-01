@@ -72,7 +72,6 @@ export default function AdminHomePage() {
                 {...props}
                 title="Manage Service Providers"
                 getURL="http://localhost:8070/serviceprovider/"
-                column1name="Name"
                 viewURL=""
                 updateURL=""
                 deleteURL=""
