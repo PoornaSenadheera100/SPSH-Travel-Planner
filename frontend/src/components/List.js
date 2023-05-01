@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function List(props) {
   const [list, setList] = useState([]);
@@ -18,7 +19,27 @@ export default function List(props) {
   }, []);
   return (
     <>
-      {list.length === 0 && <h1>No Records</h1>}
+      <center>
+        <h1>{props.title}</h1>
+      </center>
+      {list.length === 0 && (
+        <h2>
+          No Records
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </h2>
+      )}
 
       {list.length !== 0 && (
         <table className="table table-borderless">
