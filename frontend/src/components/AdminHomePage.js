@@ -1,8 +1,12 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CreateForm from "./CreateForm";
+import Button from "react-bootstrap/Button";
 
 export default function AdminHomePage() {
-  const title = "test";
+  if (sessionStorage.getItem("sTravPlaNimda") === null) {
+    window.location.replace("/");
+  }
+
   return (
     <div className="row">
       <div style={{ width: "1px" }}>
@@ -38,17 +42,25 @@ export default function AdminHomePage() {
         </button>
       </div>
       <div className="col">
-        <div className="container">
-          <Router>
-            <Route
-              path="/admin/addserviceprovider"
-              exact
-              render={(props) => (
-                <CreateForm {...props} title="Add Service Provider" />
-              )}
-            />
-          </Router>
-        </div>
+        <a
+          href="/"
+          style={{ float: "right" }}
+          onClick={() => {
+            sessionStorage.removeItem("sTravPlaNimda");
+          }}
+        >
+          <Button variant="danger">Signout</Button>{" "}
+        </a>
+
+        <Router>
+          <Route
+            path="/admin/addserviceprovider"
+            exact
+            render={(props) => (
+              <CreateForm {...props} title="Add Service Provider" />
+            )}
+          />
+        </Router>
       </div>
       <div style={{ width: "1px" }}>
         <p style={{ color: "white" }}>Invisible</p>

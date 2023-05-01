@@ -28,8 +28,10 @@ export default function Login(props) {
       .then((res) => {
         console.log(res.data);
         if (res.data[0].password === password) {
-          sessionStorage.setItem("sAyurCenNimda", Math.random().toString());
-          window.location.replace(`http://localhost:3000/adminhome`);
+          sessionStorage.setItem("sTravPlaNimda", Math.random().toString());
+          window.location.replace(
+            `http://localhost:3000/admin/addserviceprovider`
+          );
         } else {
           alert("Invalid Credentials!");
         }
