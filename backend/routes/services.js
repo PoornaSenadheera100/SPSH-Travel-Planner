@@ -87,19 +87,20 @@ router.route("/:Service_ProviderId").get(async(req, res)=>{
     })
 })
 
-/*
+
 //DELETE ROUTE.
-router.route("/delete/:SupplierId/:ProductId").delete(async(req, res)=>{
-    let SupplierId = req.params.SupplierId;
-    let ProductId = req.params.ProductId;
-    await Item.findOneAndDelete({"SupplierId": `${SupplierId}`, "ProductId": `${ProductId}`}).then(()=>{
-        res.status(200).send({status: "Item Deleted"});
+router.route("/delete/:Service_ProviderId/:ServiceId").delete(async(req, res)=>{
+    let Service_ProviderId = req.params.Service_ProviderId;
+    let ServiceId = req.params.ServiceId;
+    await Item.findOneAndDelete({"Service_ProviderId": `${Service_ProviderId}`, "ServiceId": `${ServiceId}`}).then(()=>{
+        res.status(200).send({status: "Service Deleted"});
     }).catch((err)=>{
         console.log(err.message);
-        res.status(500).send({status: "Error in deleting Item", error: err.message});
+        res.status(500).send({status: "Error in deleting Service", error: err.message});
     })
 })
 
+/*
 //RETRIEVEING ONE SPECIFIC DETAIL
 router.route("/get/:SupplierId/:ProductId").get(async(req,res) =>{ 
     let SupplierId = req.params.SupplierId;
