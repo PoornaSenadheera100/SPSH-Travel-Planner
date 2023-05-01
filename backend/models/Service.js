@@ -17,16 +17,30 @@ const serviceSchema = new mongoose.Schema({
     maxlength:2000,
     required: true
   },
-  ServiceDescription:{
-    type: String,
-    maxlength:2000,
+
+  ServiceLocation: {
+    type:String,
     required: true
-  }, 
+  },
+
   ServicePrice: {
     type: Number,
     required: true
   },
-  ServiceQuantity:{
+
+  ServiceDuration: {
+    type:String,
+    required: true
+  },
+  AvailableTime: {
+    type:String,
+    required: true
+  },
+  AvailableDates: {
+    type:String,
+    required: true
+  },
+  Capacity:{
     type: Number, 
     required: true
   }, 
