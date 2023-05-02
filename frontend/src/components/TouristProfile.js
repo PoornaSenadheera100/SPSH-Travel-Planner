@@ -30,6 +30,27 @@ export default function TouristProfile() {
   }, []);
 
   const isMobile = windowSize.width <= 767;
+
+  //Creating constant to fetch and store buyer info
+  const { email } = useParams();
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [nic, setNic] = useState("");
+  const [phone, setPhone] = useState("");
+
+  //Axios method to fetch the info
+  useEffect(()=>{
+    axios.get(`http://localhost:8070/buyer/get/email/${email}`).then((res)=>{
+      setName(res.data[0].name);
+      setAddress(res.data[0].address);
+      setNic(res.data[0].nic);
+      setPhone(res.data[0].phone);
+    }).catch((err)=>{
+      alert("Network Issue..")
+    });
+
+  });
+  
     return (
         <div style={style}>
             <div className="container"
