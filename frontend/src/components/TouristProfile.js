@@ -71,8 +71,10 @@ export default function TouristProfile() {
                         <input type="password" id="repassword" class="form-control" placeholder="Password" required
                                onChange={(e) => {
                                }}/>
+                        <br></br>
                         <button>Back</button>
-                        <button>Update</button>
+                        
+                        <button style={{float:"right"}}>Update</button>
                     </form>
                 </div>
             </div>
