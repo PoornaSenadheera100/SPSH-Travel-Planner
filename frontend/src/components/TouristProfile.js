@@ -72,9 +72,9 @@ export default function TouristProfile() {
                                onChange={(e) => {
                                }}/>
                         <br></br>
-                        <button>Back</button>
                         
-                        <button style={{float:"right"}}>Update</button>
+                      <button type="button" class="btn btn-dark">Back</button>
+                      <button type="button" class="btn btn-dark" style={{float:"right"}}>Update</button>
                     </form>
                 </div>
             </div>
