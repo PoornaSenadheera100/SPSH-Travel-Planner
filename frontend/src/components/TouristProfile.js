@@ -62,11 +62,6 @@ export default function TouristProfile() {
                                pattern="0[0-9]{9}" required onChange={(e) => {
                         }}/>
 
-                        <label htmlFor="delChrg">Delivery Charge (Rs.)</label>
-                        <input type="number" id="delChrg" class="form-control" placeholder="Delivery Charge" min="0" step="0.01" required onChange={(e)=>{
-                    
-                        }}/>
-
                         <label htmlFor="newpassword">New Password</label>
                         <input type="password" id="newpassword" class="form-control" placeholder="Password"
                                minLength="8" required onChange={(e) => {
@@ -76,6 +71,8 @@ export default function TouristProfile() {
                         <input type="password" id="repassword" class="form-control" placeholder="Password" required
                                onChange={(e) => {
                                }}/>
+                        <button>Back</button>
+                        <button>Update</button>
                     </form>
                 </div>
             </div>
