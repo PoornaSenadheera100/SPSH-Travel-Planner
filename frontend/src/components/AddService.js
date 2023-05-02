@@ -13,7 +13,7 @@ import axios from "axios";
 //const fs = require('fs');
 
 export default function AddService() {
-  if (sessionStorage.getItem("sAyurCenRelles") === null) {
+  if (sessionStorage.getService("sTravPlaNimda") === null) {
     window.location.replace("/sellerlogin");
   }
 
