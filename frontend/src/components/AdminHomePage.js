@@ -69,6 +69,7 @@ export default function AdminHomePage() {
           <Button variant="danger">Signout</Button>{" "}
         </a>
 
+        {/* Add a Service Provider */}
         <Router>
           <Route
             path="/admin/addserviceprovider"
@@ -78,6 +79,7 @@ export default function AdminHomePage() {
             )}
           />
 
+          {/* Manage Service Providers */}
           <Route
             path="/admin/manageserviceproviders"
             exact
@@ -95,6 +97,7 @@ export default function AdminHomePage() {
             )}
           />
 
+          {/* View a Service Provider */}
           <Route
             path="/admin/manageserviceproviders/view/:email"
             exact
@@ -103,12 +106,13 @@ export default function AdminHomePage() {
                 {...props}
                 title="Service Provider"
                 // getURL="http://localhost:8070/serviceprovider/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
+                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
                 backBtnURL="http://localhost:3000/admin/manageserviceproviders"
               />
             )}
           />
 
+          {/* Manage tourists */}
           <Route
             path="/admin/managetourists"
             exact
@@ -116,12 +120,27 @@ export default function AdminHomePage() {
               <List
                 {...props}
                 title="Manage Tourists"
-                // getURL="http://localhost:8070/serviceprovider/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/tourists/"
+                // getURL="http://localhost:8070/tourists/"
+                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
                 viewURL="http://localhost:3000/admin/managetourists/view"
                 updateURL=""
                 deleteURL=""
                 afterDeleteURL=""
+              />
+            )}
+          />
+
+          {/* View a Tourist */}
+          <Route
+            path="/admin/managetourists/view/:email"
+            exact
+            render={(props) => (
+              <ViewUser
+                {...props}
+                title="Tourist"
+                // getURL="http://localhost:8070/serviceprovider/"
+                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
+                backBtnURL="http://localhost:3000/admin/managetourists"
               />
             )}
           />
