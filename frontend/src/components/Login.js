@@ -20,7 +20,25 @@ export default function Login(props) {
 
   function validateTraveller() {}
 
-  function validateSP() {}
+  function validateSP() {
+    axios
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email/${email}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        if (res.data[0].password === password) {
+          sessionStorage.setItem("sTravPlaVresVorp", Math.random().toString());
+          sessionStorage.setItem("serviceProviderEmail", email);
+          window.location.replace(`http://localhost:3000/serviceprovider`);
+        } else {
+          alert("Invalid Credentials !");
+        }
+      })
+      .catch((err) => {
+        alert("Please register your account !");
+      });
+  }
 
   function validateAdmin() {
     axios
