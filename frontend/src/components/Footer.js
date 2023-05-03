@@ -1,33 +1,38 @@
 import React from "react";
 
+import image1 from "../images/Image1.png";
+import image2 from "../images/Image2.png";
+import image3 from "../images/Image3.png";
+import image4 from "../images/Image4.png";
+
 const Footer = () => {
   return (
     <div style={{ backgroundColor: "#f2f2f2", padding: "20px" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ marginRight: "20px" }}>
           <img
-            src="../images/Image1.png"
+            src={image1}
             alt="image1"
             style={{ width: "50px", height: "50px", borderRadius: "50%" }}
           />
         </div>
         <div style={{ marginRight: "20px" }}>
           <img
-            src="../images/Image2.png"
+            src={image2}
             alt="image2"
             style={{ width: "50px", height: "50px", borderRadius: "50%" }}
           />
         </div>
         <div style={{ marginRight: "20px" }}>
           <img
-            src="../images/Image3.png"
+            src={image3}
             alt="image3"
             style={{ width: "50px", height: "50px", borderRadius: "50%" }}
           />
         </div>
         <div>
           <img
-            src="../images/Image4.png"
+            src={image4}
             alt="image4"
             style={{ width: "50px", height: "50px", borderRadius: "50%" }}
           />
