@@ -48,13 +48,15 @@ export default function AdminHomePage() {
         </a>
         <br />
         <br />
-        <button
-          type="button"
-          class="btn btn-warning btn-lg"
-          style={{ width: "90%", height: "17%" }}
-        >
-          Manage Tourists
-        </button>
+        <a href="/admin/managetourists">
+          <button
+            type="button"
+            class="btn btn-warning btn-lg"
+            style={{ width: "90%", height: "17%" }}
+          >
+            Manage Tourists
+          </button>
+        </a>
       </div>
       <div className="col">
         <a
@@ -88,7 +90,7 @@ export default function AdminHomePage() {
                 viewURL="http://localhost:3000/admin/manageserviceproviders/view"
                 updateURL=""
                 deleteURL=""
-                afterDeleteURL=""
+                afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
               />
             )}
           />
@@ -103,6 +105,23 @@ export default function AdminHomePage() {
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
                 backBtnURL="http://localhost:3000/admin/manageserviceproviders"
+              />
+            )}
+          />
+
+          <Route
+            path="/admin/managetourists"
+            exact
+            render={(props) => (
+              <List
+                {...props}
+                title="Manage Tourists"
+                // getURL="http://localhost:8070/serviceprovider/"
+                getURL="https://spsh-travel-planner-backend.onrender.com/tourists/"
+                viewURL="http://localhost:3000/admin/managetourists/view"
+                updateURL=""
+                deleteURL=""
+                afterDeleteURL=""
               />
             )}
           />
