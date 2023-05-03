@@ -1,5 +1,4 @@
 const router = require("express").Router();
-//let Service = require("../models/Service");
 const multer = require("multer");
 //import file system.
 const fs = require("fs");
@@ -178,7 +177,7 @@ router.route("/update/:Service_ProviderId/:ServiceId").put(async (req, res) => {
 // RETRIEVE ALL ITEMS ROUTE.
 router.route("/").get((req, res) => {
   Service.find()
-    .then((items) => {
+    .then((services) => {
       res.json(services);
     })
     .catch((err) => {
