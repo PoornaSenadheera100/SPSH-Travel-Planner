@@ -2,7 +2,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import profileBackground from '../images/profileBackground.jpg'
-
+//adding a background image 
 export default function TouristProfile() {
     const backgroundImageUrl = `url(${profileBackground})`;
     const style = {
@@ -16,21 +16,6 @@ export default function TouristProfile() {
     height: window.innerHeight,
   });
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const isMobile = windowSize.width <= 767;
-
   //Creating constant to fetch and store buyer info
   const { email } = useParams();
   const [name, setName] = useState("");
@@ -40,16 +25,16 @@ export default function TouristProfile() {
 
   //Axios method to fetch the info
   useEffect(()=>{
-    axios.get(`http://localhost:8070/buyer/get/email/${email}`).then((res)=>{
+    axios.get(`http://localhost:8070/buyer/get/email/${paramemail}`).then((res)=>{
       setName(res.data[0].name);
       setAddress(res.data[0].address);
       setNic(res.data[0].nic);
+      setEmail(res.data[0].email);
       setPhone(res.data[0].phone);
-    }).catch((err)=>{
-      alert("Network Issue..")
-    });
-
-  });
+  }).catch((err)=>{
+      alert("Network Issue...");
+  })
+}, [paramemail]);
   
     return (
         <div style={style}>
@@ -70,7 +55,7 @@ export default function TouristProfile() {
                     <form>
                         <label htmlFor="name" >Name</label>
                         <input type="text" id="name" class="form-control" placeholder="Enter your name"
-                               pattern="[A-Za-z .]{1,100}" required onChange={(e) => {
+                               pattern="[A-Za-z .]{1,100}" required onChange={(e) => {setName(e.target.value);
                         }}/>
 
                         <label htmlFor="email">Email</label>
