@@ -27,7 +27,9 @@ export default function AddService() {
   //Value given in the input field to record he name should be passed to the state "name" respectively. ---> could be done using the setName method.
   //In the setName method we pass an argument ---> (e.target.value) --> what happens in taget.value is ---> value entered in the text field to input the name will be assigned to the state of "name".
   //Same process applies to the other 2 variables as well.
-  const [Service_ProviderId, setService_ProviderId] = useState("");
+  const [Service_ProviderId, setService_ProviderId] = useState(
+    "suritharawwala@gmail.com"
+  );
   const [ServiceId, setServiceId] = useState("");
   const [ServiceName, setServiceName] = useState("");
   const [ServiceLocation, setServiceLocation] = useState();
