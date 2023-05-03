@@ -199,7 +199,6 @@ export default function AddService() {
             <input
               type="text"
               className="form-control"
-              pattern="[a-zA-Z\s]+"
               required
               id="location"
               placeholder="Enter Service Location"
@@ -321,7 +320,7 @@ export default function AddService() {
           Submit
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a type="button" href="/sellerhome/item" class="btn btn-secondary">
+        <a type="button" href="/sellerhome/service" class="btn btn-secondary">
           Back
         </a>
       </form>

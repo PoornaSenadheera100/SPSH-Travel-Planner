@@ -77,8 +77,8 @@ router.route("/:Service_ProviderId").get(async (req, res) => {
   const retrieve = await Service.find({
     Service_ProviderId: Service_ProviderId,
   })
-    .then((item) => {
-      res.json(item);
+    .then((service) => {
+      res.json(service);
     })
     .catch((err) => {
       console.log(err);
@@ -92,7 +92,7 @@ router
   .delete(async (req, res) => {
     let Service_ProviderId = req.params.Service_ProviderId;
     let ServiceId = req.params.ServiceId;
-    await Item.findOneAndDelete({
+    await Service.findOneAndDelete({
       Service_ProviderId: `${Service_ProviderId}`,
       ServiceId: `${ServiceId}`,
     })
@@ -189,7 +189,7 @@ router.route("/").get((req, res) => {
 router.route("/getservice/:ServiceId").get(async (req, res) => {
   let ServiceId = req.params.ServiceId;
 
-  const retrieve = await Item.find({ ServiceId: ServiceId })
+  const retrieve = await Service.find({ ServiceId: ServiceId })
     .then((service) => {
       res.json(service);
     })
