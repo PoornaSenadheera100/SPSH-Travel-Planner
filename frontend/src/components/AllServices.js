@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from "react";
 
 import { Buffer } from "buffer";
-import Rater from "react-rater";
-import "react-rater/lib/react-rater.css";
+//import Rater from "react-rater";
+//import "react-rater/lib/react-rater.css";
 
 //Import the axios pacakge to read the data from the backend to the frontend.
 import axios from "axios";
@@ -15,9 +15,9 @@ import { useHistory } from "react-router-dom";
 
 //export the function of "AllServices"
 export default function AllServices() {
-  if (sessionStorage.getService("sAyurCenRelles") === null) {
+  /*if (sessionStorage.getService("sAyurCenRelles") === null) {
     window.location.replace("/sellerlogin");
-  }
+  }*/
 
   //Creating an array that passes 2 values.
   //First value of "students" returns the state.
@@ -25,11 +25,13 @@ export default function AllServices() {
   //The initial/default value of the useState is an empty array.([])
   const [services, setService] = useState([]);
   const [ServiceId, setServiceId] = useState("");
+  const [Service_ProviderId, setService_ProviderId] =
+    "suritharawwala2gmail.com";
 
   //assigning the method of useHistory to the variable "history"
   let history = useHistory();
 
-  const Service_ProviderId = sessionStorage.getService("sellerEmail");
+  //const Service_ProviderId = sessionStorage.getService("sellerEmail");
 
   useEffect(() => {
     //There's another function called getStudents defined inside the arrow function.
@@ -104,9 +106,7 @@ export default function AllServices() {
                 //history.push moves from the current page.
                 //history.push(`/update/${student._id}`);
                 //window.location also redirects to another page.(delete page with the ID)
-                window.location.replace(
-                  `http://localhost:3000/sellerhome/service/add`
-                );
+                window.location.replace(`http://localhost:3000/service/add`);
               }}
             >
               Add Service
@@ -177,7 +177,7 @@ export default function AllServices() {
                   }}
                   onClick={() => {
                     window.location.replace(
-                      `http://localhost:3000/sellerhome/item/get/${item.ProductId}`
+                      `http://localhost:3000/sellerhome/service/get/${service.ServiceId}`
                     );
                   }}
                 >
@@ -195,7 +195,7 @@ export default function AllServices() {
                     }}
                     onClick={() => {
                       window.location.replace(
-                        `http://localhost:3000/sellerhome/service/update/${service.ServiceId}`
+                        `http://localhost:3000/service/update/${service.ServiceId}`
                       );
                     }}
                   >
@@ -224,7 +224,7 @@ export default function AllServices() {
                           .then(() => {
                             alert("Service Deleted");
                             window.location.replace(
-                              "http://localhost:3000/sellerhome/service/"
+                              "http://localhost:3000/service/"
                             );
                           })
                           .catch((err) => {
