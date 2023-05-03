@@ -11,9 +11,7 @@ export default function ViewUser(props) {
 
   useEffect(() => {
     axios
-      .get(
-        `https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email/${email}`
-      )
+      .get(`${props.getURL}/${email}`)
       .then((res) => {
         setName(res.data[0].name);
         setNic(res.data[0].nic);
