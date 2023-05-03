@@ -322,7 +322,7 @@ export default function AddService() {
           Submit
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a type="button" href="/sellerhome/service" class="btn btn-secondary">
+        <a type="button" href="/service" class="btn btn-secondary">
           Back
         </a>
       </form>
