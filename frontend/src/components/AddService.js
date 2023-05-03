@@ -13,10 +13,11 @@ import axios from "axios";
 //const fs = require('fs');
 
 export default function AddService() {
+  /*
   if (sessionStorage.getService("sTravPlaNimda") === null) {
-    window.location.replace("/sellerlogin");
+    window.location.replace("/serviceprovider");
   }
-
+*/
   //Create 3 variables/states for name,age and gender
   //The initialization of these 3 states have been done below.
   //It is using the setName/setAge/setGender that we assign values to the states of name/age/gender respectively.
@@ -26,7 +27,7 @@ export default function AddService() {
   //Value given in the input field to record he name should be passed to the state "name" respectively. ---> could be done using the setName method.
   //In the setName method we pass an argument ---> (e.target.value) --> what happens in taget.value is ---> value entered in the text field to input the name will be assigned to the state of "name".
   //Same process applies to the other 2 variables as well.
-
+  const [Service_ProviderId, setService_ProviderId] = useState("");
   const [ServiceId, setServiceId] = useState("");
   const [ServiceName, setServiceName] = useState("");
   const [ServiceLocation, setServiceLocation] = useState();
@@ -38,7 +39,7 @@ export default function AddService() {
   const [Image, setImage] = useState("");
   const [serviceIds, setServiceIds] = useState([]);
 
-  const Service_ProviderId = sessionStorage.getService("sellerEmail");
+  // const Service_ProviderId = sessionStorage.getService("sellerEmail");
 
   const [block, setBlock] = useState(false);
 
@@ -98,7 +99,7 @@ export default function AddService() {
         .then(() => {
           //After sending the data --> backend server responds --> if successfully added then an alert message is sent.
           alert(`Service Added`);
-          window.location.replace("http://localhost:3000/sellerhome/service");
+          window.location.replace("http://localhost:3000/service");
 
           //After submitting the details ---> the values should be taken off from the fields ---> to do this --> the setters are assigned with ("")
           setServiceId("");
