@@ -2,8 +2,9 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import profileBackground from '../images/profileBackground.jpg'
-//adding a background image 
+
 export default function TouristProfile() {
+  //adding a background image 
     const backgroundImageUrl = `url(${profileBackground})`;
     const style = {
         backgroundImage: backgroundImageUrl,
@@ -11,30 +12,47 @@ export default function TouristProfile() {
         backgroundPosition: 'center',
         height: '100vh',
     };
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
 
-  //Creating constant to fetch and store buyer info
-  const { email } = useParams();
+
+//creating variables for each function
+  const {email} = useParams();
+  const [Email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [nic, setNic] = useState("");
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
-  //Axios method to fetch the info
+  //Use effect to fetch data which is in DB and display them in the form
   useEffect(()=>{
-    axios.get(`http://localhost:8070/buyer/get/email/${paramemail}`).then((res)=>{
-      setName(res.data[0].name);
-      setAddress(res.data[0].address);
-      setNic(res.data[0].nic);
-      setEmail(res.data[0].email);
-      setPhone(res.data[0].phone);
-  }).catch((err)=>{
-      alert("Network Issue...");
-  })
-}, [paramemail]);
+    axios.get(`http://localhost:8070/tourist/get/email/subasinghesanuthi@gmail.com`).then((res)=>{
+      console.log(res.data);
+      setName(res.data.name);
+      setAddress(res.data.address);
+      setNic(res.data.nic);
+      setPhone(res.data.phone);
+      setEmail(res.data.Email);
+      
+    }).catch((err)=>{
+      alert("Error in fetching tourist data");
+    })
+  },[]);
+
+  //Function to update the data
+  function updateProfile(e){
+    e.preventDefault();
+
+    const newTourist ={
+      name,address,nic,phone,Email,password
+    }
+    axios.put(`http://localhost:8070/tourist/update/${email}`,newTourist).then(()=>{
+      alert("Profile updated")
+      window.location.replace("http://localhost:3000/tourist/");
+    }).catch((err)=>{
+      alert("Update failure occured ! ")
+    })
+  }
   
     return (
         <div style={style}>
@@ -52,31 +70,28 @@ export default function TouristProfile() {
                         backgroundColor: "rgba(255, 255, 255, 0.7)",
                     }}>
                     <center><h1>User Profile</h1></center>
-                    <form>
+                    <form onSubmit={updateProfile}>
                         <label htmlFor="name" >Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter your name"
-                               pattern="[A-Za-z .]{1,100}" required onChange={(e) => {setName(e.target.value);
-                        }}/>
+                        <input type="text" id="name" value={name} class="form-control" placeholder="Enter your name" pattern="[A-Za-z .]{1,100}" required  onChange={(e) => { setName(e.target.value)}}/>
 
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" class="form-control" placeholder="abc@gmail.com" required
-                               onChange={(e) => {
-                               }}/>
+                        {/* <input type="text" id="name" value={name}  class="form-control" placeholder="Enter your name"
+                              pattern="[A-Za-z .]{1,100}" required onChange={(e) => {setName(e.target.value); }}/> */}
+
+                        <label htmlFor="address">Address</label>
+                        <input type="address" id="address" class="form-control" placeholder="92/E,Jane Street,New York" required
+                               onChange={(e) => { setAddress(e.target.value)}}/>
 
                         <label htmlFor="phone"> Phone</label>
                         <input type="phone" id="phone" class="form-control" placeholder="Phone No"
-                               pattern="0[0-9]{9}" required onChange={(e) => {
-                        }}/>
-
+                               pattern="0[0-9]{9}" required  onChange={(e) => { setPhone(e.target.value)}}/>
+                        
                         <label htmlFor="newpassword">New Password</label>
-                        <input type="password" id="newpassword" class="form-control" placeholder="Password"
-                               minLength="8" required onChange={(e) => {
-                        }}/>
+                        <input type="password" id="newpassword" class="form-control" placeholder="Enter New Password" minLength="8"	onChange={(e)=>{
+                          setPassword(e.target.value);}}/>
 
                         <label htmlFor="repassword">Re-enter Password</label>
-                        <input type="password" id="repassword" class="form-control" placeholder="Password" required
-                               onChange={(e) => {
-                               }}/>
+                        <input type="password" id="repassword"  class="form-control" placeholder="Re-Enter New Password" onChange={(e)=>{
+                        setRePassword(e.target.value)}}/>
                         <br></br>
                         
                       <button type="button" class="btn btn-dark">Back</button>
@@ -86,4 +101,5 @@ export default function TouristProfile() {
             </div>
         </div>
     );
-}
+  }
+
