@@ -25,8 +25,9 @@ export default function AllServices() {
   //The initial/default value of the useState is an empty array.([])
   const [services, setService] = useState([]);
   const [ServiceId, setServiceId] = useState("");
-  const [Service_ProviderId, setService_ProviderId] =
-    "suritharawwala2gmail.com";
+  const [Service_ProviderId, setService_ProviderId] = useState(
+    "suritharawwala@gmail.com"
+  );
 
   //assigning the method of useHistory to the variable "history"
   let history = useHistory();
@@ -177,7 +178,7 @@ export default function AllServices() {
                   }}
                   onClick={() => {
                     window.location.replace(
-                      `http://localhost:3000/sellerhome/service/get/${service.ServiceId}`
+                      `http://localhost:3000/service/getservice/${service.ServiceId}`
                     );
                   }}
                 >
