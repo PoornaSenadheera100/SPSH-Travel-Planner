@@ -75,24 +75,31 @@ export default function TouristProfile() {
     );
   }
 
+  //Prop to get the curved border
+  function CurvedBorder(props){
+    return(
+    <div style={{
+      border: "1px solid black",
+      padding: "100px",
+      textAlign: "justify",
+      borderRadius: "10px",
+      height: "600px",
+      width: "600px",
+      borderRadius: "50% 50% 0 0",
+      backgroundColor: "rgba(255, 255, 255, 0.7)",
+    }}>
+      {props.children}
+    </div>
+    );
+  }
+
   return (
     <div style={style}>
       <div
         className="container"
         style={{ margin: "auto", maxWidth: "500px", padding: "20px" }}
       >
-        <div
-          style={{
-            border: "1px solid black",
-            padding: "100px",
-            textAlign: "justify",
-            borderRadius: "10px",
-            height: "600px",
-            width: "600px",
-            borderRadius: "50% 50% 0 0",
-            backgroundColor: "rgba(255, 255, 255, 0.7)",
-          }}
-        >
+       <CurvedBorder>
           <center>
             <h1>User Profile</h1>
           </center>
@@ -106,9 +113,11 @@ export default function TouristProfile() {
             <button type="button" class="btn btn-dark">Back</button>
             <button type="button"class="btn btn-dark"style={{ float: "right" }}>Update</button>
           </form>
-
+        </CurvedBorder>
         </div>
+        
       </div>
-    </div>
+    
+    
   );
 }
