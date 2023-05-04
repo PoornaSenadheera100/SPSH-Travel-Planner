@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
 
 export default function TouristProfile() {
+  if (sessionStorage.getItem("sTravPlaTsirout") === null) {
+    window.location.replace("/");
+  }
+
   //adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
 
