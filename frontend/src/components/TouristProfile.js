@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import profileBackground from "../images/profileBackground.jpg";
 
 export default function TouristProfile() {
@@ -15,9 +14,7 @@ export default function TouristProfile() {
   };
 
   //creating variables for each function
-  //const { paramemail } = useParams();
-  const [paramemail] = "subasinghesanuthi@gmail.com";
-  const [email, setEmail] = useState("");
+  const email = sessionStorage.getItem("touristEmail");
   const [name, setName] = useState("");
   const [nic, setNic] = useState("");
   const [phone, setPhone] = useState("");
@@ -25,15 +22,12 @@ export default function TouristProfile() {
   //Use effect to fetch data which is in DB and display them in the form
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8070/tourist/get/email/subasinghesanuthi@gmail.com`
-      )
+      .get(`http://localhost:8070/tourist/get/email/${email}`)
       .then((res) => {
         console.log(res.data);
         setName(res.data[0].name);
         setNic(res.data[0].nic);
         setPhone(res.data[0].phone);
-        setEmail(res.data[0].Email);
       })
       .catch((err) => {
         alert("Error in fetching tourist data");
@@ -110,9 +104,11 @@ export default function TouristProfile() {
             <Label formLabel="NIC" value={nic} />
             <Label formLabel="Phone" value={phone} />
             <br></br>
-            <button type="button" class="btn btn-dark">
-              Back
-            </button>
+            <a href="http://localhost:3000/tourist/">
+              <button type="button" class="btn btn-dark">
+                Back
+              </button>
+            </a>
             <button
               type="button"
               class="btn btn-dark"
