@@ -4,17 +4,23 @@ import { useParams } from "react-router-dom";
 import { Buffer } from "buffer";
 
 export default function SingleService() {
+  /*
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
     window.location.replace("/sellerlogin");
   }
-
-  const SupplierId = sessionStorage.getItem("sellerEmail");
-
-  const [ProductId, setProductId] = useState("");
-  const [Name, setName] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Price, setPrice] = useState();
-  const [Quantity, setQuantity] = useState();
+*/
+  //const SupplierId = sessionStorage.getItem("sellerEmail");
+  const [Service_ProviderId, setService_ProviderId] = useState(
+    "suritharawwala@gmail.com"
+  );
+  const [ServiceId, setServiceId] = useState("");
+  const [ServiceName, setServiceName] = useState("");
+  const [ServiceLocation, setServiceLocation] = useState("");
+  const [ServicePrice, setServicePrice] = useState();
+  const [ServiceDuration, setServiceDuration] = useState();
+  const [AvailableTime, setAvailableTime] = useState("");
+  const [AvailableDates, setAvailableDates] = useState("");
+  const [Capacity, setCapacity] = useState();
   const [Image, setImage] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const { id } = useParams();
@@ -22,17 +28,22 @@ export default function SingleService() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/item/get/${SupplierId}/${id}`)
+      .get(
+        `http://localhost:8070/service/getservice/${id}/${Service_ProviderId}`
+      )
       .then((res) => {
         console.log(res.data);
-        console.log(SupplierId);
+        console.log(Service_ProviderId);
         //console.log(productId);
-        setProductId(res.data.item[0].ProductId);
-        setName(res.data.item[0].Name);
-        setDescription(res.data.item[0].Description);
-        setPrice(res.data.item[0].Price);
-        setQuantity(res.data.item[0].Quantity);
-        setImage(res.data.item[0].Image);
+        setServiceId(res.data[0].ServiceId);
+        setServiceName(res.data[0].ServiceName);
+        setServiceLocation(res.data[0].ServiceLocation);
+        setServicePrice(res.data[0].ServicePrice);
+        setServiceDuration(res.data[0].ServiceDuration);
+        setAvailableTime(res.data[0].AvailableTime);
+        setAvailableDates(res.data[0].AvailableDates);
+        setCapacity(res.data[0].Capacity);
+        setImage(res.data[0].Image);
       })
       .catch((err) => {
         console.log(err);
@@ -52,29 +63,36 @@ export default function SingleService() {
     return (
       <div className="container">
         <div>
-          <a type="button" href="/sellerhome/item" class="btn btn-secondary">
+          <a type="button" href="/service" class="btn btn-secondary">
             Back
           </a>
         </div>
         <table className="table table-borderless">
           <tr>
-            <th scope="col">Product ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
+            <th scope="col">Service ID</th>
+            <th scope="col">Service Name</th>
+            <th scope="col">Service location</th>
+            <th scope="col">Service Price</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Available Time</th>
+            <th scope="col">Available Date</th>
+            <th scope="col">Capacity</th>
             <th scope="col">Image</th>
           </tr>
           <tr scope="row">
-            <td class="text-uppercase">{ProductId}</td>
-            <td class="text-uppercase">{Name}</td>
-            <td class="text-uppercase">{Description}</td>
-            <td class="text-uppercase">{Price}</td>
-            <td class="text-uppercase">{Quantity}</td>
+            <td class="text-uppercase">{ServiceId}</td>
+            <td class="text-uppercase">{ServiceName}</td>
+            <td class="text-uppercase">{ServiceLocation}</td>
+            <td class="text-uppercase">{ServicePrice}</td>
+            <td class="text-uppercase">{ServiceDuration}</td>
+            <td class="text-uppercase">{AvailableTime}</td>
+            <td class="text-uppercase">{AvailableDates}</td>
+            <td class="text-uppercase">{Capacity}</td>
+
             <td>
               <img
                 src={getImageSource(Image)}
-                alt={Name}
+                alt={ServiceName}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 style={{
