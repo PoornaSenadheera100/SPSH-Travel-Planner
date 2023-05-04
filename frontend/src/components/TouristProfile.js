@@ -6,7 +6,7 @@ import profileBackground from "../images/profileBackground.jpg";
 export default function TouristProfile() {
   //adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
- 
+
   const style = {
     backgroundImage: backgroundImageUrl,
     backgroundSize: "cover",
@@ -15,56 +15,54 @@ export default function TouristProfile() {
   };
 
   //creating variables for each function
-  const { paramemail } = useParams();
+  //const { paramemail } = useParams();
+  const[paramemail]="subasinghesanuthi@gmail.com";
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [nic, setNic] = useState("");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
+
 
   //Use effect to fetch data which is in DB and display them in the form
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8070/tourist/get/email/${paramemail}`
-      )
+      .get(`http://localhost:8070/tourist/get/email/${paramemail}`)
       .then((res) => {
         console.log(res.data);
-        setName(res.data.name);
-        setAddress(res.data.address);
-        setNic(res.data.nic);
-        setPhone(res.data.phone);
-        setEmail(res.data.Email);
+        setName(res.data[0].name);
+        setAddress(res.data[0].address);
+        setNic(res.data[0].nic);
+        setPhone(res.data[0].phone);
+        setEmail(res.data[0].Email);
       })
       .catch((err) => {
         alert("Error in fetching tourist data");
       });
   }, []);
 
-  //Function to update the data
-  function updateProfile(e) {
-    e.preventDefault();
+  // //Function to update the data
+  // function updateProfile(e) {
+  //   e.preventDefault();
 
-    const newTourist = {
-      name,
-      address,
-      nic,
-      phone,
-      email,
-      password,
-    };
-    axios
-      .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
-      .then(() => {
-        alert("Profile updated");
-        window.location.replace("http://localhost:3000/tourist/");
-      })
-      .catch((err) => {
-        alert("Update failure occured ! ");
-      });
-  }
+  //   const newTourist = {
+  //     name,
+  //     address,
+  //     nic,
+  //     phone,
+  //     email,
+  //     password,
+  //   };
+  //   axios
+  //     .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
+  //     .then(() => {
+  //       alert("Profile updated");
+  //       window.location.replace("http://localhost:3000/tourist/");
+  //     })
+  //     .catch((err) => {
+  //       alert("Update failure occured ! ");
+  //     });
+  // }
 
   //Function for creating  a prop for label
   function Label({ formLabel }) {
@@ -74,24 +72,6 @@ export default function TouristProfile() {
       </div>
     );
   }
-  //Function for creating  a prop for textInputcontrol
-  function InputField({type,id,value,placeholder,pattern,onChange}){
-    return(
-      <input>
-        type={type}
-        id={id}
-        value={value}
-        placeholder={placeholder}
-        pattern={pattern}
-        onChange={onChange}
-        class="form-control"
-        required
-
-      </input>
-    )
-  }
-
-  
 
   return (
     <div style={style}>
@@ -100,7 +80,6 @@ export default function TouristProfile() {
         style={{ margin: "auto", maxWidth: "500px", padding: "20px" }}
       >
         <div
-        
           style={{
             border: "1px solid black",
             padding: "100px",
@@ -116,12 +95,12 @@ export default function TouristProfile() {
             <h1>User Profile</h1>
           </center>
 
-          <form onSubmit={updateProfile}>
+          <form>
             <Label formLabel="Name" />
             <input
               type="text"
               id="name"
-              class="form-control"
+              className="form-control"
               value={name}
               required
               placeholder="Enter your name"
@@ -130,6 +109,7 @@ export default function TouristProfile() {
                 setName(e.target.value);
               }}
             />
+
             <Label formLabel="Email" />
             <input
               type="email"
@@ -147,7 +127,7 @@ export default function TouristProfile() {
             <input
               type="address"
               id="address"
-              value={address}
+              value={nic}
               class="form-control"
               placeholder="92/E,Jane Street,New York"
               required
