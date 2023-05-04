@@ -19,7 +19,6 @@ export default function TouristProfile() {
   const [paramemail] = "subasinghesanuthi@gmail.com";
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
   const [nic, setNic] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -32,7 +31,6 @@ export default function TouristProfile() {
       .then((res) => {
         console.log(res.data);
         setName(res.data[0].name);
-        setAddress(res.data[0].address);
         setNic(res.data[0].nic);
         setPhone(res.data[0].phone);
         setEmail(res.data[0].Email);
@@ -66,7 +64,7 @@ export default function TouristProfile() {
   // }
 
   //Function for creating  a prop for Form
-  function Label({ formLabel, value}) {
+  function Label({ formLabel, value }) {
     return (
       <div>
         <label>{formLabel}</label>
@@ -75,22 +73,23 @@ export default function TouristProfile() {
     );
   }
 
-
   //Prop to get the curved border
-  function CurvedBorder(props){
-    return(
-    <div style={{
-      border: "1px solid black",
-      padding: "100px",
-      textAlign: "justify",
-      borderRadius: "10px",
-      height: "600px",
-      width: "600px",
-      borderRadius: "50% 50% 0 0",
-      backgroundColor: "rgba(255, 255, 255, 0.7)",
-    }}>
-      {props.children}
-    </div>
+  function CurvedBorder(props) {
+    return (
+      <div
+        style={{
+          border: "1px solid black",
+          padding: "100px",
+          textAlign: "justify",
+          borderRadius: "10px",
+          height: "600px",
+          width: "600px",
+          borderRadius: "50% 50% 0 0",
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
+        }}
+      >
+        {props.children}
+      </div>
     );
   }
 
@@ -100,7 +99,7 @@ export default function TouristProfile() {
         className="container"
         style={{ margin: "auto", maxWidth: "500px", padding: "20px" }}
       >
-       <CurvedBorder>
+        <CurvedBorder>
           <center>
             <h1>User Profile</h1>
           </center>
@@ -111,14 +110,19 @@ export default function TouristProfile() {
             <Label formLabel="NIC" value={nic} />
             <Label formLabel="Phone" value={phone} />
             <br></br>
-            <button type="button" class="btn btn-dark">Back</button>
-            <button type="button"class="btn btn-dark"style={{ float: "right" }}>Update</button>
+            <button type="button" class="btn btn-dark">
+              Back
+            </button>
+            <button
+              type="button"
+              class="btn btn-dark"
+              style={{ float: "right" }}
+            >
+              Update
+            </button>
           </form>
         </CurvedBorder>
-        </div>
-        
       </div>
-    
-    
+    </div>
   );
 }
