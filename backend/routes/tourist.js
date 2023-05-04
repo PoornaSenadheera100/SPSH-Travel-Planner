@@ -73,12 +73,10 @@ router.route("/update/:paramemail").put(async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res
-        .status(500)
-        .send({
-          status: "Error with updating the tourist",
-          error: err.message,
-        });
+      res.status(500).send({
+        status: "Error with updating the tourist",
+        error: err.message,
+      });
     });
 });
 
@@ -92,12 +90,10 @@ router.route("/delete/email/:paraemail").delete(async (req, res) => {
     })
     .catch((err) => {
       console.log(err.message);
-      res
-        .status(500)
-        .send({
-          status: "Error occured when deleting tourist",
-          error: err.message,
-        });
+      res.status(500).send({
+        status: "Error occured when deleting tourist",
+        error: err.message,
+      });
     });
 });
 module.exports = router;
