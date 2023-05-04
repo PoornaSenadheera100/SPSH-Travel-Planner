@@ -53,6 +53,17 @@ export default function TouristProfile() {
       alert("Update failure occured ! ")
     })
   }
+
+  //Function for creating props 
+  function Label({formLabel}){
+             return(
+                 <div>
+                     <label>{formLabel}</label>
+                     
+                 </div>
+             )
+         }
+  
   
     return (
         <div style={style}>
@@ -70,29 +81,24 @@ export default function TouristProfile() {
                         backgroundColor: "rgba(255, 255, 255, 0.7)",
                     }}>
                     <center><h1>User Profile</h1></center>
+                    
                     <form onSubmit={updateProfile}>
-                        <label htmlFor="name" >Name</label>
+                        <Label formLabel= "Name"/>  
                         <input type="text" id="name" value={name} class="form-control" placeholder="Enter your name" pattern="[A-Za-z .]{1,100}" required  onChange={(e) => { setName(e.target.value)}}/>
 
                         {/* <input type="text" id="name" value={name}  class="form-control" placeholder="Enter your name"
                               pattern="[A-Za-z .]{1,100}" required onChange={(e) => {setName(e.target.value); }}/> */}
+                        <Label formLabel= "Email"/> 
+                        <input type="address" id="address" class="form-control" placeholder="Ann@gmail.com" required
+                               onChange={(e) => { setEmail(e.target.value)}}/>
 
-                        <label htmlFor="address">Address</label>
+                        <Label formLabel= "Address"/> 
                         <input type="address" id="address" class="form-control" placeholder="92/E,Jane Street,New York" required
                                onChange={(e) => { setAddress(e.target.value)}}/>
 
-                        <label htmlFor="phone"> Phone</label>
+                        <Label formLabel= "Phone"/> 
                         <input type="phone" id="phone" class="form-control" placeholder="Phone No"
                                pattern="0[0-9]{9}" required  onChange={(e) => { setPhone(e.target.value)}}/>
-                        
-                        <label htmlFor="newpassword">New Password</label>
-                        <input type="password" id="newpassword" class="form-control" placeholder="Enter New Password" minLength="8"	onChange={(e)=>{
-                          setPassword(e.target.value);}}/>
-
-                        <label htmlFor="repassword">Re-enter Password</label>
-                        <input type="password" id="repassword"  class="form-control" placeholder="Re-Enter New Password" onChange={(e)=>{
-                        setRePassword(e.target.value)}}/>
-                        <br></br>
                         
                       <button type="button" class="btn btn-dark">Back</button>
                       <button type="button" class="btn btn-dark" style={{float:"right"}}>Update</button>
