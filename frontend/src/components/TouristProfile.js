@@ -16,18 +16,19 @@ export default function TouristProfile() {
 
   //creating variables for each function
   //const { paramemail } = useParams();
-  const[paramemail]="subasinghesanuthi@gmail.com";
+  const [paramemail] = "subasinghesanuthi@gmail.com";
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [nic, setNic] = useState("");
   const [phone, setPhone] = useState("");
 
-
   //Use effect to fetch data which is in DB and display them in the form
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/tourist/get/email/${paramemail}`)
+      .get(
+        `http://localhost:8070/tourist/get/email/subasinghesanuthi@gmail.com`
+      )
       .then((res) => {
         console.log(res.data);
         setName(res.data[0].name);
@@ -65,10 +66,11 @@ export default function TouristProfile() {
   // }
 
   //Function for creating  a prop for label
-  function Label({ formLabel }) {
+  function Label({ formLabel, value }) {
     return (
       <div>
         <label>{formLabel}</label>
+        <input class="form-control" value={value} />
       </div>
     );
   }
@@ -96,73 +98,15 @@ export default function TouristProfile() {
           </center>
 
           <form>
-            <Label formLabel="Name" />
-            <input
-              type="text"
-              id="name"
-              className="form-control"
-              value={name}
-              required
-              placeholder="Enter your name"
-              pattern="[A-Za-z .]{1,100}"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-
-            <Label formLabel="Email" />
-            <input
-              type="email"
-              id="email"
-              value={email}
-              class="form-control"
-              placeholder="Ann@gmail.com"
-              required
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-
-            <Label formLabel="Address" />
-            <input
-              type="address"
-              id="address"
-              value={nic}
-              class="form-control"
-              placeholder="92/E,Jane Street,New York"
-              required
-              onChange={(e) => {
-                setAddress(e.target.value);
-              }}
-            />
-
-            <Label formLabel="Phone" />
-            <input
-              type="phone"
-              id="phone"
-              value={phone}
-              class="form-control"
-              placeholder="Phone No"
-              pattern="0[0-9]{9}"
-              required
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
-
+            <Label formLabel="Name" value={name} />
+            <Label formLabel="Email" value={email} />
+            <Label formLabel="NIC" value={nic} />
+            <Label formLabel="Phone" value={phone} />
             <br></br>
-
-            <button type="button" class="btn btn-dark">
-              Back
-            </button>
-            <button
-              type="button"
-              class="btn btn-dark"
-              style={{ float: "right" }}
-            >
-              Update
-            </button>
+            <button type="button" class="btn btn-dark">Back</button>
+            <button type="button"class="btn btn-dark"style={{ float: "right" }}>Update</button>
           </form>
+          
         </div>
       </div>
     </div>
