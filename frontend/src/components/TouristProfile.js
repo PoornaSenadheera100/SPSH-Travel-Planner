@@ -110,9 +110,6 @@ export default function TouristProfile() {
                 setName(e.target.value);
               }}
             />
-
-            {/* <input type="text" id="name" value={name}  class="form-control" placeholder="Enter your name"
-                              pattern="[A-Za-z .]{1,100}" required onChange={(e) => {setName(e.target.value); }}/> */}
             <Label formLabel="Email" />
             <input
               type="address"
