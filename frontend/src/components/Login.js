@@ -8,7 +8,7 @@ export default function Login(props) {
   function validate(e) {
     e.preventDefault();
     if (props.title.props.children === "SPSH Travel Planner") {
-      validateTraveller();
+      validateTourist();
     } else {
       if (email === "admin@spsh.lk") {
         validateAdmin();
@@ -18,7 +18,22 @@ export default function Login(props) {
     }
   }
 
-  function validateTraveller() {}
+  function validateTourist() {
+    axios
+      .get(`http://localhost:8070/tourist/get/email/${email}`)
+      .then((res) => {
+        if (res.data[0].password === password) {
+          sessionStorage.setItem("sTravPlaTsirout", Math.random().toString());
+          sessionStorage.setItem("touristEmail", email);
+          window.location.replace(`http://localhost:3000/tourist`);
+        } else {
+          alert("Invalid Credentials !");
+        }
+      })
+      .catch((err) => {
+        alert("Please register your account !");
+      });
+  }
 
   function validateSP() {
     axios
