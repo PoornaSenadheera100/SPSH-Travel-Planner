@@ -6,6 +6,7 @@ import profileBackground from "../images/profileBackground.jpg";
 export default function TouristProfile() {
   //adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
+ 
   const style = {
     backgroundImage: backgroundImageUrl,
     backgroundSize: "cover",
@@ -65,7 +66,7 @@ export default function TouristProfile() {
       });
   }
 
-  //Function for creating props
+  //Function for creating  a prop for label
   function Label({ formLabel }) {
     return (
       <div>
@@ -73,6 +74,24 @@ export default function TouristProfile() {
       </div>
     );
   }
+  //Function for creating  a prop for textInputcontrol
+  function InputField({type,id,value,placeholder,pattern,onChange}){
+    return(
+      <input>
+        type={type}
+        id={id}
+        value={value}
+        placeholder={placeholder}
+        pattern={pattern}
+        onChange={onChange}
+        class="form-control"
+        required
+
+      </input>
+    )
+  }
+
+  
 
   return (
     <div style={style}>
@@ -81,6 +100,7 @@ export default function TouristProfile() {
         style={{ margin: "auto", maxWidth: "500px", padding: "20px" }}
       >
         <div
+        
           style={{
             border: "1px solid black",
             padding: "100px",
@@ -101,11 +121,11 @@ export default function TouristProfile() {
             <input
               type="text"
               id="name"
-              value={name}
               class="form-control"
+              value={name}
+              required
               placeholder="Enter your name"
               pattern="[A-Za-z .]{1,100}"
-              required
               onChange={(e) => {
                 setName(e.target.value);
               }}
