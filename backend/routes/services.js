@@ -37,7 +37,7 @@ router.route("/add").post(upload.single("Image"), (req, res) => {
   const ServiceName = req.body.ServiceName;
   const ServiceLocation = req.body.ServiceLocation;
   const ServicePrice = Number(req.body.ServicePrice);
-  const ServiceDuration = Number(req.body.ServiceDuration);
+  const ServiceDuration = req.body.ServiceDuration;
   const AvailableTime = req.body.AvailableTime;
   const AvailableDates = req.body.AvailableDates;
   const Capacity = req.body.Capacity;
@@ -185,18 +185,20 @@ router.route("/").get((req, res) => {
     });
 });
 
-// Retrieve a single item
-router.route("/getservice/:ServiceId").get(async (req, res) => {
-  let ServiceId = req.params.ServiceId;
+// Retrieve a single service
+router
+  .route("/getservice/:ServiceId/:Service_ProviderId")
+  .get(async (req, res) => {
+    let ServiceId = req.params.ServiceId;
 
-  const retrieve = await Service.find({ ServiceId: ServiceId })
-    .then((service) => {
-      res.json(service);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ status: "Error in retrieving details." });
-    });
-});
+    const retrieve = await Service.find({ ServiceId: ServiceId })
+      .then((service) => {
+        res.json(service);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send({ status: "Error in retrieving details." });
+      });
+  });
 
 module.exports = router;

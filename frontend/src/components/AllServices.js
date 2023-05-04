@@ -89,7 +89,7 @@ export default function AllServices() {
 
   return (
     <div className="container">
-      <a href="/sellerhome">
+      <a href="/service">
         <button class="btn btn-dark">Back</button>
       </a>
       <center>
