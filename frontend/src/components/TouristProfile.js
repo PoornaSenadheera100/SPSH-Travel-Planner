@@ -27,7 +27,7 @@ export default function TouristProfile() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8070/tourist/get/email/subasinghesanuthi@gmail.com`
+        `http://localhost:8070/tourist/get/email/${paramemail}`
       )
       .then((res) => {
         console.log(res.data);
@@ -112,8 +112,9 @@ export default function TouristProfile() {
             />
             <Label formLabel="Email" />
             <input
-              type="address"
-              id="address"
+              type="email"
+              id="email"
+              value={email}
               class="form-control"
               placeholder="Ann@gmail.com"
               required
@@ -126,6 +127,7 @@ export default function TouristProfile() {
             <input
               type="address"
               id="address"
+              value={address}
               class="form-control"
               placeholder="92/E,Jane Street,New York"
               required
@@ -138,6 +140,7 @@ export default function TouristProfile() {
             <input
               type="phone"
               id="phone"
+              value={phone}
               class="form-control"
               placeholder="Phone No"
               pattern="0[0-9]{9}"
@@ -146,6 +149,8 @@ export default function TouristProfile() {
                 setPhone(e.target.value);
               }}
             />
+
+            <br></br>
 
             <button type="button" class="btn btn-dark">
               Back
