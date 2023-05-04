@@ -66,7 +66,7 @@ export default function TouristProfile() {
   // }
 
   //Function for creating  a prop for Form
-  function Label({ formLabel, value }) {
+  function Label({ formLabel, value}) {
     return (
       <div>
         <label>{formLabel}</label>
@@ -74,6 +74,7 @@ export default function TouristProfile() {
       </div>
     );
   }
+
 
   //Prop to get the curved border
   function CurvedBorder(props){
