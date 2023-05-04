@@ -14,8 +14,8 @@ export default function TouristProfile() {
   };
 
   //creating variables for each function
-  const { email } = useParams();
-  const [Email, setEmail] = useState("");
+  const { paramemail } = useParams();
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [nic, setNic] = useState("");
@@ -51,7 +51,7 @@ export default function TouristProfile() {
       address,
       nic,
       phone,
-      Email,
+      email,
       password,
     };
     axios
