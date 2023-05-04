@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AllServices from "./components/AllServices";
 import AddService from "./components/AddService";
+import SingleService from "./components/SingleService";
 
 function App() {
   return (
@@ -11,6 +12,11 @@ function App() {
       <Header />
       <Route path="/service/add/" exact component={AddService}></Route>
       <Route path="/service" exact component={AllServices}></Route>
+      <Route
+        path="/service/getservice/:id"
+        exact
+        component={SingleService}
+      ></Route>
       <Footer />
     </Router>
   );
