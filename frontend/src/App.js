@@ -16,11 +16,7 @@ function App() {
       <Route path="/admin/" component={AdminHomePage} />
       <Route path="/serviceprovider/" component={ServiceProviderHomePage} />
 
-      <Route
-        path="/tourist/view/userprofile"
-        exact
-        component={TouristProfile}
-      />
+      <Route path="/tourist/userprofile" exact component={TouristProfile} />
     </Router>
   );
 }
