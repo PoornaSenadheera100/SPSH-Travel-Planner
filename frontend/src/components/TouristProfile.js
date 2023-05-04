@@ -65,7 +65,7 @@ export default function TouristProfile() {
   //     });
   // }
 
-  //Function for creating  a prop for label
+  //Function for creating  a prop for Form
   function Label({ formLabel, value }) {
     return (
       <div>
@@ -106,7 +106,7 @@ export default function TouristProfile() {
             <button type="button" class="btn btn-dark">Back</button>
             <button type="button"class="btn btn-dark"style={{ float: "right" }}>Update</button>
           </form>
-          
+
         </div>
       </div>
     </div>
