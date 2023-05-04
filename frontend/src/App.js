@@ -5,12 +5,16 @@ import Footer from "./components/Footer";
 import AllServices from "./components/AllServices";
 import AddService from "./components/AddService";
 import SingleService from "./components/SingleService";
+import Slideshow from "./components/Slideshow";
+import UpdateService from "./components/UpdateServices";
 
 function App() {
   return (
     <Router>
       <Header />
+      <Slideshow />
       <Route path="/service/add/" exact component={AddService}></Route>
+      <Route path="/service/update/:id" exact component={UpdateService}></Route>
       <Route path="/service" exact component={AllServices}></Route>
       <Route
         path="/service/getservice/:id"
