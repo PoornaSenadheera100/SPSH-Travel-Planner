@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
-import List from "./List";
-
+import CreateForm from "./CreateForm";
 export default function TouristProfile() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
@@ -30,7 +29,6 @@ export default function TouristProfile() {
       document.body.style.height = null;
     };
   }, []);
-  
 
   //creating variables for each function
   const email = sessionStorage.getItem("touristEmail");
@@ -129,35 +127,35 @@ export default function TouristProfile() {
               </button>
             </a>
             <a href="/tourist/updateprofile">
-            <button
-              type="button"
-              class="btn btn-dark"
-              style={{ float: "right" }}
-            >
-              Update
-            </button>
+              <button
+                type="button"
+                class="btn btn-dark"
+                style={{ float: "right" }}
+              >
+                Update
+              </button>
             </a>
           </form>
         </CurvedBorder>
       </div>
-      
-          {/* Update tourist */}
-          <Route
-            path="/tourist/updateprofile"
-            exact
-            render={(props) => (
-              <List
-                {...props}
-                title="Update tourist"
-                // getURL="http://localhost:8070/serviceprovider/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
-                viewURL="http://localhost:3000/admin/manageserviceproviders/view"
-                updateURL=""
-                deleteURL=""
-                afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
-              />
-            )}
+
+      {/* Update tourist */}
+      <Route
+        path="/tourist/updateprofile"
+        exact
+        render={(props) => (
+          <CreateForm
+            {...props}
+            title="Update tourist"
+            // getURL="http://localhost:8070/serviceprovider/"
+            // getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
+            // viewURL="http://localhost:3000/admin/manageserviceproviders/view"
+            // updateURL=""
+            // deleteURL=""
+            // afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
           />
+        )}
+      />
     </div>
   );
 }
