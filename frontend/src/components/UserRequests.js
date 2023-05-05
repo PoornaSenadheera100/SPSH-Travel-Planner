@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import UserViewService from "./UserViewService";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default function UserRequests() {
   let [status, setStatus] = useState(["Approved", "Rejected", "Pending"]);
-  let history = useHistory();
-
-  function handleViewClick() {
-    history.push({
-      pathname: "/userHome/requests/view",
-      state: { staus: status },
-    });
-  }
 
   return (
     <div className="container" style={{ marginTop: "20px" }}>
@@ -41,16 +34,24 @@ export default function UserRequests() {
           >
             Status: {status}
           </h4>
-          <button
+          <a
             href="/userHome/requests/view"
             className="btn btn-secondary"
             style={{ float: "right" }}
-            onClick={handleViewClick}
           >
             View
-          </button>
+          </a>
         </div>
       ))}
+
+      {/* pass status as prop to show cancel button according to that */}
+      {/* <Router>
+        <Route
+          path="/userHome/requests/view"
+          exact
+          render={(props) => <UserViewService {...props} status={status} />}
+        />
+      </Router> */}
     </div>
   );
 }
