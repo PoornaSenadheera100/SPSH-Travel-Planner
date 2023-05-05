@@ -137,6 +137,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="text"
+              value={props.ServiceId}
               className="form-control"
               required
               pattern="[S][0-9]{3}"
@@ -160,6 +161,7 @@ export default function CreateService(props) {
             <input
               type="text"
               className="form-control"
+              value={props.ServiceName}
               id="name"
               pattern="[a-zA-Z\s]+"
               required
@@ -178,6 +180,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="text"
+              value={props.ServiceLocation}
               className="form-control"
               required
               id="location"
@@ -196,6 +199,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="number"
+              value={props.ServicePrice}
               className="form-control"
               required
               id="price"
@@ -215,6 +219,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="text"
+              value={props.ServiceDuration}
               className="form-control"
               required
               id="duration"
@@ -235,6 +240,7 @@ export default function CreateService(props) {
             <input
               type="text"
               className="form-control"
+              value={props.AvailableTime}
               required
               id="time"
               min="0"
@@ -253,6 +259,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="text"
+              value={props.AvailableDates}
               className="form-control"
               required
               id="dates"
@@ -272,6 +279,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="number"
+              value={props.Capacity}
               className="form-control"
               required
               id="capacity"
