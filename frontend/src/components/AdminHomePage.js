@@ -9,6 +9,15 @@ export default function AdminHomePage() {
     window.location.replace("/");
   }
 
+  const pwdChangeWarning = (
+    <>
+      <br />
+      <h4>
+        Leave the fields below blank if you do not want to change the password!
+      </h4>
+    </>
+  );
+
   return (
     <div className="row" style={{ height: "100%" }}>
       <div style={{ width: "1px" }}>
@@ -90,7 +99,7 @@ export default function AdminHomePage() {
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
                 viewURL="http://localhost:3000/admin/manageserviceproviders/view"
-                updateURL=""
+                updateURL="http://localhost:3000/admin/manageserviceproviders/update"
                 deleteURL=""
                 afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
               />
@@ -108,6 +117,19 @@ export default function AdminHomePage() {
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
                 backBtnURL="http://localhost:3000/admin/manageserviceproviders"
+              />
+            )}
+          />
+
+          {/* Update a Service Provider */}
+          <Route
+            path="/admin/manageserviceproviders/update/:email"
+            exact
+            render={(props) => (
+              <CreateForm
+                {...props}
+                title="Update Service Provider"
+                pwdChangeWarning={pwdChangeWarning}
               />
             )}
           />

@@ -74,6 +74,8 @@ export default function CreateForm(props) {
           }}
         />
 
+        {props.pwdChangeWarning}
+
         <br></br>
 
         <label htmlFor="newpassword">New Password</label>
