@@ -7,7 +7,7 @@ export default function TouristProfile() {
     window.location.replace("/");
   }
 
-  //adding a background image
+  // //adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
 
   const style = {
@@ -16,6 +16,19 @@ export default function TouristProfile() {
     backgroundPosition: "center",
     height: "100vh",
   };
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(${profileBackground})`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.height = "100vh";
+    return () => {
+      document.body.style.backgroundImage = null;
+      document.body.style.backgroundSize = null;
+      document.body.style.backgroundPosition = null;
+      document.body.style.height = null;
+    };
+  }, []);
+  
 
   //creating variables for each function
   const email = sessionStorage.getItem("touristEmail");
@@ -80,7 +93,7 @@ export default function TouristProfile() {
           padding: "100px",
           textAlign: "justify",
           borderRadius: "10px",
-          height: "600px",
+          height: "550px",
           width: "600px",
           borderRadius: "50% 50% 0 0",
           backgroundColor: "rgba(255, 255, 255, 0.7)",
