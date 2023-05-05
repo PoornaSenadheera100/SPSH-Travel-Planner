@@ -6,32 +6,34 @@ import yala from "../images/yala.png";
 import hills from "../images/hills.png";
 import sigiriya from "../images/sigiriya.png";
 
-const Slideshow = () => {
-  const slideImages = [
-    {
-      src: { hikkaduwa },
-      caption: "Hikkaduwa",
-    },
-    {
-      src: { yala },
-      caption: "Yala",
-    },
-    {
-      src: { hills },
-      caption: "Nuwara-Eliya",
-    },
-    {
-      src: { sigiriya },
-      caption: "Sigiriya",
-    },
-  ];
+const slideImages = [
+  {
+    url: hikkaduwa,
+    caption: "Hikkaduwa",
+  },
+  {
+    url: yala,
+    caption: "Yala",
+  },
+  {
+    url: hills,
+    caption: "Nuwara-Eliya",
+  },
+  {
+    url: sigiriya,
+    caption: "Sigiriya",
+  },
+];
 
+const Slideshow = () => {
   return (
     <div className="slide-container">
       <Slide>
         {slideImages.map((image, index) => (
           <div className="each-slide" key={index}>
-            <div style={{ backgroundImage: `src(${image.src})` }}>
+            <div
+              style={{ backgroundImage: `url(${image.url})`, height: "300px" }}
+            >
               <span>{image.caption}</span>
             </div>
           </div>
@@ -40,33 +42,5 @@ const Slideshow = () => {
     </div>
   );
 };
-
-/*
-const Slideshow = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex((currentIndex + 1) % 4);
-    }, 3000);
-
-    return () => clearInterval(intervalId);
-  }, [currentIndex]);
-
-  const images = ["hikkaduwa.png", "yala.png", "hills.png", "sigiriya.png"];
-
-  return (
-    <div
-      className="slideshow"
-      style={{ backgroundImage: `url(${images[currentIndex]})` }}
-    >
-      <img src={hikkaduwa} alt="image1" />
-      <img src={yala} alt="image2" />
-      <img src={hills} alt="image3" />
-      <img src={sigiriya} alt="image4" />
-    </div>
-  );
-};
-*/
 
 export default Slideshow;
