@@ -101,7 +101,13 @@ export default function AllServices() {
           <div class="btn-group" role="group" aria-label="Basic example">
             <button
               type="button"
-              class="btn btn-dark"
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                borderRadius: "5px",
+                border: "none",
+                width: "1060px",
+              }}
               onClick={() => {
                 //history.push moves from the current page.
                 //history.push(`/update/${student._id}`);
