@@ -1,8 +1,19 @@
 //import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { useState } from "react";
+import Footer from "./Footer";
+import elephant from "../images/elephant.png";
 
 export default function CreateService(props) {
+  const backgroundImageUrl = `url(${elephant})`;
+
+  const style = {
+    backgroundImage: backgroundImageUrl,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "100vh",
+  };
+
   const [Service_ProviderId, setService_ProviderId] = useState(
     "suritharawwala@gmail.com"
   );
@@ -127,16 +138,55 @@ export default function CreateService(props) {
       <center>
         <h1>{props.title}</h1>
       </center>
-
-      <form onSubmit={submService}>
-        <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="serviceID">Service ID</label>
+      <div className="container">
+        <button type="button" class="btn btn-danger" style={{ float: "right" }}>
+          SignOut
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button
+          type="button"
+          class="btn btn-secondary"
+          style={{ float: "left" }}
+        >
+          Back
+        </button>
+      </div>
+      <img
+        src={elephant}
+        width="50%"
+        alt="Logo"
+        style={{ display: "block", margin: "0 auto", marginBottom: "10px" }}
+      ></img>
+      <form
+        className="container"
+        onSubmit={submService}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateRows: "repeat(3, auto)",
+          gridGap: "1rem",
+          backgroundColor: "black",
+          color: "white",
+          marginTop: "5px",
+          height: "300%",
+        }}
+      >
+        <div className="form-grid">
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "45%" }}
+          >
+            <label
+              for="serviceID"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
+            >
+              Service ID
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="text"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.ServiceId}
               className="form-control"
               required
@@ -153,13 +203,16 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="name">Service Name</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "40%" }}>
+            <label for="name" style={{ fontWeight: "bold", fontSize: "20px" }}>
+              Service Name
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="text"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               className="form-control"
               value={props.ServiceName}
               id="name"
@@ -173,13 +226,24 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "30%" }}>
-            <label for="location">Service Location</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "40%" }}>
+            <label
+              for="location"
+              style={{
+                fontWeight: "bold",
+                fontSize: "20px",
+                display: "inline-block",
+                width: "40%",
+              }}
+            >
+              Service Location
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="text"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.ServiceLocation}
               className="form-control"
               required
@@ -192,13 +256,16 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="price">Service Price</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "30%" }}>
+            <label for="price" style={{ fontWeight: "bold", fontSize: "20px" }}>
+              Service Price
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="number"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.ServicePrice}
               className="form-control"
               required
@@ -212,13 +279,19 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="duration">Service Duration</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "30%" }}>
+            <label
+              for="duration"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
+            >
+              Service Duration
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="text"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.ServiceDuration}
               className="form-control"
               required
@@ -232,14 +305,17 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="time">Available Time</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "40%" }}>
+            <label for="time" style={{ fontWeight: "bold", fontSize: "20px" }}>
+              Available Time
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="text"
               className="form-control"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.AvailableTime}
               required
               id="time"
@@ -252,13 +328,16 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="dates">Available Dates</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "30%" }}>
+            <label for="dates" style={{ fontWeight: "bold", fontSize: "20px" }}>
+              Available Dates
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="text"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.AvailableDates}
               className="form-control"
               required
@@ -272,13 +351,19 @@ export default function CreateService(props) {
           </div>
         </div>
         <div className="form-group">
-          <div style={{ marginLeft: "0px", marginRight: "auto", width: "10%" }}>
-            <label for="capacity">Capacity</label>
+          <div style={{ marginLeft: "0px", marginRight: "auto", width: "40%" }}>
+            <label
+              for="capacity"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
+            >
+              Capacity
+            </label>
           </div>
 
           <div class="col-sm-10">
             <input
               type="number"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.Capacity}
               className="form-control"
               required
@@ -296,9 +381,15 @@ export default function CreateService(props) {
           <></>
         ) : (
           <div class="col-sm-10">
-            <label htmlFor="service_image">Image</label>
+            <label
+              htmlFor="service_image"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
+            >
+              Image
+            </label>
             <input
               type="file"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
               id="image"
               placeholder="Upload Image"
               required
@@ -308,18 +399,22 @@ export default function CreateService(props) {
             />
           </div>
         )}
-        <button
-          type="submit"
-          class="btn btn-primary"
-          style={{ float: "right" }}
-        >
-          Submit
-        </button>
-
+        <center>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style={{ float: "center", fontWeight: "bold", fontSize: "20px" }}
+          >
+            Submit
+          </button>
+        </center>
         {/* <a href="/adminhome/managesellers">
           <Button variant="dark">Back</Button>
         </a> */}
       </form>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
