@@ -31,9 +31,9 @@ export default function UpdateServicePage() {
         setServiceLocation(res.data.service[0].ServiceLocation);
         setServicePrice(res.data.service[0].ServicePrice);
         setServiceDuration(res.data.service[0].ServiceDuration);
-        setAvailableTime(res.data.service[0].setAvailableTime);
-        setAvailableDates(res.data.service[0].setAvailableDates);
-        setCapacity(res.data.service[0].setCapacity);
+        setAvailableTime(res.data.service[0].AvailableTime);
+        setAvailableDates(res.data.service[0].AvailableDates);
+        setCapacity(res.data.service[0].Capacity);
         setImage(res.data.service[0].Image);
       })
       .catch((err) => {
