@@ -126,6 +126,7 @@ export default function TouristProfile() {
                 Back
               </button>
             </a>
+            <a href="/tourist/updateprofile">
             <button
               type="button"
               class="btn btn-dark"
@@ -133,6 +134,7 @@ export default function TouristProfile() {
             >
               Update
             </button>
+            </a>
           </form>
         </CurvedBorder>
       </div>
