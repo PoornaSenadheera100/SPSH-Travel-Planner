@@ -1,6 +1,12 @@
+import { useState } from "react";
+
 export default function UserServiceBookingForm(props) {
+  let price = 500;
+  let [quantity, setQuantity] = useState(1);
+  let total = price * quantity;
+
   return (
-    <div>
+    <div style={{ width: 500, margin: "auto" }}>
       <form>
         <div class="form-group row">
           <label for="name">Name</label>
@@ -10,7 +16,8 @@ export default function UserServiceBookingForm(props) {
             name="name"
             class="form-control"
             // value={formData.name}
-            value={"John"}
+            value={"John Cena"}
+            disabled
             // onChange={handleInputChange}
           />
         </div>
@@ -58,8 +65,11 @@ export default function UserServiceBookingForm(props) {
             id="quantity"
             name="quantity"
             class="form-control"
-            // value={formData.quantity}
-            // onChange={handleInputChange}
+            min="0"
+            placeholder="Enter Quantity"
+            onChange={(e) => {
+              setQuantity(e.target.value);
+            }}
           />
           {/* <br /> */}
         </div>
@@ -67,21 +77,25 @@ export default function UserServiceBookingForm(props) {
         <div class="form-group row">
           <label for="price">Price:</label>
           <input
-            type="number"
+            type="text"
             id="price"
             name="price"
             class="form-control"
-            // value={formData.price}
+            value={`Rs. ${total}`}
+            disabled
             // onChange={handleInputChange}
           />
-          {/* <br /> */}
         </div>
 
         {/* <input type="submit" value="Submit" /> */}
 
-        <div class="form-group row">
-          <button style={{ float: "left" }}>Back</button>
-          <button style={{ float: "right" }}>Submit</button>
+        <div style={{ marginBottom: "75px" }}>
+          <button class="btn btn-dark" style={{ float: "left" }}>
+            Back
+          </button>
+          <button class="btn btn-success" style={{ float: "right" }}>
+            Book
+          </button>
         </div>
       </form>
     </div>
