@@ -9,6 +9,13 @@ import TouristProfile from "./components/TouristProfile";
 import UserHome from "./components/UserHome";
 import UserRequests from "./components/UserRequests";
 import UserViewService from "./components/UserViewService";
+import AllServices from "./components/AllServices";
+import AddService from "./components/AddService";
+import SingleService from "./components/SingleService";
+import Slideshow from "./components/Slideshow";
+import UpdateService from "./components/UpdateServices";
+import AddServicePage from "./components/AddServicePage";
+import UpdateServicePage from "./components/UpdateServicePage";
 
 function App() {
   return (
@@ -29,6 +36,23 @@ function App() {
         exact
         component={UserViewService}
       />{" "}
+      <Route
+        path="/serviceprovider/add/"
+        exact
+        component={AddServicePage}
+      ></Route>
+      <Route
+        path="/serviceprovider/update/:id"
+        exact
+        component={UpdateServicePage}
+      ></Route>
+      {/*<Route path="/service/update/:id" exact component={UpdateService}></Route>*/}
+      <Route path="/serviceprovider" exact component={AllServices}></Route>
+      <Route
+        path="/serviceprovider/getservice/:id"
+        exact
+        component={SingleService}
+      ></Route>
     </Router>
   );
 }
