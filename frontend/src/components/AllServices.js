@@ -127,6 +127,8 @@ export default function AllServices() {
             <div
               style={{
                 display: "flex",
+                background: "linear-gradient(to bottom, #191970, white)",
+                color: "white",
                 flexDirection: "column",
                 alignItems: "center",
                 padding: "1rem",
