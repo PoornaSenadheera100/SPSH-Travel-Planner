@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import UserHome from "./components/UserHome";
 import UserRequests from "./components/UserRequests";
 import UserViewService from "./components/UserViewService";
-import RequestDetails from "./components/RequestDetails";
 
 function App() {
   return (
@@ -14,12 +13,12 @@ function App() {
       <Route path="/" exact component={UserHome} />
       {/* <Route path="/userHome/requests/:id" exact component={UserRequests} /> */}
       <Route path="/userHome/requests/" exact component={UserRequests} />
+      {/* Remove this and implement UserRequests component line 47 */}
       <Route
-        path="/userHome/requests/view/"
+        path="/userHome/requests/view"
         exact
         component={UserViewService}
-      />
-      {/* <Route path="/userHome/requests/view/" exact component={RequestDetails} /> */}
+      />{" "}
     </Router>
   );
 }
