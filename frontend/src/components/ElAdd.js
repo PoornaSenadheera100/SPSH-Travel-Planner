@@ -131,7 +131,7 @@ export default function CreateService(props) {
   }
 
   return (
-    <div>
+    <div style={{ marginBottom: "10px" }}>
       <center>
         <h1>{props.title}</h1>
       </center>
@@ -173,7 +173,7 @@ export default function CreateService(props) {
           >
             <label
               for="serviceID"
-              style={{ fontWeight: "bold", fontSize: "20px" }}
+              style={{ fontWeight: "bold", fontSize: "20px", width: "100%" }}
             >
               Service ID
             </label>
@@ -229,7 +229,7 @@ export default function CreateService(props) {
                 fontWeight: "bold",
                 fontSize: "20px",
                 display: "inline-block",
-                width: "40%",
+                width: "200%",
               }}
             >
               Service Location
@@ -278,7 +278,7 @@ export default function CreateService(props) {
           <div style={{ marginLeft: "0px", marginRight: "auto", width: "30%" }}>
             <label
               for="duration"
-              style={{ fontWeight: "bold", fontSize: "20px" }}
+              style={{ fontWeight: "bold", fontSize: "20px", width: "200%" }}
             >
               Service Duration
             </label>
@@ -302,7 +302,10 @@ export default function CreateService(props) {
         </div>
         <div className="form-group">
           <div style={{ marginLeft: "0px", marginRight: "auto", width: "40%" }}>
-            <label for="time" style={{ fontWeight: "bold", fontSize: "20px" }}>
+            <label
+              for="time"
+              style={{ fontWeight: "bold", fontSize: "20px", width: "200%" }}
+            >
               Available Time
             </label>
           </div>
@@ -310,9 +313,9 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="text"
-              className="form-control"
               style={{ fontWeight: "bold", fontSize: "20px" }}
               value={props.AvailableTime}
+              className="form-control"
               required
               id="time"
               min="0"
@@ -325,7 +328,10 @@ export default function CreateService(props) {
         </div>
         <div className="form-group">
           <div style={{ marginLeft: "0px", marginRight: "auto", width: "30%" }}>
-            <label for="dates" style={{ fontWeight: "bold", fontSize: "20px" }}>
+            <label
+              for="dates"
+              style={{ fontWeight: "bold", fontSize: "20px", width: "200%" }}
+            >
               Available Dates
             </label>
           </div>
@@ -333,7 +339,7 @@ export default function CreateService(props) {
           <div class="col-sm-10">
             <input
               type="text"
-              style={{ fontWeight: "bold", fontSize: "20px" }}
+              style={{ fontWeight: "bold", fontSize: "20px", width: "100%" }}
               value={props.AvailableDates}
               className="form-control"
               required
@@ -350,7 +356,7 @@ export default function CreateService(props) {
           <div style={{ marginLeft: "0px", marginRight: "auto", width: "40%" }}>
             <label
               for="capacity"
-              style={{ fontWeight: "bold", fontSize: "20px" }}
+              style={{ fontWeight: "bold", fontSize: "20px", width: "200%" }}
             >
               Capacity
             </label>
