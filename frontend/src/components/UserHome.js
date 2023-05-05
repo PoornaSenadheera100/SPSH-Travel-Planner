@@ -15,12 +15,13 @@ export default function UserHome() {
           My Profile
         </button>
         <br />
-        <button
+        <a
+          href="/userHome/requests/"
           class="btn btn-dark"
           style={{ marginBottom: "10px", width: "15%" }}
         >
           My Requests
-        </button>
+        </a>
         <br />
       </div>
       <div
