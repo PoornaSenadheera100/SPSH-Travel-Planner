@@ -98,7 +98,6 @@ export default function AllServices() {
       <br></br>
       <table className="table table-borderless">
         <div className="row">
-          <div class="btn-group" role="group" aria-label="Basic example"></div>
           <div class="btn-group" role="group" aria-label="Basic example">
             <button
               type="button"
@@ -127,7 +126,7 @@ export default function AllServices() {
             <div
               style={{
                 display: "flex",
-                background: "linear-gradient(to bottom, #191970, white)",
+                background: "linear-gradient(to bottom, #28282B, white)",
                 color: "white",
                 flexDirection: "column",
                 alignItems: "center",

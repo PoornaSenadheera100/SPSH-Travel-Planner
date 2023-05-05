@@ -7,14 +7,21 @@ import AddService from "./components/AddService";
 import SingleService from "./components/SingleService";
 import Slideshow from "./components/Slideshow";
 import UpdateService from "./components/UpdateServices";
+import AddServicePage from "./components/AddServicePage";
+import UpdateServicePage from "./components/UpdateServicePage";
 
 function App() {
   return (
     <Router>
       <Header />
       <Slideshow />
-      <Route path="/service/add/" exact component={AddService}></Route>
-      <Route path="/service/update/:id" exact component={UpdateService}></Route>
+      <Route path="/service/add/" exact component={AddServicePage}></Route>
+      <Route
+        path="/service/update/:id"
+        exact
+        component={UpdateServicePage}
+      ></Route>
+      {/*<Route path="/service/update/:id" exact component={UpdateService}></Route>*/}
       <Route path="/service" exact component={AllServices}></Route>
       <Route
         path="/service/getservice/:id"
