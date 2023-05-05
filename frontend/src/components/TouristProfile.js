@@ -2,13 +2,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
-import CreateForm from "./CreateForm";
+
 export default function TouristProfile() {
+  
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
 
-  // //adding a background image
+//adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
 
   const style = {
@@ -138,24 +139,6 @@ export default function TouristProfile() {
           </form>
         </CurvedBorder>
       </div>
-
-      {/* Update tourist */}
-      <Route
-        path="/tourist/updateprofile"
-        exact
-        render={(props) => (
-          <CreateForm
-            {...props}
-            title="Update tourist"
-            // getURL="http://localhost:8070/serviceprovider/"
-            // getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
-            // viewURL="http://localhost:3000/admin/manageserviceproviders/view"
-            // updateURL=""
-            // deleteURL=""
-            // afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
-          />
-        )}
-      />
     </div>
   );
 }
