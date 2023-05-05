@@ -14,7 +14,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <Slideshow />
       <Route path="/service/add/" exact component={AddServicePage}></Route>
       <Route
         path="/service/update/:id"
@@ -28,7 +27,6 @@ function App() {
         exact
         component={SingleService}
       ></Route>
-      <Footer />
     </Router>
   );
 }
