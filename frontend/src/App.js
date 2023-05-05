@@ -6,6 +6,9 @@ import SignupPage from "./components/SignupPage";
 import AdminHomePage from "./components/AdminHomePage";
 import ServiceProviderHomePage from "./components/ServiceProviderHomePage";
 import TouristProfile from "./components/TouristProfile";
+import UserHome from "./components/UserHome";
+import UserRequests from "./components/UserRequests";
+import UserViewService from "./components/UserViewService";
 
 function App() {
   return (
@@ -15,8 +18,17 @@ function App() {
       <Route path="/signup" exact component={SignupPage} />
       <Route path="/admin/" component={AdminHomePage} />
       <Route path="/serviceprovider/" component={ServiceProviderHomePage} />
-
       <Route path="/tourist/userprofile" exact component={TouristProfile} />
+      {/* <Route path="/userHome" exact component={UserHome} /> */}
+      <Route path="/tourist" exact component={UserHome} />
+      {/* <Route path="/userHome/requests/:id" exact component={UserRequests} /> */}
+      <Route path="/tourist/requests/" exact component={UserRequests} />
+      {/* Remove this and implement UserRequests component line 47 */}
+      <Route
+        path="/tourist/requests/view"
+        exact
+        component={UserViewService}
+      />{" "}
     </Router>
   );
 }
