@@ -89,7 +89,7 @@ export default function AllServices() {
   return (
     <div className="container">
       <a href="/service">
-        <button class="btn btn-dark">Back</button>
+        <button class="btn btn-dark">Booking Requests</button>
       </a>
       <center>
         <h1>All Services</h1>
@@ -133,7 +133,7 @@ export default function AllServices() {
             <div
               style={{
                 display: "flex",
-                background: "linear-gradient(to bottom, #28282B, white)",
+                background: "#020317",
                 color: "white",
                 flexDirection: "column",
                 alignItems: "center",
