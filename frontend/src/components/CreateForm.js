@@ -1,13 +1,29 @@
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function CreateForm(props) {
   const [name, setName] = useState({});
-  const [email, setEmail] = useState({});
+  var [email, setEmail] = useState({});
   const [phone, setPhone] = useState({});
   const [nic, setNic] = useState({});
   const [password, setPassword] = useState({});
   const [rePassword, setRePassword] = useState({});
+
+  email = useParams();
+
+  useEffect(() => {
+    if (props.getURL) {
+      axios.get(`${props.getURL}/${email.email}`).then((res) => {
+        console.log(res.data[0]);
+        setName(res.data[0].name);
+        setEmail(res.data[0].email);
+        setPhone(res.data[0].phone);
+        setNic(res.data[0].nic);
+      });
+    }
+  });
 
   function proceed() {}
 
@@ -25,6 +41,7 @@ export default function CreateForm(props) {
           class="form-control"
           placeholder="Enter your name"
           pattern="[A-Za-z .]{1,100}"
+          value={name}
           required
           onChange={(e) => {
             setName(e.target.value);
@@ -39,6 +56,7 @@ export default function CreateForm(props) {
           id="email"
           class="form-control"
           placeholder="abc@gmail.com"
+          value={email.email}
           required
           onChange={(e) => {
             setEmail(e.target.value);
@@ -54,6 +72,7 @@ export default function CreateForm(props) {
           class="form-control"
           placeholder="Phone No"
           pattern="0[0-9]{9}"
+          value={phone}
           required
           onChange={(e) => {
             setPhone(e.target.value);
@@ -68,6 +87,7 @@ export default function CreateForm(props) {
           id="nic"
           class="form-control"
           placeholder="NIC"
+          value={nic}
           required
           onChange={(e) => {
             setNic(e.target.value);
