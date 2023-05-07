@@ -130,6 +130,7 @@ export default function AdminHomePage() {
                 {...props}
                 title="Update Service Provider"
                 pwdChangeWarning={pwdChangeWarning}
+                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
               />
             )}
           />
@@ -145,7 +146,7 @@ export default function AdminHomePage() {
                 // getURL="http://localhost:8070/tourists/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
                 viewURL="http://localhost:3000/admin/managetourists/view"
-                updateURL=""
+                updateURL="http://localhost:3000/admin/managetourists/update"
                 deleteURL=""
                 afterDeleteURL=""
               />
@@ -163,6 +164,20 @@ export default function AdminHomePage() {
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
                 backBtnURL="http://localhost:3000/admin/managetourists"
+              />
+            )}
+          />
+
+          {/* Update a Tourist */}
+          <Route
+            path="/admin/managetourists/update/:email"
+            exact
+            render={(props) => (
+              <CreateForm
+                {...props}
+                title="Update Tourist"
+                pwdChangeWarning={pwdChangeWarning}
+                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
               />
             )}
           />
