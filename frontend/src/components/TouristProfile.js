@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
 
 export default function TouristProfile() {
-  
+
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
@@ -52,28 +52,7 @@ export default function TouristProfile() {
       });
   }, []);
 
-  // //Function to update the data
-  // function updateProfile(e) {
-  //   e.preventDefault();
-
-  //   const newTourist = {
-  //     name,
-  //     address,
-  //     nic,
-  //     phone,
-  //     email,
-  //     password,
-  //   };
-  //   axios
-  //     .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
-  //     .then(() => {
-  //       alert("Profile updated");
-  //       window.location.replace("http://localhost:3000/tourist/");
-  //     })
-  //     .catch((err) => {
-  //       alert("Update failure occured ! ");
-  //     });
-  // }
+ 
 
   //Function for creating  a prop for Form
   function Label({ formLabel, value }) {
@@ -127,7 +106,7 @@ export default function TouristProfile() {
                 Back
               </button>
             </a>
-            <a href="/tourist/updateprofile">
+            <a href={`/tourist/updateprofile/${email}`}>
               <button
                 type="button"
                 class="btn btn-dark"
