@@ -84,7 +84,7 @@ router.route("/update/:paramemail").put(async (req, res) => {
 router.route("/delete/email/:paraemail").delete(async (req, res) => {
   let touristEmail = req.params.paraemail;
 
-  await Buyer.findOneAndDelete({ email: touristEmail })
+  await Tourist.findOneAndDelete({ email: touristEmail })
     .then(() => {
       res.status(200).send({ status: "Tourist Deleted" });
     })
