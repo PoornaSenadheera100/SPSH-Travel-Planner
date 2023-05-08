@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function CreateForm(props) {
   const [name, setName] = useState({});
-  var [email, setEmail] = useState({});
+  var   [email, setEmail] = useState({});
   const [phone, setPhone] = useState({});
   const [nic, setNic] = useState({});
   const [password, setPassword] = useState({});
@@ -35,12 +35,12 @@ export default function CreateForm(props) {
       if(password != rePassword){
         alert("Sorry passwords are not matching!")
       }
-      else if(password===''&rePassword===''){
+      else if(password === '' && rePassword === ''){
         const updateTouristWithoutPassword={
           name,
           nic,
           phone,
-          email,
+          email
         };
         axios(`http://localhost:8070/tourist/update/${email}`,updateTouristWithoutPassword).then(()=>{
           alert("Profile updated");

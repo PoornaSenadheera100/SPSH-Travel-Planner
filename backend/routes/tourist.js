@@ -64,7 +64,7 @@ router.route("/update/:paramemail").put(async (req, res) => {
     nic,
     email,
     phone,
-    password,
+    password
   };
 
   await Tourist.findOneAndUpdate({ email: paramemail }, updateTourist)
