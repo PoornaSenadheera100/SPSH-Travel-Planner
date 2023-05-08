@@ -1,9 +1,57 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function UserServiceBookingForm(props) {
-  let price = 500;
+  const email = sessionStorage.getItem("touristEmail");
+  let { serviceProviderId, serviceId } = props;
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [ServicePrice, setServicePrice] = useState();
+  const [AvailableTime, setAvailableTime] = useState("");
+  const [AvailableDates, setAvailableDates] = useState("");
+  const [Image, setImage] = useState("");
+  // let price = 500;
   let [quantity, setQuantity] = useState(1);
-  let total = price * quantity;
+
+  //convert Service price to number
+  let total = Number(ServicePrice) * quantity;
+
+  function getTouristInformation() {
+    axios
+      .get(`http://localhost:8070/tourist/get/email/${email}`)
+      .then((res) => {
+        console.log(res.data);
+        setName(res.data[0].name);
+        setPhone(res.data[0].phone);
+      })
+      .catch((err) => {
+        alert("Error in fetching tourist data");
+      });
+  }
+
+  function getServiceDetails() {
+    axios
+      .get(
+        `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        console.log(serviceProviderId);
+        setServicePrice(res.data[0].ServicePrice);
+        setAvailableTime(res.data[0].AvailableTime);
+        setAvailableDates(res.data[0].AvailableDates);
+        setImage(res.data[0].Image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    getTouristInformation();
+    getServiceDetails();
+  });
 
   return (
     <div style={{ width: 500, margin: "auto" }}>
@@ -16,7 +64,7 @@ export default function UserServiceBookingForm(props) {
             name="name"
             class="form-control"
             // value={formData.name}
-            value={"John Cena"}
+            value={name}
             disabled
             // onChange={handleInputChange}
           />
@@ -30,7 +78,7 @@ export default function UserServiceBookingForm(props) {
             name="contactNo"
             class="form-control"
             // value={formData.name}
-            value={"0771234567"}
+            value={phone}
             // onChange={handleInputChange}
           />
         </div>
@@ -41,7 +89,7 @@ export default function UserServiceBookingForm(props) {
             id="date"
             name="date"
             class="form-control"
-            // value={formData.date}
+            value={AvailableDates}
             // onChange={handleInputChange}
           />
           {/* <br /> */}
@@ -53,7 +101,7 @@ export default function UserServiceBookingForm(props) {
             id="time"
             name="time"
             class="form-control"
-            // value={formData.time}
+            value={AvailableTime}
             // onChange={handleInputChange}
           />
           {/* <br /> */}
@@ -96,6 +144,8 @@ export default function UserServiceBookingForm(props) {
           <button class="btn btn-success" style={{ float: "right" }}>
             Book
           </button>
+          <br />
+          <br /> <br /> <br />
         </div>
       </form>
     </div>
