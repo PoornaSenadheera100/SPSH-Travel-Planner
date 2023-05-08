@@ -137,6 +137,10 @@ export default function UserViewService(props) {
           >
             Cancel
           </button>
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </form>
     </div>
