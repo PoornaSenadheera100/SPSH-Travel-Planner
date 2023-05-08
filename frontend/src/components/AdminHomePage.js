@@ -84,7 +84,11 @@ export default function AdminHomePage() {
             path="/admin/addserviceprovider"
             exact
             render={(props) => (
-              <CreateForm {...props} title="Add Service Provider" />
+              <CreateForm
+                {...props}
+                title="Add Service Provider"
+                backBtnURL="/admin/addserviceprovider"
+              />
             )}
           />
 
