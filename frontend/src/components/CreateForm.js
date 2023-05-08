@@ -28,6 +28,7 @@ export default function CreateForm(props) {
   function proceed(e) {
     e.preventDefault();
     createTourist();
+    createSP();
   }
 
   function createTourist() {
@@ -60,6 +61,45 @@ export default function CreateForm(props) {
                 });
             } else {
               alert("You already have an account !");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  }
+
+  function createSP() {
+    if (props.title === "Add Service Provider") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else {
+        axios
+          .get(`http://localhost:8070/serviceprovider/get/email/${email}`)
+          .then((res) => {
+            if (res.data[0] === undefined) {
+              const newSP = {
+                name,
+                nic,
+                email,
+                phone,
+                password,
+              };
+
+              axios
+                .post("http://localhost:8070/serviceprovider/add", newSP)
+                .then(() => {
+                  alert("Registration Successfull !");
+                  window.location.replace("/admin/addserviceprovider");
+                })
+                .catch((err) => {
+                  alert("Something went wrong !");
+                });
+            } else {
+              alert("This service provider already has an account !");
             }
           })
           .catch((err) => {
