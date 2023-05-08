@@ -5,13 +5,13 @@ import axios from "axios";
 
 export default function CreateForm(props) {
   const [name, setName] = useState("");
-  var [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [nic, setNic] = useState({});
+  const [nic, setNic] = useState("");
   const [password, setPassword] = useState({});
   const [rePassword, setRePassword] = useState({});
 
-  email = useParams();
+  // email = useParams();
 
   useEffect(() => {
     if (props.getURL) {
@@ -25,10 +25,55 @@ export default function CreateForm(props) {
     }
   });
 
-  function proceed() {}
+  function proceed(e) {
+    e.preventDefault();
+    createTourist();
+  }
+
+  function createTourist() {
+    if (props.title === "Create New Account") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else {
+        axios
+          .get(`http://localhost:8070/tourist/get/email/${email}`)
+          .then((res) => {
+            if (res.data[0] === undefined) {
+              const newTourist = {
+                name,
+                nic,
+                email,
+                phone,
+                password,
+              };
+
+              axios
+                .post("http://localhost:8070/tourist/add", newTourist)
+                .then(() => {
+                  alert("Registration Successfull !");
+                  window.location.replace("/");
+                })
+                .catch((err) => {
+                  alert("Something went wrong !");
+                });
+            } else {
+              alert("You already have an account !");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  }
 
   return (
     <div>
+      <a href={props.backBtnURL}>
+        <Button variant="dark">Back</Button>
+      </a>
       <center>
         <h1>{props.title}</h1>
       </center>
