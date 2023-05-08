@@ -16,6 +16,7 @@ import Slideshow from "./components/Slideshow";
 import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
+import AdminRequestApprovalSingle from "./components/AdminRequestApprovalSingle";
 
 function App() {
   return (
