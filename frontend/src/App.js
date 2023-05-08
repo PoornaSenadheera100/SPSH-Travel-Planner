@@ -16,6 +16,7 @@ import Slideshow from "./components/Slideshow";
 import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
+import TouristProfileUpdatePage from "./components/TouristProfileUpdatePage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/admin/" component={AdminHomePage} />
       <Route path="/serviceprovider/" component={ServiceProviderHomePage} />
       <Route path="/tourist/userprofile" exact component={TouristProfile} />
+      <Route path="/tourist/updateprofile/:email" exact component={TouristProfileUpdatePage}/>
       {/* <Route path="/userHome" exact component={UserHome} /> */}
       <Route path="/tourist" exact component={UserHome} />
       {/* <Route path="/userHome/requests/:id" exact component={UserRequests} /> */}
