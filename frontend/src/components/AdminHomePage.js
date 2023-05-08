@@ -3,6 +3,9 @@ import CreateForm from "./CreateForm";
 import Button from "react-bootstrap/Button";
 import List from "./List";
 import ViewUser from "./ViewUser";
+import AdminRequestApproval from "./AdminRequestApproval";
+import AdminRequestApprovalSingle from "./AdminRequestApprovalSingle";
+import AdminServiceSearch from "./AdminServiceSearch";
 
 export default function AdminHomePage() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
@@ -15,7 +18,7 @@ export default function AdminHomePage() {
         <p style={{ color: "white" }}>Invisible</p>
       </div>
       <div className="col-4">
-        <a href="/admin/managerequests">
+        <a href="/admin/managerequests/view/">
           <button
             type="button"
             class="btn btn-info btn-lg"
@@ -144,6 +147,28 @@ export default function AdminHomePage() {
               />
             )}
           />
+
+          {/* Manage Requests  */}
+          <Route
+            path="/admin/managerequests/view/"
+            exact
+            render={(props) => (
+              <AdminRequestApproval {...props} title="Approvals" />
+            )} //check if props are passed
+          />
+
+          {/* Admin View Single Requests  */}
+          <Route
+            path="/admin/managerequests/view/search/single"
+            exact
+            component={AdminRequestApprovalSingle}
+          />
+
+          {/* Admin Search Service Availability */}
+          {/* <Route
+            path="/admin/managerequests/view/search"
+            component={AdminServiceSearch}
+          /> */}
         </Router>
       </div>
       <div style={{ width: "1px" }}>
