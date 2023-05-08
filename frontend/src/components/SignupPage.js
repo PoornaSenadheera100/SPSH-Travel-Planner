@@ -5,7 +5,7 @@ export default function SignupPage() {
 
   return (
     <div className="container">
-      <CreateForm title={title} />
+      <CreateForm title={title} backBtnURL="/" />
     </div>
   );
 }
