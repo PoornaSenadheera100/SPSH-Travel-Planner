@@ -2,16 +2,14 @@ import { useState } from "react";
 import UserServiceBookingForm from "./UserServiceBookingForm";
 
 export default function UserServicesComponent(props) {
-  let { city } = props;
+  let { city, serviceName } = props;
 
-  let [serviceNames, setServiceName] = useState([
-    "Pony ride",
-    "Horseback riding",
-  ]);
-  let [serviceDescriptions, setServiceDescription] = useState([
-    "Pony ride in racecourse",
-    "Horseback riding on the beach",
-  ]);
+  let [serviceNames, setServiceName] = useState([serviceName]);
+
+  // let [serviceDescriptions, setServiceDescription] = useState([
+  //   "Pony ride in racecourse",
+  //   "Horseback riding on the beach",
+  // ]);
 
   let [showServiceComponents, setShowServiceComponents] = useState(true);
 
@@ -51,7 +49,7 @@ export default function UserServicesComponent(props) {
                   <h3 style={{ margin: "0", color: "#fff", fontSize: "24px" }}>
                     {name}
                   </h3>
-                  <p style={{ color: "#fff" }}>{serviceDescriptions[index]}</p>
+                  {/* <p style={{ color: "#fff" }}>{serviceDescriptions[index]}</p> */}
                 </div>
               </a>
             </div>
