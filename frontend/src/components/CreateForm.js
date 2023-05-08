@@ -24,8 +24,55 @@ export default function CreateForm(props) {
       });
     }
   });
+  
+  function proceed() {
+    TouristUpdateProfile();
+  }
+  function TouristUpdateProfile(){
+    if (props.title=="Update tourist profile"){
 
-  function proceed() {}
+      //check if both passwords are matching and then update
+      if(password != rePassword){
+        alert("Sorry passwords are not matching!")
+      }
+      else if(password===''&rePassword===''){
+        const updateTouristWithoutPassword={
+          name,
+          nic,
+          phone,
+          email,
+        };
+        axios(`http://localhost:8070/tourist/update/${email}`,updateTouristWithoutPassword).then(()=>{
+          alert("Profile updated");
+          window.location.replace("http://localhost:3000/tourist/");
+        }).catch((err)=>{
+          alert("Sorry unable to update tourist");
+        });
+      }
+      else{
+        const newTourist = {
+          name,
+          nic,
+          phone,
+          email,
+          password,
+        };
+        axios
+          .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
+          .then(() => {
+            alert("Profile updated");
+            window.location.replace("http://localhost:3000/tourist/");
+          })
+          .catch((err) => {
+            alert("Update failure occured ! ");
+          });
+
+      }
+
+ 
+
+    }
+  }
 
   return (
     <div>
@@ -105,7 +152,6 @@ export default function CreateForm(props) {
           class="form-control"
           placeholder="Password"
           minLength="8"
-          required
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -119,7 +165,6 @@ export default function CreateForm(props) {
           id="repassword"
           class="form-control"
           placeholder="Password"
-          required
           onChange={(e) => {
             setRePassword(e.target.value);
           }}
