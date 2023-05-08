@@ -19,10 +19,6 @@ export default function AllServices() {
     window.location.replace("/");
   }
 
-  //Creating an array that passes 2 values.
-  //First value of "students" returns the state.
-  //Second value of "setStudents" returns the method that sets the values to the statae, or the one that changes the value of the state.
-  //The initial/default value of the useState is an empty array.([])
   const [services, setService] = useState([]);
   const [ServiceId, setServiceId] = useState("");
 
@@ -44,6 +40,7 @@ export default function AllServices() {
         .then((res) => {
           console.log(res.data);
           setService(res.data);
+          console.log(services[0]);
 
           //if it wasn't successfully fetched, then the error is displayed and handled as an exception.
         })
