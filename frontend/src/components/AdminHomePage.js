@@ -100,8 +100,9 @@ export default function AdminHomePage() {
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
                 viewURL="/admin/manageserviceproviders/view"
                 updateURL="/admin/manageserviceproviders/update"
-                deleteURL=""
+                deleteURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/delete/email"
                 afterDeleteURL="/admin/manageserviceproviders"
+                deleteMsg="Service Provider Deleted"
               />
             )}
           />
@@ -148,8 +149,9 @@ export default function AdminHomePage() {
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
                 viewURL="/admin/managetourists/view"
                 updateURL="/admin/managetourists/update"
-                deleteURL=""
-                afterDeleteURL=""
+                deleteURL="https://spsh-travel-planner-backend.onrender.com/tourist/delete/email"
+                afterDeleteURL="/admin/managetourists"
+                deleteMsg="Tourist Deleted"
               />
             )}
           />
