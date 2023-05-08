@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function CreateForm(props) {
-  const [name, setName] = useState({});
-  var [email, setEmail] = useState({});
-  const [phone, setPhone] = useState({});
+  const [name, setName] = useState("");
+  var [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [nic, setNic] = useState({});
   const [password, setPassword] = useState({});
   const [rePassword, setRePassword] = useState({});
@@ -105,7 +105,6 @@ export default function CreateForm(props) {
           class="form-control"
           placeholder="Password"
           minLength="8"
-          required
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -119,7 +118,6 @@ export default function CreateForm(props) {
           id="repassword"
           class="form-control"
           placeholder="Password"
-          required
           onChange={(e) => {
             setRePassword(e.target.value);
           }}

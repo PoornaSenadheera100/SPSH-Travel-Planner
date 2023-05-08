@@ -25,8 +25,11 @@ export default function SingleService() {
 
   useEffect(() => {
     axios
+      // .get(
+      //   `http://localhost:8070/service/getservice/${id}/${Service_ProviderId}`
+      // )
       .get(
-        `http://localhost:8070/service/getservice/${id}/${Service_ProviderId}`
+        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${id}/${Service_ProviderId}`
       )
       .then((res) => {
         console.log(res.data);

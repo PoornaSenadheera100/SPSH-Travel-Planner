@@ -23,7 +23,10 @@ export default function UpdateServicePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/service/get/${Service_ProviderId}/${id}`)
+      // .get(`http://localhost:8070/service/get/${Service_ProviderId}/${id}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/service/get/${Service_ProviderId}/${id}`
+      )
       .then((res) => {
         console.log(res.data.service);
         setServiceId(res.data.service[0].ServiceId);

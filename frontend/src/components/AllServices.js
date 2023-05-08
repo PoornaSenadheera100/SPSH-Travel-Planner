@@ -40,7 +40,10 @@ export default function AllServices() {
       //axois uses the "get" method --> when retrieving data from the DB --> since that is the http request that is specified in the BACKEND
       //If data was successfully fetched, then ---> the data objects sent as an array is passed to the seStudent method.
       axios
-        .get(`http://localhost:8070/service/${Service_ProviderId}`)
+        // .get(`http://localhost:8070/service/${Service_ProviderId}`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/service/${Service_ProviderId}`
+        )
         .then((res) => {
           console.log(res.data);
           setService(res.data);
@@ -111,9 +114,7 @@ export default function AllServices() {
                 //history.push moves from the current page.
                 //history.push(`/update/${student._id}`);
                 //window.location also redirects to another page.(delete page with the ID)
-                window.location.replace(
-                  `http://localhost:3000/serviceprovider/add`
-                );
+                window.location.replace(`/serviceprovider/add`);
               }}
             >
               Add Service
@@ -186,7 +187,7 @@ export default function AllServices() {
                   }}
                   onClick={() => {
                     window.location.replace(
-                      `http://localhost:3000/serviceprovider/getservice/${service.ServiceId}`
+                      `/serviceprovider/getservice/${service.ServiceId}`
                     );
                   }}
                 >
@@ -204,7 +205,7 @@ export default function AllServices() {
                     }}
                     onClick={() => {
                       window.location.replace(
-                        `http://localhost:3000/serviceprovider/update/${service.ServiceId}`
+                        `/serviceprovider/update/${service.ServiceId}`
                       );
                     }}
                   >
@@ -227,14 +228,15 @@ export default function AllServices() {
                       );
                       if (response) {
                         axios
+                          // .delete(
+                          //   `http://localhost:8070/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
+                          // )
                           .delete(
-                            `http://localhost:8070/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
+                            `https://spsh-travel-planner-backend.onrender.com/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
                           )
                           .then(() => {
                             alert("Service Deleted");
-                            window.location.replace(
-                              "http://localhost:3000/serviceprovider/"
-                            );
+                            window.location.replace("/serviceprovider/");
                           })
                           .catch((err) => {
                             alert(err);

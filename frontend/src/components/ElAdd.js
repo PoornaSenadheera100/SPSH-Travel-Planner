@@ -43,7 +43,10 @@ export default function CreateService(props) {
 
   function checkServiceCode(serviceCode) {
     axios
-      .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      // .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceCode}`
+      )
       .then((res) => {
         if (res.data.length !== 0) {
           console.log(serviceCode);
@@ -82,11 +85,15 @@ export default function CreateService(props) {
 
     if (block === false) {
       axios
-        .post(`http://localhost:8070/service/add/`, newService)
+        // .post(`http://localhost:8070/service/add/`, newService)
+        .post(
+          `https://spsh-travel-planner-backend.onrender.com/service/add/`,
+          newService
+        )
         .then(() => {
           //After sending the data --> backend server responds --> if successfully added then an alert message is sent.
           alert(`Service Added`);
-          window.location.replace("http://localhost:3000/serviceprovider");
+          window.location.replace("/serviceprovider");
 
           //After submitting the details ---> the values should be taken off from the fields ---> to do this --> the setters are assigned with ("")
           setServiceId("");
@@ -118,7 +125,10 @@ export default function CreateService(props) {
 
   function checkServiceCode(serviceCode) {
     axios
-      .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      // .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceCode}/${Service_ProviderId}`
+      )
       .then((res) => {
         if (res.data.length !== 0) {
           console.log(serviceCode);

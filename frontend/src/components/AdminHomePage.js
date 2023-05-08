@@ -98,10 +98,10 @@ export default function AdminHomePage() {
                 title="Manage Service Providers"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
-                viewURL="http://localhost:3000/admin/manageserviceproviders/view"
-                updateURL="http://localhost:3000/admin/manageserviceproviders/update"
+                viewURL="/admin/manageserviceproviders/view"
+                updateURL="/admin/manageserviceproviders/update"
                 deleteURL=""
-                afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
+                afterDeleteURL="/admin/manageserviceproviders"
               />
             )}
           />
@@ -116,7 +116,7 @@ export default function AdminHomePage() {
                 title="Service Provider"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
-                backBtnURL="http://localhost:3000/admin/manageserviceproviders"
+                backBtnURL="/admin/manageserviceproviders"
               />
             )}
           />
@@ -145,8 +145,8 @@ export default function AdminHomePage() {
                 title="Manage Tourists"
                 // getURL="http://localhost:8070/tourists/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
-                viewURL="http://localhost:3000/admin/managetourists/view"
-                updateURL="http://localhost:3000/admin/managetourists/update"
+                viewURL="/admin/managetourists/view"
+                updateURL="/admin/managetourists/update"
                 deleteURL=""
                 afterDeleteURL=""
               />
@@ -163,7 +163,7 @@ export default function AdminHomePage() {
                 title="Tourist"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
-                backBtnURL="http://localhost:3000/admin/managetourists"
+                backBtnURL="/admin/managetourists"
               />
             )}
           />

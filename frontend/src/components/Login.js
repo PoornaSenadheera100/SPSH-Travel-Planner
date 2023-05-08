@@ -20,12 +20,15 @@ export default function Login(props) {
 
   function validateTourist() {
     axios
-      .get(`http://localhost:8070/tourist/get/email/${email}`)
+      // .get(`http://localhost:8070/tourist/get/email/${email}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
+      )
       .then((res) => {
         if (res.data[0].password === password) {
           sessionStorage.setItem("sTravPlaTsirout", Math.random().toString());
           sessionStorage.setItem("touristEmail", email);
-          window.location.replace(`http://localhost:3000/tourist`);
+          window.location.replace(`/tourist`);
         } else {
           alert("Invalid Credentials !");
         }
@@ -45,7 +48,7 @@ export default function Login(props) {
         if (res.data[0].password === password) {
           sessionStorage.setItem("sTravPlaVresVorp", Math.random().toString());
           sessionStorage.setItem("serviceProviderEmail", email);
-          window.location.replace(`http://localhost:3000/serviceprovider`);
+          window.location.replace(`/serviceprovider`);
         } else {
           alert("Invalid Credentials !");
         }
@@ -65,9 +68,7 @@ export default function Login(props) {
         console.log(res.data);
         if (res.data[0].password === password) {
           sessionStorage.setItem("sTravPlaNimda", Math.random().toString());
-          window.location.replace(
-            `http://localhost:3000/admin/addserviceprovider`
-          );
+          window.location.replace(`/admin/addserviceprovider`);
         } else {
           alert("Invalid Credentials!");
         }

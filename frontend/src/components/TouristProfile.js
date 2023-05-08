@@ -26,7 +26,10 @@ export default function TouristProfile() {
   //Use effect to fetch data which is in DB and display them in the form
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/tourist/get/email/${email}`)
+      // .get(`http://localhost:8070/tourist/get/email/${email}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
+      )
       .then((res) => {
         console.log(res.data);
         setName(res.data[0].name);
@@ -108,7 +111,7 @@ export default function TouristProfile() {
             <Label formLabel="NIC" value={nic} />
             <Label formLabel="Phone" value={phone} />
             <br></br>
-            <a href="http://localhost:3000/tourist/">
+            <a href="/tourist">
               <button type="button" class="btn btn-dark">
                 Back
               </button>

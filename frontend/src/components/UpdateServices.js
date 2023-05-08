@@ -28,7 +28,10 @@ function UpdateService() {
   const { update, id } = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/service/get/${Service_ProviderId}/${id}`)
+      // .get(`http://localhost:8070/service/get/${Service_ProviderId}/${id}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/service/get/${Service_ProviderId}/${id}`
+      )
       .then((res) => {
         console.log(res.data.service);
         setServiceId(res.data.service[0].ServiceId);
@@ -75,15 +78,19 @@ function UpdateService() {
       Image,
     };
     axios
+      // .put(
+      //   `http://localhost:8070/service/update/${Service_ProviderId}/${id}`,
+      //   newService
+      // )
       .put(
-        `http://localhost:8070/service/update/${Service_ProviderId}/${id}`,
+        `https://spsh-travel-planner-backend.onrender.com/service/update/${Service_ProviderId}/${id}`,
         newService
       )
       .then(() => {
         alert("Service  Updated");
         //window.location --> helps the user to navigate(frontend --> so port is 3000)
         //axios --> navigation between frontend and backend --> so port is 8070.
-        window.location.replace("http://localhost:3000/service/");
+        window.location.replace("/service/");
       })
       .catch((err) => {
         alert(err);
