@@ -67,7 +67,6 @@ router.route("/get/email/:email").get(async (req, res) => {
 });
 
 //delete service request by email
-
 router.route("/delete/email/:email").delete(async (req, res) => {
   let email = req.params.email;
 
@@ -84,26 +83,18 @@ router.route("/delete/email/:email").delete(async (req, res) => {
     });
 });
 
-//Retrieve requests in respect to ServiceProviderId
-router.route("/get/email/:email/:serviceProviderId").get(async (req, res) => {
-  let email = req.params.email;
-  let serviceProviderId = req.params.serviceProviderId;
-
-  const servicerequest = await ServiceRequest.find({
-    email: `${email}`,
-    serviceProviderId: `${serviceProviderId}`,
-  })
-    .then((servicerequest) => {
-      res
-        .status(200)
-        .send({ status: "Service Request fetched", servicerequest });
-    })
-    .catch((err) => {
-      console.log(err.message);
-      res
-        .status(500)
-        .send({ status: "Error with get service request", error: err.message });
+//Retrieve "accepted" service requests of a given service provider.
+router.get("/servicerequest/:serviceProviderId", async (req, res) => {
+  try {
+    const serviceRequests = await ServiceRequest.find({
+      serviceProvider: req.params.serviceProviderId,
+      status: "accepted",
     });
+    res.json(serviceRequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 module.exports = router;
