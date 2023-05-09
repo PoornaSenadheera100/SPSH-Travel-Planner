@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Buffer } from "buffer";
 
 export default function UserServiceBookingForm(props) {
   const email = sessionStorage.getItem("touristEmail");
@@ -15,13 +16,18 @@ export default function UserServiceBookingForm(props) {
   let [quantity, setQuantity] = useState(1);
 
   //convert Service price to number
-  let total = Number(ServicePrice) * quantity;
+  let total;
+  if (quantity <= 0) {
+    total = ServicePrice;
+  } else {
+    total = Number(ServicePrice) * quantity;
+  }
 
   function getTouristInformation() {
     axios
       .get(`http://localhost:8070/tourist/get/email/${email}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setName(res.data[0].name);
         setPhone(res.data[0].phone);
       })
@@ -36,8 +42,11 @@ export default function UserServiceBookingForm(props) {
         `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
       )
       .then((res) => {
-        console.log(res.data);
+        console.log("hi");
+        console.log(serviceId);
         console.log(serviceProviderId);
+        // console.log(res.data);
+        // console.log(serviceProviderId);
         setServicePrice(res.data[0].ServicePrice);
         setAvailableTime(res.data[0].AvailableTime);
         setAvailableDates(res.data[0].AvailableDates);
@@ -48,13 +57,36 @@ export default function UserServiceBookingForm(props) {
       });
   }
 
+  function makeBooking() {}
+
   useEffect(() => {
     getTouristInformation();
     getServiceDetails();
   });
 
+  const getImageSource = (imageData, imageType) => {
+    // Set the MIME type based on the image type
+    const mimeType = imageType === "jpeg" ? "image/jpeg" : "image/png";
+
+    // Convert the binary data to a Base64 encoded string
+    let imageSource = `data:${mimeType};base64,${Buffer.from(imageData.data)
+      .toString("base64")
+      .substring(19)}`;
+
+    // Remove any padding characters from the end of the string
+    //imageSource = imageSource.replace(/=+$/, '');
+    imageSource = imageSource.slice(0, imageSource.length - 2);
+
+    return imageSource;
+  };
+
   return (
     <div style={{ width: 500, margin: "auto" }}>
+      <img
+        src={getImageSource(Image)}
+        style={{ maxWidth: "150px", height: "150px" }}
+      />
+
       <form>
         <div class="form-group row">
           <label for="name">Name</label>
@@ -85,11 +117,12 @@ export default function UserServiceBookingForm(props) {
         <div class="form-group row">
           <label for="date">Date</label>
           <input
-            type="date"
+            type="text"
             id="date"
             name="date"
             class="form-control"
             value={AvailableDates}
+            disabled
             // onChange={handleInputChange}
           />
           {/* <br /> */}
@@ -97,11 +130,12 @@ export default function UserServiceBookingForm(props) {
         <div class="form-group row">
           <label for="time">Time:</label>
           <input
-            type="time"
+            type="text"
             id="time"
             name="time"
             class="form-control"
             value={AvailableTime}
+            disabled
             // onChange={handleInputChange}
           />
           {/* <br /> */}
@@ -115,6 +149,7 @@ export default function UserServiceBookingForm(props) {
             class="form-control"
             min="0"
             placeholder="Enter Quantity"
+            value={quantity}
             onChange={(e) => {
               setQuantity(e.target.value);
             }}
