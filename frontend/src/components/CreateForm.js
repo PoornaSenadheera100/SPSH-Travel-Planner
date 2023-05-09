@@ -24,13 +24,14 @@ export default function CreateForm(props) {
         setNic(res.data[0].nic);
       });
     }
-  }, [paramemail]);
+  }, [props.getURL, paramemail]);
 
   function proceed(e) {
     e.preventDefault();
     createTourist();
     createSP();
     updateSP();
+    updateTourist();
   }
 
   function createTourist() {
@@ -155,6 +156,51 @@ export default function CreateForm(props) {
           .then(() => {
             alert("Service Provider Updated");
             window.location.replace("/admin/manageserviceproviders");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      }
+    }
+  }
+
+  function updateTourist() {
+    if (props.title === "Update Tourist") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else if (password === "" && rePassword === "") {
+        const newTourist = {
+          name,
+          nic,
+          email,
+          phone,
+        };
+
+        axios
+          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .then(() => {
+            alert("Tourist Updated");
+            window.location.replace("/admin/managetourists");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      } else {
+        const newTourist = {
+          name,
+          nic,
+          email,
+          phone,
+          password,
+        };
+
+        axios
+          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .then(() => {
+            alert("Tourist Updated");
+            window.location.replace("/admin/managetourists");
           })
           .catch((err) => {
             alert("Network Error...");
