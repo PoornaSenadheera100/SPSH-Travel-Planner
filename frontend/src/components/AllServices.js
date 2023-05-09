@@ -96,7 +96,7 @@ export default function AllServices() {
           );
         }}
       >
-        Booking Requests
+        Accepted Requests
       </button>
 
       <center>
