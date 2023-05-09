@@ -128,7 +128,7 @@ export default function AdminHomePage() {
 
           {/* Update a Service Provider */}
           <Route
-            path="/admin/manageserviceproviders/update/:email"
+            path="/admin/manageserviceproviders/update/:paramemail"
             exact
             render={(props) => (
               <CreateForm
@@ -177,7 +177,7 @@ export default function AdminHomePage() {
 
           {/* Update a Tourist */}
           <Route
-            path="/admin/managetourists/update/:email"
+            path="/admin/managetourists/update/:paramemail"
             exact
             render={(props) => (
               <CreateForm
