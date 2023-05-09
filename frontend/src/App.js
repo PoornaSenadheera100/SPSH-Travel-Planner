@@ -27,7 +27,7 @@ function App() {
       <Route path="/admin/" component={AdminHomePage} />
       <Route path="/serviceprovider/" component={ServiceProviderHomePage} />
       <Route path="/tourist/userprofile" exact component={TouristProfile} />
-      <Route path="/tourist/updateprofile/:email" exact component={TouristProfileUpdatePage}/>
+      <Route path="/tourist/updateprofile/:paramemail" exact component={TouristProfileUpdatePage}/>
       {/* <Route path="/userHome" exact component={UserHome} /> */}
       <Route path="/tourist" exact component={UserHome} />
       {/* <Route path="/userHome/requests/:id" exact component={UserRequests} /> */}
