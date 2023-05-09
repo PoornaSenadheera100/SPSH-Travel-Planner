@@ -14,6 +14,7 @@ export default function CreateForm(props) {
   const { paramemail } = useParams();
 
   useEffect(() => {
+    disableEmail(props.disableEmail);
     if (props.getURL) {
       console.log(paramemail);
       axios.get(`${props.getURL}/${paramemail}`).then((res) => {
@@ -236,6 +237,12 @@ export default function CreateForm(props) {
             alert("Network Error...");
           });
       }
+    }
+  }
+
+  function disableEmail(isDisabled) {
+    if (isDisabled) {
+      document.getElementById("email").disabled = true;
     }
   }
 

@@ -137,6 +137,7 @@ export default function AdminHomePage() {
                 pwdChangeWarning={pwdChangeWarning}
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
                 backBtnURL="/admin/manageserviceproviders"
+                disableEmail="true"
               />
             )}
           />
@@ -186,6 +187,7 @@ export default function AdminHomePage() {
                 pwdChangeWarning={pwdChangeWarning}
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
                 backBtnURL="/admin/managetourists"
+                disableEmail="true"
               />
             )}
           />
