@@ -85,9 +85,20 @@ export default function AllServices() {
 
   return (
     <div className="container">
-      <a href="/service">
-        <button class="btn btn-dark">Booking Requests</button>
-      </a>
+      <button
+        class="btn btn-dark"
+        onClick={() => {
+          //history.push moves from the current page.
+          //history.push(`/update/${student._id}`);
+          //window.location also redirects to another page.(delete page with the ID)
+          window.location.replace(
+            `http://localhost:3000/serviceprovider/servicerequest/${Service_ProviderId}`
+          );
+        }}
+      >
+        Booking Requests
+      </button>
+
       <center>
         <h1>All Services</h1>
       </center>
