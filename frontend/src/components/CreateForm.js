@@ -42,7 +42,10 @@ export default function CreateForm(props) {
         );
       } else {
         axios
-          .get(`http://localhost:8070/tourist/get/email/${email}`)
+          // .get(`http://localhost:8070/tourist/get/email/${email}`)
+          .get(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
+          )
           .then((res) => {
             if (res.data[0] === undefined) {
               const newTourist = {
@@ -54,7 +57,11 @@ export default function CreateForm(props) {
               };
 
               axios
-                .post("http://localhost:8070/tourist/add", newTourist)
+                // .post("http://localhost:8070/tourist/add", newTourist)
+                .post(
+                  "https://spsh-travel-planner-backend.onrender.com/tourist/add",
+                  newTourist
+                )
                 .then(() => {
                   alert("Registration Successfull !");
                   window.location.replace("/");
@@ -81,7 +88,10 @@ export default function CreateForm(props) {
         );
       } else {
         axios
-          .get(`http://localhost:8070/serviceprovider/get/email/${email}`)
+          // .get(`http://localhost:8070/serviceprovider/get/email/${email}`)
+          .get(
+            `https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email/${email}`
+          )
           .then((res) => {
             if (res.data[0] === undefined) {
               const newSP = {
@@ -93,7 +103,11 @@ export default function CreateForm(props) {
               };
 
               axios
-                .post("http://localhost:8070/serviceprovider/add", newSP)
+                // .post("http://localhost:8070/serviceprovider/add", newSP)
+                .post(
+                  "https://spsh-travel-planner-backend.onrender.com/serviceprovider/add",
+                  newSP
+                )
                 .then(() => {
                   alert("Registration Successfull !");
                   window.location.replace("/admin/addserviceprovider");
@@ -127,8 +141,12 @@ export default function CreateForm(props) {
         };
 
         axios
+          // .put(
+          //   `http://localhost:8070/serviceprovider/update/${paramemail}`,
+          //   newSP
+          // )
           .put(
-            `http://localhost:8070/serviceprovider/update/${paramemail}`,
+            `https://spsh-travel-planner-backend.onrender.com/serviceprovider/update/${paramemail}`,
             newSP
           )
           .then(() => {
@@ -149,8 +167,12 @@ export default function CreateForm(props) {
         };
 
         axios
+          // .put(
+          //   `http://localhost:8070/serviceprovider/update/${paramemail}`,
+          //   newSP
+          // )
           .put(
-            `http://localhost:8070/serviceprovider/update/${paramemail}`,
+            `https://spsh-travel-planner-backend.onrender.com/serviceprovider/update/${paramemail}`,
             newSP
           )
           .then(() => {
@@ -179,7 +201,11 @@ export default function CreateForm(props) {
         };
 
         axios
-          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          // .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
+            newTourist
+          )
           .then(() => {
             alert("Tourist Updated");
             window.location.replace("/admin/managetourists");
@@ -197,7 +223,11 @@ export default function CreateForm(props) {
         };
 
         axios
-          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          // .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
+            newTourist
+          )
           .then(() => {
             alert("Tourist Updated");
             window.location.replace("/admin/managetourists");

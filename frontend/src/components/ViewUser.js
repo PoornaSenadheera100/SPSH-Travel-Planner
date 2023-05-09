@@ -20,7 +20,7 @@ export default function ViewUser(props) {
       .catch((err) => {
         alert("Network Issue...");
       });
-  });
+  }, []);
 
   return (
     <>

@@ -45,7 +45,8 @@ export default function AddService() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8070/service/")
+      // .get("http://localhost:8070/service/")
+      .get("https://spsh-travel-planner-backend.onrender.com/service/")
       .then((res) => {
         console.log(res.data);
         setServiceIds(res.data.ProductId);
@@ -95,7 +96,11 @@ export default function AddService() {
 
     if (block === false) {
       axios
-        .post(`http://localhost:8070/service/add/`, newService)
+        // .post(`http://localhost:8070/service/add/`, newService)
+        .post(
+          `https://spsh-travel-planner-backend.onrender.com/service/add/`,
+          newService
+        )
         .then(() => {
           //After sending the data --> backend server responds --> if successfully added then an alert message is sent.
           alert(`Service Added`);
@@ -131,7 +136,10 @@ export default function AddService() {
 
   function checkServiceCode(serviceCode) {
     axios
-      .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      // .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceCode}`
+      )
       .then((res) => {
         if (res.data.length !== 0) {
           console.log(serviceCode);
