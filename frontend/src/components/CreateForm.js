@@ -5,19 +5,19 @@ import axios from "axios";
 
 export default function CreateForm(props) {
   const [name, setName] = useState("");
-  var [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [nic, setNic] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
 
-  email = useParams();
-
-
+  const { paramemail } = useParams();
 
   useEffect(() => {
+    disableEmail(props.disableEmail);
     if (props.getURL) {
-      axios.get(`${props.getURL}/${email.email}`).then((res) => {
+      console.log(paramemail);
+      axios.get(`${props.getURL}/${paramemail}`).then((res) => {
         console.log(res.data[0]);
         setName(res.data[0].name);
         setEmail(res.data[0].email);
@@ -25,62 +25,284 @@ export default function CreateForm(props) {
         setNic(res.data[0].nic);
       });
     }
-  });
+  }, [props.getURL, paramemail]);
 
-  function proceed() {
+  function proceed(e) {
+    e.preventDefault();
+    createTourist();
+    createSP();
+    updateSP();
+    updateTourist();
     TouristUpdateProfile();
   }
-  function TouristUpdateProfile() {
-    if (props.title == "Update tourist profile") {
-      //Check of the Email is updated or not
-      if (setEmail != email) {
-        alert("Sorry you cannot edit the Email!");
+
+  function createTourist() {
+    if (props.title === "Create New Account") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
       } else {
-        //check if both passwords are matching and then update
-        if (password != rePassword) {
-          alert("Sorry passwords are not matching!");
-        } else if (password === "" && rePassword === "") {
-          const updateTouristWithoutPassword = {
-            name,
-            nic,
-            phone,
-            email,
-          };
-          axios(
-            `http://localhost:8070/tourist/update/${email}`,
-            updateTouristWithoutPassword
+        axios
+          // .get(`http://localhost:8070/tourist/get/email/${email}`)
+          .get(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
           )
-            .then(() => {
-              alert("Profile updated");
-              window.location.replace("http://localhost:3000/tourist/");
-            })
-            .catch((err) => {
-              alert("Sorry unable to update tourist");
-            });
-        } else {
-          const newTourist = {
-            name,
-            nic,
-            phone,
-            email,
-            password,
-          };
-          axios
-            .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
-            .then(() => {
-              alert("Profile updated");
-              window.location.replace("http://localhost:3000/tourist/");
-            })
-            .catch((err) => {
-              alert("Update failure occured ! ");
-            });
-        }
+          .then((res) => {
+            if (res.data[0] === undefined) {
+              const newTourist = {
+                name,
+                nic,
+                email,
+                phone,
+                password,
+              };
+
+              axios
+                // .post("http://localhost:8070/tourist/add", newTourist)
+                .post(
+                  "https://spsh-travel-planner-backend.onrender.com/tourist/add",
+                  newTourist
+                )
+                .then(() => {
+                  alert("Registration Successfull !");
+                  window.location.replace("/");
+                })
+                .catch((err) => {
+                  alert("Something went wrong !");
+                });
+            } else {
+              alert("You already have an account !");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
   }
 
+  function createSP() {
+    if (props.title === "Add Service Provider") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else {
+        axios
+          // .get(`http://localhost:8070/serviceprovider/get/email/${email}`)
+          .get(
+            `https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email/${email}`
+          )
+          .then((res) => {
+            if (res.data[0] === undefined) {
+              const newSP = {
+                name,
+                nic,
+                email,
+                phone,
+                password,
+              };
+
+              axios
+                // .post("http://localhost:8070/serviceprovider/add", newSP)
+                .post(
+                  "https://spsh-travel-planner-backend.onrender.com/serviceprovider/add",
+                  newSP
+                )
+                .then(() => {
+                  alert("Registration Successfull !");
+                  window.location.replace("/admin/addserviceprovider");
+                })
+                .catch((err) => {
+                  alert("Something went wrong !");
+                });
+            } else {
+              alert("This service provider already has an account !");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  }
+
+  function updateSP() {
+    if (props.title === "Update Service Provider") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else if (password === "" && rePassword === "") {
+        const newSP = {
+          name,
+          nic,
+          email,
+          phone,
+        };
+
+        axios
+          // .put(
+          //   `http://localhost:8070/serviceprovider/update/${paramemail}`,
+          //   newSP
+          // )
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/serviceprovider/update/${paramemail}`,
+            newSP
+          )
+          .then(() => {
+            alert("Service Provider Updated");
+            window.location.replace("/admin/manageserviceproviders");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      } else {
+        const newSP = {
+          name,
+
+          nic,
+          email,
+          phone,
+          password,
+        };
+
+        axios
+          // .put(
+          //   `http://localhost:8070/serviceprovider/update/${paramemail}`,
+          //   newSP
+          // )
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/serviceprovider/update/${paramemail}`,
+            newSP
+          )
+          .then(() => {
+            alert("Service Provider Updated");
+            window.location.replace("/admin/manageserviceproviders");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      }
+    }
+  }
+
+  function updateTourist() {
+    if (props.title === "Update Tourist") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else if (password === "" && rePassword === "") {
+        const newTourist = {
+          name,
+          nic,
+          email,
+          phone,
+        };
+
+        axios
+          // .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
+            newTourist
+          )
+          .then(() => {
+            alert("Tourist Updated");
+            window.location.replace("/admin/managetourists");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      } else {
+        const newTourist = {
+          name,
+          nic,
+          email,
+          phone,
+          password,
+        };
+
+        axios
+          // .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
+            newTourist
+          )
+          .then(() => {
+            alert("Tourist Updated");
+            window.location.replace("/admin/managetourists");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      }
+    }
+  }
+
+  function TouristUpdateProfile() {
+    if (props.title == "Update tourist profile") {
+      //Check of the Email is updated or not
+      // if (paramemail != email) {
+      //   alert("Sorry you cannot edit the Email!");
+      // } else {
+      //check if both passwords are matching and then update
+      if (password != rePassword) {
+        alert("Sorry passwords are not matching!");
+      } 
+      else if (password === "" && rePassword === "") {
+        const updateTouristWithoutPassword = {
+          name,
+          nic,
+          phone,
+          email,
+        };
+        axios.put(
+          `http://localhost:8070/tourist/update/${paramemail}`,
+          updateTouristWithoutPassword
+        )
+          .then(() => {
+            alert("Profile updated");
+            window.location.replace("http://localhost:3000/tourist/");
+          })
+          .catch((err) => {
+            alert("Sorry unable to update tourist");
+          });
+      } else {
+        const newTourist = {
+          name,
+          nic,
+          phone,
+          email,
+          password,
+        };
+        axios
+          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .then(() => {
+            alert("Profile updated");
+            window.location.replace("http://localhost:3000/tourist/");
+          })
+          .catch((err) => {
+            alert("Update failure occured ! ");
+          });
+      }
+    }
+  }
+  function disableEmail(isDisabled) {
+
+     if (isDisabled) {
+    
+    document.getElementById("email").disabled = true;
+    
+    }
+    
+   }
   return (
     <div>
+      <a href={props.backBtnURL}>
+        <Button variant="dark">Back</Button>
+      </a>
       <center>
         <h1>{props.title}</h1>
       </center>
@@ -108,7 +330,7 @@ export default function CreateForm(props) {
           id="email"
           class="form-control"
           placeholder="abc@gmail.com"
-          value={email.email}
+          value={email}
           required
           onChange={(e) => {
             setEmail(e.target.value);

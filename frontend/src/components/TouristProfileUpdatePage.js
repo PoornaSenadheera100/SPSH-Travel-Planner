@@ -8,7 +8,7 @@ export default function TouristProfileUpdatePage(){
 
     return(<div className="container">
 
-        <CreateForm title='Update tourist profile' getURL='http://localhost:8070/tourist/get/email' pwdChangeWarning={pwdChangeWarning}/>
+        <CreateForm title='Update tourist profile' getURL='http://localhost:8070/tourist/get/email' pwdChangeWarning={pwdChangeWarning} disableEmail="true"/>
 
     </div>)
 
