@@ -8,14 +8,15 @@ export default function CreateForm(props) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [nic, setNic] = useState("");
-  const [password, setPassword] = useState({});
-  const [rePassword, setRePassword] = useState({});
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
-  // email = useParams();
+  const { paramemail } = useParams();
 
   useEffect(() => {
     if (props.getURL) {
-      axios.get(`${props.getURL}/${email.email}`).then((res) => {
+      console.log(paramemail);
+      axios.get(`${props.getURL}/${paramemail}`).then((res) => {
         console.log(res.data[0]);
         setName(res.data[0].name);
         setEmail(res.data[0].email);
@@ -23,12 +24,14 @@ export default function CreateForm(props) {
         setNic(res.data[0].nic);
       });
     }
-  });
+  }, [paramemail]);
 
   function proceed(e) {
+    alert(props.title);
     e.preventDefault();
     createTourist();
     createSP();
+    updateSP();
   }
 
   function createTourist() {
@@ -109,6 +112,58 @@ export default function CreateForm(props) {
     }
   }
 
+  function updateSP() {
+    if (props.title === "Update Service Provider") {
+      if (password !== rePassword) {
+        alert(
+          "Re-entered password does not match with the password that you have entered!"
+        );
+      } else if (password === "" && rePassword === "") {
+        const newSP = {
+          name,
+          nic,
+          email,
+          phone,
+        };
+
+        axios
+          .put(
+            `http://localhost:8070/serviceprovider/update/${paramemail}`,
+            newSP
+          )
+          .then(() => {
+            alert("Service Provider Updated");
+            window.location.replace("/admin/manageserviceproviders");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      } else {
+        const newSP = {
+          name,
+
+          nic,
+          email,
+          phone,
+          password,
+        };
+
+        axios
+          .put(
+            `http://localhost:8070/serviceprovider/update/${paramemail}`,
+            newSP
+          )
+          .then(() => {
+            alert("Service Provider Updated");
+            window.location.replace("admin/manageserviceproviders");
+          })
+          .catch((err) => {
+            alert("Network Error...");
+          });
+      }
+    }
+  }
+
   return (
     <div>
       <a href={props.backBtnURL}>
@@ -141,7 +196,7 @@ export default function CreateForm(props) {
           id="email"
           class="form-control"
           placeholder="abc@gmail.com"
-          value={email.email}
+          value={email}
           required
           onChange={(e) => {
             setEmail(e.target.value);
