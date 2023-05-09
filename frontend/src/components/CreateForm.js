@@ -4,14 +4,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function CreateForm(props) {
-  const [name, setName] = useState({});
-  var   [email, setEmail] = useState({});
-  const [phone, setPhone] = useState({});
-  const [nic, setNic] = useState({});
-  const [password, setPassword] = useState({});
-  const [rePassword, setRePassword] = useState({});
+  const [name, setName] = useState("");
+  var [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [nic, setNic] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
   email = useParams();
+
+
 
   useEffect(() => {
     if (props.getURL) {
@@ -24,53 +26,56 @@ export default function CreateForm(props) {
       });
     }
   });
-  
+
   function proceed() {
     TouristUpdateProfile();
   }
-  function TouristUpdateProfile(){
-    if (props.title=="Update tourist profile"){
-
-      //check if both passwords are matching and then update
-      if(password != rePassword){
-        alert("Sorry passwords are not matching!")
+  function TouristUpdateProfile() {
+    if (props.title == "Update tourist profile") {
+      //Check of the Email is updated or not
+      if (setEmail != email) {
+        alert("Sorry you cannot edit the Email!");
+      } else {
+        //check if both passwords are matching and then update
+        if (password != rePassword) {
+          alert("Sorry passwords are not matching!");
+        } else if (password === "" && rePassword === "") {
+          const updateTouristWithoutPassword = {
+            name,
+            nic,
+            phone,
+            email,
+          };
+          axios(
+            `http://localhost:8070/tourist/update/${email}`,
+            updateTouristWithoutPassword
+          )
+            .then(() => {
+              alert("Profile updated");
+              window.location.replace("http://localhost:3000/tourist/");
+            })
+            .catch((err) => {
+              alert("Sorry unable to update tourist");
+            });
+        } else {
+          const newTourist = {
+            name,
+            nic,
+            phone,
+            email,
+            password,
+          };
+          axios
+            .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
+            .then(() => {
+              alert("Profile updated");
+              window.location.replace("http://localhost:3000/tourist/");
+            })
+            .catch((err) => {
+              alert("Update failure occured ! ");
+            });
+        }
       }
-      else if(password === '' && rePassword === ''){
-        const updateTouristWithoutPassword={
-          name,
-          nic,
-          phone,
-          email
-        };
-        axios(`http://localhost:8070/tourist/update/${email}`,updateTouristWithoutPassword).then(()=>{
-          alert("Profile updated");
-          window.location.replace("http://localhost:3000/tourist/");
-        }).catch((err)=>{
-          alert("Sorry unable to update tourist");
-        });
-      }
-      else{
-        const newTourist = {
-          name,
-          nic,
-          phone,
-          email,
-          password,
-        };
-        axios
-          .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
-          .then(() => {
-            alert("Profile updated");
-            window.location.replace("http://localhost:3000/tourist/");
-          })
-          .catch((err) => {
-            alert("Update failure occured ! ");
-          });
-
-      }
-
- 
-
     }
   }
 
