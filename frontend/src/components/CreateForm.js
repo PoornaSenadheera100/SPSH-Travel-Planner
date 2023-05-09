@@ -27,7 +27,6 @@ export default function CreateForm(props) {
   }, [paramemail]);
 
   function proceed(e) {
-    alert(props.title);
     e.preventDefault();
     createTourist();
     createSP();
@@ -155,7 +154,7 @@ export default function CreateForm(props) {
           )
           .then(() => {
             alert("Service Provider Updated");
-            window.location.replace("admin/manageserviceproviders");
+            window.location.replace("/admin/manageserviceproviders");
           })
           .catch((err) => {
             alert("Network Error...");
