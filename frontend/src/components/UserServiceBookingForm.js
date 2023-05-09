@@ -83,7 +83,7 @@ export default function UserServiceBookingForm(props) {
   return (
     <div style={{ width: 500, margin: "auto" }}>
       <img
-        src={getImageSource(Image)}
+        src={getImageSource(Image)} //initially this will be null, that is why error is coming
         style={{ maxWidth: "150px", height: "150px" }}
       />
 
