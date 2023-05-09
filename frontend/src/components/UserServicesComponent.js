@@ -2,7 +2,7 @@ import { useState } from "react";
 import UserServiceBookingForm from "./UserServiceBookingForm";
 
 export default function UserServicesComponent(props) {
-  let { city, serviceName } = props;
+  let { city, serviceName, serviceId, serviceProviderId } = props;
 
   let [serviceNames, setServiceName] = useState([serviceName]);
 
@@ -56,7 +56,13 @@ export default function UserServicesComponent(props) {
           ))}
       </ul>
       <div id="myForm" style={{ display: "none" }}>
-        <UserServiceBookingForm serviceName={serviceNames} />
+        <UserServiceBookingForm
+          serviceName={serviceNames}
+          serviceId={serviceId}
+          serviceProviderId={serviceProviderId}
+          city={city}
+          setShowServiceComponents={setShowServiceComponents}
+        />
       </div>
     </div>
   );
