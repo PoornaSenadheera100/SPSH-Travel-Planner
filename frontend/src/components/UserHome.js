@@ -2,11 +2,22 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import UserServicesComponent from "./UserServicesComponent";
 import axios from "axios";
+import userHomeBG from "../images/userHomeBG.jpg";
 
 export default function UserHome() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
+
+  //adding a background image
+  const backgroundImageUrl = `url(${userHomeBG})`;
+
+  const style = {
+    backgroundImage: backgroundImageUrl,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "100vh",
+  };
 
   const [location, setLocation] = useState("");
   const [locations, setLocations] = useState([]);
@@ -17,7 +28,7 @@ export default function UserHome() {
     axios
       .get(`http://localhost:8070/service/get/servicedetails/`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (locationsFetched == false) {
           for (let i = 0; i < res.data.length; i++) {
@@ -32,7 +43,7 @@ export default function UserHome() {
           }
           locationsFetched = true;
         }
-        console.log(locations);
+        // console.log(locations);
       })
       .catch((err) => {
         alert(err.message);
