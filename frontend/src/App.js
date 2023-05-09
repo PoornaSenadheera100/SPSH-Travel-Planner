@@ -12,10 +12,10 @@ import UserViewService from "./components/UserViewService";
 import AllServices from "./components/AllServices";
 import AddService from "./components/AddService";
 import SingleService from "./components/SingleService";
-import Slideshow from "./components/Slideshow";
 import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
+import MyServiceRequests from "./components/MyServiceRequests";
 
 function App() {
   return (
@@ -52,6 +52,11 @@ function App() {
         path="/serviceprovider/getservice/:id"
         exact
         component={SingleService}
+      ></Route>
+      <Route
+        path="/serviceprovider/servicerequest/:id"
+        exact
+        component={MyServiceRequests}
       ></Route>
     </Router>
   );
