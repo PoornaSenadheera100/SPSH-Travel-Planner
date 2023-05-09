@@ -84,10 +84,10 @@ router.route("/delete/email/:email").delete(async (req, res) => {
 });
 
 //Retrieve "accepted" service requests of a given service provider.
-router.get("/servicerequest/:serviceProviderId", async (req, res) => {
+router.get("/myrequest/:serviceProviderId", async (req, res) => {
   try {
     const serviceRequests = await ServiceRequest.find({
-      serviceProvider: req.params.serviceProviderId,
+      serviceProviderId: req.params.serviceProviderId,
       status: "accepted",
     });
     res.json(serviceRequests);
