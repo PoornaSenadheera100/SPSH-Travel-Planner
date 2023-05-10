@@ -24,7 +24,7 @@ const serviceRequestSchema = new Schema({
     required: true,
   },
   date: {
-    type: Date, //check
+    type: String, //check
     required: true,
   },
   time: {
@@ -33,7 +33,6 @@ const serviceRequestSchema = new Schema({
   },
   quantity: {
     type: Number,
-
     required: true,
   },
   price: {
