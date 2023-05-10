@@ -32,9 +32,6 @@ export default function AllServices() {
   useEffect(() => {
     //There's another function called getStudents defined inside the arrow function.
     function getService() {
-      //axois can go to the mentioned URL and get the backend data.
-      //axois uses the "get" method --> when retrieving data from the DB --> since that is the http request that is specified in the BACKEND
-      //If data was successfully fetched, then ---> the data objects sent as an array is passed to the seStudent method.
       axios
         .get(`http://localhost:8070/service/${Service_ProviderId}`)
         .then((res) => {
