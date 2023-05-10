@@ -13,8 +13,8 @@ export default function UserServiceBookingForm(props) {
   const [AvailableTime, setAvailableTime] = useState("");
   const [AvailableDates, setAvailableDates] = useState("");
   const [Image, setImage] = useState("");
-  // let price = 500;
   let [quantity, setQuantity] = useState(1);
+  let bookingStatus = "Pending";
 
   //convert Service price to number
   let total;
@@ -23,6 +23,15 @@ export default function UserServiceBookingForm(props) {
   } else {
     total = Number(ServicePrice) * quantity;
   }
+
+  const d = new Date();
+  const orderRef =
+    d.getDate().toString() +
+    d.getMonth().toString() +
+    d.getFullYear().toString() +
+    d.getHours().toString() +
+    d.getMinutes().toString() +
+    d.getSeconds().toString();
 
   function getTouristInformation() {
     axios
@@ -58,7 +67,29 @@ export default function UserServiceBookingForm(props) {
       });
   }
 
-  function makeBooking() {}
+  function makeBooking(e) {
+    e.preventDefault();
+
+    const newBooking = {
+      orderRef,
+      name,
+      phone,
+      email,
+      serviceProviderId,
+      AvailableDates,
+      AvailableTime,
+      quantity,
+      total,
+      bookingStatus,
+    };
+
+    axios
+      .post(`http://localhost:8070/servicerequest/add`, newBooking)
+      .then(() => {
+        alert("Booking Successful");
+        window.location.replace("http://localhost:3000/tourist");
+      });
+  }
 
   useEffect(() => {
     getTouristInformation();
@@ -96,7 +127,7 @@ export default function UserServiceBookingForm(props) {
           />
         </div>
 
-        <form>
+        <form onSubmit={makeBooking}>
           <div class="form-group row">
             <label for="name">Name</label>
             <input
@@ -104,13 +135,10 @@ export default function UserServiceBookingForm(props) {
               id="name"
               name="name"
               class="form-control"
-              // value={formData.name}
               value={name}
               disabled
-              // onChange={handleInputChange}
             />
           </div>
-          {/* <br /> */}
           <div class="form-group row">
             <label for="contactNo">Contact No</label>
             <input
@@ -118,9 +146,7 @@ export default function UserServiceBookingForm(props) {
               id="contactNo"
               name="contactNo"
               class="form-control"
-              // value={formData.name}
               value={phone}
-              // onChange={handleInputChange}
             />
           </div>
           <div class="form-group row">
@@ -132,9 +158,7 @@ export default function UserServiceBookingForm(props) {
               class="form-control"
               value={AvailableDates}
               disabled
-              // onChange={handleInputChange}
             />
-            {/* <br /> */}
           </div>
           <div class="form-group row">
             <label for="time">Time:</label>
@@ -145,9 +169,7 @@ export default function UserServiceBookingForm(props) {
               class="form-control"
               value={AvailableTime}
               disabled
-              // onChange={handleInputChange}
             />
-            {/* <br /> */}
           </div>
           <div class="form-group row">
             <label for="quantity">Quantity:</label>
@@ -163,7 +185,6 @@ export default function UserServiceBookingForm(props) {
                 setQuantity(e.target.value);
               }}
             />
-            {/* <br /> */}
           </div>
 
           <div class="form-group row">
@@ -175,7 +196,6 @@ export default function UserServiceBookingForm(props) {
               class="form-control"
               value={`Rs. ${total}`}
               disabled
-              // onChange={handleInputChange}
             />
           </div>
 
@@ -185,7 +205,11 @@ export default function UserServiceBookingForm(props) {
             <button class="btn btn-dark" style={{ float: "left" }}>
               Back
             </button>
-            <button class="btn btn-success" style={{ float: "right" }}>
+            <button
+              type="submit"
+              class="btn btn-success"
+              style={{ float: "right" }}
+            >
               Book
             </button>
             <br />
