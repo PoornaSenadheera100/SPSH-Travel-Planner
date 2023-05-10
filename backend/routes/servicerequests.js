@@ -5,6 +5,7 @@ let ServiceRequest = require("../models/ServiceRequest");
 router.route("/add").post((req, res) => {
   //object destructuring assignment
   const {
+    bookingId,
     name,
     contactNo,
     email,
@@ -18,6 +19,7 @@ router.route("/add").post((req, res) => {
 
   //create new service request object
   const newServiceRequest = new ServiceRequest({
+    bookingId,
     name,
     contactNo,
     date,

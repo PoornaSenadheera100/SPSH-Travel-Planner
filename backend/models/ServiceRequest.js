@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Mongoose schema defined for the service request object
 const serviceRequestSchema = new Schema({
+  bookingId: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
