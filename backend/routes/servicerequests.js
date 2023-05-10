@@ -88,7 +88,7 @@ router.get("/myrequest/:serviceProviderId", async (req, res) => {
   try {
     const serviceRequests = await ServiceRequest.find({
       serviceProviderId: req.params.serviceProviderId,
-      status: "accepted",
+      status: "Approved",
     });
     res.json(serviceRequests);
   } catch (err) {
