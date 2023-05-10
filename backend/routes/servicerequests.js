@@ -4,8 +4,17 @@ let ServiceRequest = require("../models/ServiceRequest");
 //add service request booking
 router.route("/add").post((req, res) => {
   //object destructuring assignment
-  const { name, contactNo, email, date, time, quantity, price, status } =
-    req.body;
+  const {
+    name,
+    contactNo,
+    email,
+    serviceProviderId,
+    date,
+    time,
+    quantity,
+    price,
+    status,
+  } = req.body;
 
   //create new service request object
   const newServiceRequest = new ServiceRequest({
@@ -13,6 +22,7 @@ router.route("/add").post((req, res) => {
     contactNo,
     date,
     email,
+    serviceProviderId,
     time,
     quantity,
     price,
@@ -57,7 +67,6 @@ router.route("/get/email/:email").get(async (req, res) => {
 });
 
 //delete service request by email
-
 router.route("/delete/email/:email").delete(async (req, res) => {
   let email = req.params.email;
 
@@ -72,6 +81,20 @@ router.route("/delete/email/:email").delete(async (req, res) => {
         error: err.message,
       });
     });
+});
+
+//Retrieve "accepted" service requests of a given service provider.
+router.get("/myrequest/:serviceProviderId", async (req, res) => {
+  try {
+    const serviceRequests = await ServiceRequest.find({
+      serviceProviderId: req.params.serviceProviderId,
+      status: "Approved",
+    });
+    res.json(serviceRequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 module.exports = router;
