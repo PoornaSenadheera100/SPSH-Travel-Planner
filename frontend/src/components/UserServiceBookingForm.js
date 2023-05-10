@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Buffer } from "buffer";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function UserServiceBookingForm(props) {
   const email = sessionStorage.getItem("touristEmail");
@@ -80,109 +81,124 @@ export default function UserServiceBookingForm(props) {
     return imageSource;
   };
 
-  return (
-    <div style={{ width: 500, margin: "auto" }}>
-      <img
-        src={getImageSource(Image)} //initially this will be null, that is why error is coming
-        style={{ maxWidth: "150px", height: "150px" }}
-      />
-
-      <form>
-        <div class="form-group row">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="form-control"
-            // value={formData.name}
-            value={name}
-            disabled
-            // onChange={handleInputChange}
-          />
-        </div>
-        {/* <br /> */}
-        <div class="form-group row">
-          <label for="contactNo">Contact No</label>
-          <input
-            type="text"
-            id="contactNo"
-            name="contactNo"
-            class="form-control"
-            // value={formData.name}
-            value={phone}
-            // onChange={handleInputChange}
-          />
-        </div>
-        <div class="form-group row">
-          <label for="date">Date</label>
-          <input
-            type="text"
-            id="date"
-            name="date"
-            class="form-control"
-            value={AvailableDates}
-            disabled
-            // onChange={handleInputChange}
-          />
-          {/* <br /> */}
-        </div>
-        <div class="form-group row">
-          <label for="time">Time:</label>
-          <input
-            type="text"
-            id="time"
-            name="time"
-            class="form-control"
-            value={AvailableTime}
-            disabled
-            // onChange={handleInputChange}
-          />
-          {/* <br /> */}
-        </div>
-        <div class="form-group row">
-          <label for="quantity">Quantity:</label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            class="form-control"
-            min="0"
-            placeholder="Enter Quantity"
-            value={quantity}
-            onChange={(e) => {
-              setQuantity(e.target.value);
+  if (Image != "") {
+    return (
+      <div style={{ width: 500, margin: "auto" }}>
+        <div style={{ textAlign: "center" }}>
+          <img
+            src={getImageSource(Image)}
+            style={{
+              maxWidth: "500px",
+              height: "400px",
+              marginBottom: "20px",
+              borderRadius: "20px",
             }}
           />
+        </div>
+
+        <form>
+          <div class="form-group row">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              // value={formData.name}
+              value={name}
+              disabled
+              // onChange={handleInputChange}
+            />
+          </div>
           {/* <br /> */}
-        </div>
+          <div class="form-group row">
+            <label for="contactNo">Contact No</label>
+            <input
+              type="text"
+              id="contactNo"
+              name="contactNo"
+              class="form-control"
+              // value={formData.name}
+              value={phone}
+              // onChange={handleInputChange}
+            />
+          </div>
+          <div class="form-group row">
+            <label for="date">Date</label>
+            <input
+              type="text"
+              id="date"
+              name="date"
+              class="form-control"
+              value={AvailableDates}
+              disabled
+              // onChange={handleInputChange}
+            />
+            {/* <br /> */}
+          </div>
+          <div class="form-group row">
+            <label for="time">Time:</label>
+            <input
+              type="text"
+              id="time"
+              name="time"
+              class="form-control"
+              value={AvailableTime}
+              disabled
+              // onChange={handleInputChange}
+            />
+            {/* <br /> */}
+          </div>
+          <div class="form-group row">
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              class="form-control"
+              min="0"
+              placeholder="Enter Quantity"
+              value={quantity}
+              onChange={(e) => {
+                setQuantity(e.target.value);
+              }}
+            />
+            {/* <br /> */}
+          </div>
 
-        <div class="form-group row">
-          <label for="price">Price:</label>
-          <input
-            type="text"
-            id="price"
-            name="price"
-            class="form-control"
-            value={`Rs. ${total}`}
-            disabled
-            // onChange={handleInputChange}
-          />
-        </div>
+          <div class="form-group row">
+            <label for="price">Price:</label>
+            <input
+              type="text"
+              id="price"
+              name="price"
+              class="form-control"
+              value={`Rs. ${total}`}
+              disabled
+              // onChange={handleInputChange}
+            />
+          </div>
 
-        {/* <input type="submit" value="Submit" /> */}
+          {/* <input type="submit" value="Submit" /> */}
 
-        <div style={{ marginBottom: "75px" }}>
-          <button class="btn btn-dark" style={{ float: "left" }}>
-            Back
-          </button>
-          <button class="btn btn-success" style={{ float: "right" }}>
-            Book
-          </button>
-          <br />
-          <br /> <br /> <br />
-        </div>
-      </form>
-    </div>
-  );
+          <div style={{ marginBottom: "75px" }}>
+            <button class="btn btn-dark" style={{ float: "left" }}>
+              Back
+            </button>
+            <button class="btn btn-success" style={{ float: "right" }}>
+              Book
+            </button>
+            <br />
+            <br /> <br /> <br />
+          </div>
+        </form>
+      </div>
+    );
+  } else {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 }
