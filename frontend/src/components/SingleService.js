@@ -21,7 +21,6 @@ export default function SingleService() {
   const [Image, setImage] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const { id } = useParams();
-  //const { productId } = useParams();
 
   useEffect(() => {
     axios
