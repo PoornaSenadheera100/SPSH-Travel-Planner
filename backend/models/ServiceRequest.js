@@ -8,10 +8,14 @@ const serviceRequestSchema = new Schema({
     required: true,
   },
   contactNo: {
-    type: Number, //check
+    type: String, //check
     required: true,
   },
   email: {
+    type: String,
+    required: true,
+  },
+  serviceProviderId: {
     type: String,
     required: true,
   },
