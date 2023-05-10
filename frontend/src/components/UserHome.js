@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import UserServicesComponent from "./UserServicesComponent";
 import axios from "axios";
-import userHomeBG from "../images/userHomeBG.jpg";
+// import userHomeBG from "../images/userHomeBG.jpg";
 
 export default function UserHome() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
@@ -10,14 +10,14 @@ export default function UserHome() {
   }
 
   //adding a background image
-  const backgroundImageUrl = `url(${userHomeBG})`;
+  // const backgroundImageUrl = `url(${userHomeBG})`;
 
-  const style = {
-    backgroundImage: backgroundImageUrl,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "100vh",
-  };
+  // const style = {
+  //   backgroundImage: backgroundImageUrl,
+  //   backgroundSize: "cover",
+  //   backgroundPosition: "center",
+  //   height: "100vh",
+  // };
 
   const [location, setLocation] = useState("");
   const [locations, setLocations] = useState([]);
