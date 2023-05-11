@@ -5,27 +5,28 @@ import LoadingSpinner from "./LoadingSpinner";
 
 export default function UserServiceBookingForm(props) {
   const email = sessionStorage.getItem("touristEmail");
-  let { serviceProviderId, serviceId } = props;
+  let { serviceProviderId, serviceId, serviceNames } = props;
 
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [contactNo, setPhone] = useState("");
   const [ServicePrice, setServicePrice] = useState();
-  const [AvailableTime, setAvailableTime] = useState("");
-  const [AvailableDates, setAvailableDates] = useState("");
+  const [time, setAvailableTime] = useState("");
+  const [date, setAvailableDates] = useState("");
   const [Image, setImage] = useState("");
   let [quantity, setQuantity] = useState(1);
-  let bookingStatus = "Pending";
+  let status = "Pending";
+  let [serviceName, setServiceName] = useState();
 
   //convert Service price to number
-  let total;
+  let price;
   if (quantity <= 0) {
-    total = ServicePrice;
+    price = ServicePrice;
   } else {
-    total = Number(ServicePrice) * quantity;
+    price = Number(ServicePrice) * quantity;
   }
 
   const d = new Date();
-  const orderRef =
+  const bookingId =
     d.getDate().toString() +
     d.getMonth().toString() +
     d.getFullYear().toString() +
@@ -37,6 +38,7 @@ export default function UserServiceBookingForm(props) {
     axios
       .get(`http://localhost:8070/tourist/get/email/${email}`)
       .then((res) => {
+        console.log("getting tourist info");
         // console.log(res.data);
         setName(res.data[0].name);
         setPhone(res.data[0].phone);
@@ -52,14 +54,16 @@ export default function UserServiceBookingForm(props) {
         `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
       )
       .then((res) => {
-        console.log("hi");
+        console.log("hi i was just now called");
         console.log(serviceId);
         console.log(serviceProviderId);
+        console.log(serviceName);
         // console.log(res.data);
         // console.log(serviceProviderId);
         setServicePrice(res.data[0].ServicePrice);
         setAvailableTime(res.data[0].AvailableTime);
         setAvailableDates(res.data[0].AvailableDates);
+        setServiceName(serviceNames[0]);
         setImage(res.data[0].Image);
       })
       .catch((err) => {
@@ -71,16 +75,17 @@ export default function UserServiceBookingForm(props) {
     e.preventDefault();
 
     const newBooking = {
-      orderRef,
+      bookingId,
+      serviceName,
       name,
-      phone,
+      contactNo,
       email,
       serviceProviderId,
-      AvailableDates,
-      AvailableTime,
+      date,
+      time,
       quantity,
-      total,
-      bookingStatus,
+      price,
+      status,
     };
 
     axios
@@ -94,7 +99,8 @@ export default function UserServiceBookingForm(props) {
   useEffect(() => {
     getTouristInformation();
     getServiceDetails();
-  });
+    console.log("Hi");
+  }, []);
 
   const getImageSource = (imageData, imageType) => {
     // Set the MIME type based on the image type
@@ -146,9 +152,15 @@ export default function UserServiceBookingForm(props) {
               id="contactNo"
               name="contactNo"
               class="form-control"
-              value={phone}
+              value={contactNo}
+              // pattern="[0-9]"
+              maxLength="10"
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
             />
           </div>
+
           <div class="form-group row">
             <label for="date">Date</label>
             <input
@@ -156,7 +168,7 @@ export default function UserServiceBookingForm(props) {
               id="date"
               name="date"
               class="form-control"
-              value={AvailableDates}
+              value={date}
               disabled
             />
           </div>
@@ -167,7 +179,7 @@ export default function UserServiceBookingForm(props) {
               id="time"
               name="time"
               class="form-control"
-              value={AvailableTime}
+              value={time}
               disabled
             />
           </div>
@@ -194,17 +206,18 @@ export default function UserServiceBookingForm(props) {
               id="price"
               name="price"
               class="form-control"
-              value={`Rs. ${total}`}
+              value={`Rs. ${price}`}
               disabled
             />
           </div>
-
-          {/* <input type="submit" value="Submit" /> */}
-
           <div style={{ marginBottom: "75px" }}>
-            <button class="btn btn-dark" style={{ float: "left" }}>
+            <a
+              class="btn btn-dark"
+              href="http://localhost:3000/tourist"
+              style={{ float: "left" }}
+            >
               Back
-            </button>
+            </a>
             <button
               type="submit"
               class="btn btn-success"

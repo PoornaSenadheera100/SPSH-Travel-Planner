@@ -1,7 +1,26 @@
-import { auto } from "@popperjs/core";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function AdminServiceSearch() {
-  let date = "06/27/2023";
+export default function AdminServiceSearch(props) {
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
+
+  function searchServiceAvailability(e) {
+    e.preventDefault();
+
+    axios
+      .get(
+        `http://localhost:8070/servicerequest/get/bookingId/${props.bookingId}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setDate(res.data[0].date);
+        setTime(res.data[0].time);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
 
   return (
     <div style={{ width: 300 }}>
@@ -15,8 +34,14 @@ export default function AdminServiceSearch() {
             type="search"
             placeholder="Search"
             aria-label="Search"
+            value={props.bookingId}
+            disabled
           />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+            onClick={searchServiceAvailability}
+          >
             Search
           </button>
         </form>
@@ -24,44 +49,24 @@ export default function AdminServiceSearch() {
       <div class="form-group row">
         <label for="date">Date</label>
         <input
-          // type="date"
           type="text"
           id="date"
           name="date"
           class="form-control"
           value={date}
-          // onChange={handleInputChange}
+          disabled
         />
-        {/* <br /> */}
       </div>
       <div class="form-group row">
         <label for="time">Time</label>
         <input
-          // type="time"
           type="text"
           id="time"
           name="time"
           class="form-control"
-          value={"10:00"}
-          // value={formData.time}
-          // onChange={handleInputChange}
-        />
-        {/* <br /> */}
-      </div>
-      <div class="form-group row">
-        <label for="time">Available</label>
-        <input
-          // type="time"
-          type="text"
-          id="time"
-          name="time"
-          class="form-control"
-          value="08/10"
+          value={time}
           disabled
-          // value={formData.time}
-          // onChange={handleInputChange}
         />
-        {/* <br /> */}
       </div>
     </div>
   );

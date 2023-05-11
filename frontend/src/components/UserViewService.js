@@ -1,22 +1,63 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function UserViewService(props) {
+export default function UserViewService() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
 
-  // let status = props.status;
-  let status = "Pending";
-  let price = 500;
-  let date = "06/27/2023";
+  const { bookingId } = useParams();
+  const [serviceName, setServiceName] = useState("");
+  const [name, setName] = useState("");
+  const [contactNo, setContactNo] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [status, setStatus] = useState("");
 
-  let [quantity, setQuantity] = useState(2);
-  let total = price * quantity;
+  function getServiceInfo() {
+    axios
+      .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      .then((res) => {
+        console.log(res.data);
+        setServiceName(res.data[0].serviceName);
+        setName(res.data[0].name);
+        setContactNo(res.data[0].contactNo);
+        setDate(res.data[0].date);
+        setTime(res.data[0].time);
+        setQuantity(res.data[0].quantity);
+        setPrice(res.data[0].price);
+        setStatus(res.data[0].status);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
+
+  function deleteService() {
+    axios
+      .delete(
+        `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
+      )
+      .then(() => {
+        alert("Service Request Deleted");
+        window.location.replace("http://localhost:3000/tourist/requests/");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
+  useEffect(() => {
+    getServiceInfo();
+  }, []);
 
   return (
     <div style={{ width: 500, margin: "auto" }}>
       <div style={{ textAlign: "center" }}>
-        <h2>Gregory Lake Boat Ride</h2>
+        <h2>{serviceName}</h2>
       </div>
       <form>
         <div class="form-group row">
@@ -26,13 +67,10 @@ export default function UserViewService(props) {
             id="name"
             name="name"
             class="form-control"
-            // value={formData.name}
-            value={"John Cena"}
+            value={name}
             disabled
-            // onChange={handleInputChange}
           />
         </div>
-        {/* <br /> */}
         <div class="form-group row">
           <label for="contactNo">Contact No</label>
           <input
@@ -40,40 +78,31 @@ export default function UserViewService(props) {
             id="contactNo"
             name="contactNo"
             class="form-control"
-            // value={formData.name}
-            value={"0771234567"}
+            value={contactNo}
             disabled
-            // onChange={handleInputChange}
           />
         </div>
         <div class="form-group row">
           <label for="date">Date</label>
           <input
-            // type="date"
             type="text"
             id="date"
             name="date"
             class="form-control"
             value={date}
             disabled
-            // onChange={handleInputChange}
           />
-          {/* <br /> */}
         </div>
         <div class="form-group row">
           <label for="time">Time:</label>
           <input
-            // type="time"
             type="text"
             id="time"
             name="time"
             class="form-control"
-            value={"10:00"}
+            value={time}
             disabled
-            // value={formData.time}
-            // onChange={handleInputChange}
           />
-          {/* <br /> */}
         </div>
         <div class="form-group row">
           <label for="quantity">Quantity:</label>
@@ -86,11 +115,7 @@ export default function UserViewService(props) {
             placeholder="Enter Quantity"
             value={quantity}
             disabled
-            // onChange={(e) => {
-            //   setQuantity(e.target.value);
-            // }}
           />
-          {/* <br /> */}
         </div>
 
         <div class="form-group row">
@@ -100,9 +125,8 @@ export default function UserViewService(props) {
             id="price"
             name="price"
             class="form-control"
-            value={`Rs. ${total}`}
+            value={`Rs. ${price}`}
             disabled
-            // onChange={handleInputChange}
           />
         </div>
 
@@ -115,28 +139,33 @@ export default function UserViewService(props) {
             class="form-control"
             value={status}
             disabled
-            // onChange={handleInputChange}
           />
         </div>
-
-        {/* <input type="submit" value="Submit" /> */}
-
         <div style={{ marginBottom: "75px" }}>
-          <button class="btn btn-dark" style={{ float: "left" }}>
-            Back
-          </button>
-
-          <button
-            class="btn btn-danger"
-            style={{ float: "right" }}
-            onClick={() => {
-              if (window.confirm("Are you sure you want to cancel?")) {
-                alert("Cancelled");
-              }
-            }}
+          <a
+            class="btn btn-dark"
+            style={{ float: "left" }}
+            href="/tourist/requests/"
           >
-            Cancel
-          </button>
+            Back
+          </a>
+
+          {(status === "Pending" || status === "Approved") && (
+            <button
+              class="btn btn-danger"
+              style={{ float: "right" }}
+              onClick={() => {
+                if (window.confirm("Are you sure you want to cancel?")) {
+                  deleteService();
+                  window.location.replace(
+                    "http://localhost:3000/tourist/requests/"
+                  );
+                }
+              }}
+            >
+              Cancel
+            </button>
+          )}
           <br />
           <br />
           <br />
