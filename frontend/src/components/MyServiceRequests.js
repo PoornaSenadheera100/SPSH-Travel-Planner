@@ -16,7 +16,7 @@ export default function MyServiceRequests() {
           `http://localhost:8070/servicerequest/myrequest/${Service_ProviderId}`
         );
         const acceptedServiceRequests = response.data.filter(
-          (serviceRequest) => serviceRequest.status === "Accepted"
+          (serviceRequest) => serviceRequest.status === "Approved"
         );
         //To check if data is fetched properly.
         console.log(response.data);
