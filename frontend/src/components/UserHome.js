@@ -52,6 +52,7 @@ export default function UserHome() {
 
   useEffect(() => {
     getServices();
+    console.log("Hi");
   }, []);
 
   return (

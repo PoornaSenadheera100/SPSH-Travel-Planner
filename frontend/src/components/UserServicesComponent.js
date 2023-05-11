@@ -6,11 +6,6 @@ export default function UserServicesComponent(props) {
 
   let [serviceNames, setServiceName] = useState([serviceName]);
 
-  // let [serviceDescriptions, setServiceDescription] = useState([
-  //   "Pony ride in racecourse",
-  //   "Horseback riding on the beach",
-  // ]);
-
   let [showServiceComponents, setShowServiceComponents] = useState(true);
 
   const handleServiceClick = (index) => {
@@ -49,7 +44,6 @@ export default function UserServicesComponent(props) {
                   <h3 style={{ margin: "0", color: "#fff", fontSize: "24px" }}>
                     {name}
                   </h3>
-                  {/* <p style={{ color: "#fff" }}>{serviceDescriptions[index]}</p> */}
                 </div>
               </a>
             </div>
@@ -57,7 +51,7 @@ export default function UserServicesComponent(props) {
       </ul>
       <div id="myForm" style={{ display: "none" }}>
         <UserServiceBookingForm
-          serviceName={serviceNames}
+          serviceNames={serviceNames}
           serviceId={serviceId}
           serviceProviderId={serviceProviderId}
           city={city}
