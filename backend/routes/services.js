@@ -70,6 +70,22 @@ router.route("/add").post(upload.single("Image"), (req, res) => {
     });
 });
 
+//RETRIEVE DETAILS ROUTE.
+router.route("/:Service_ProviderId").get(async (req, res) => {
+  let Service_ProviderId = req.params.Service_ProviderId;
+
+  const retrieve = await Service.find({
+    Service_ProviderId: Service_ProviderId,
+  })
+    .then((service) => {
+      res.json(service);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ status: "Error in retrieving details." });
+    });
+});
+
 //DELETE ROUTE.
 router
   .route("/delete/:Service_ProviderId/:ServiceId")
