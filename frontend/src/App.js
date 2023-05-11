@@ -33,7 +33,7 @@ function App() {
       <Route path="/tourist/requests/" exact component={UserRequests} />
       {/* Remove this and implement UserRequests component line 47 */}
       <Route
-        path="/tourist/requests/view"
+        path="/tourist/requests/view/:bookingId"
         exact
         component={UserViewService}
       />{" "}
