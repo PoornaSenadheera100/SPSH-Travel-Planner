@@ -11,7 +11,6 @@ import UserRequests from "./components/UserRequests";
 import UserViewService from "./components/UserViewService";
 import AllServices from "./components/AllServices";
 import SingleService from "./components/SingleService";
-import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
 import MyServiceRequests from "./components/MyServiceRequests";
