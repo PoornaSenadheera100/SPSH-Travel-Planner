@@ -77,6 +77,9 @@ const serviceRouter = require("./routes/services.js");
 //This function uses 2 parameters.  When first parameter is called --> it loads the inventories.js file in the routes folder.(Path is assigned to inventoryRouter variable)
 app.use("/service", serviceRouter);
 
+const serviceRequestRouter = require("./routes/servicerequests.js");
+app.use("/servicerequest", serviceRequestRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is up and running on PORT : ${PORT}`);
 });

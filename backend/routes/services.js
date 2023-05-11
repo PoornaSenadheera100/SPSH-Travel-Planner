@@ -107,25 +107,6 @@ router
       });
   });
 
-//RETRIEVEING ONE SPECIFIC DETAIL
-router.route("/get/:Service_ProviderId/:ServiceId").get(async (req, res) => {
-  let Service_ProviderId = req.params.Service_ProviderId;
-  let ServiceId = req.params.ServiceId;
-  const service = await Service.find({
-    Service_ProviderId: `${Service_ProviderId}`,
-    ServiceId: `${ServiceId}`,
-  })
-    .then((service) => {
-      res.status(200).send({ status: "Service fetched", service });
-    })
-    .catch((err) => {
-      console.log(err.message);
-      res
-        .status(500)
-        .send({ status: "Error with getting one service", error: err.message });
-    });
-});
-
 //UPDATE ROUTE
 router.route("/update/:Service_ProviderId/:ServiceId").put(async (req, res) => {
   //The supplier ID and Product ID is fetched and stored in variables.

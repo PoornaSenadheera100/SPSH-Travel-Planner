@@ -10,13 +10,11 @@ import UserHome from "./components/UserHome";
 import UserRequests from "./components/UserRequests";
 import UserViewService from "./components/UserViewService";
 import AllServices from "./components/AllServices";
-import AddService from "./components/AddService";
 import SingleService from "./components/SingleService";
-import Slideshow from "./components/Slideshow";
-import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
 import TouristProfileUpdatePage from "./components/TouristProfileUpdatePage";
+import MyServiceRequests from "./components/MyServiceRequests";
 
 function App() {
   return (
@@ -27,7 +25,11 @@ function App() {
       <Route path="/admin/" component={AdminHomePage} />
       <Route path="/serviceprovider/" component={ServiceProviderHomePage} />
       <Route path="/tourist/userprofile" exact component={TouristProfile} />
-      <Route path="/tourist/updateprofile/:paramemail" exact component={TouristProfileUpdatePage}/>
+      <Route
+        path="/tourist/updateprofile/:paramemail"
+        exact
+        component={TouristProfileUpdatePage}
+      />
       {/* <Route path="/userHome" exact component={UserHome} /> */}
       <Route path="/tourist" exact component={UserHome} />
       {/* <Route path="/userHome/requests/:id" exact component={UserRequests} /> */}
@@ -54,6 +56,11 @@ function App() {
         path="/serviceprovider/getservice/:id"
         exact
         component={SingleService}
+      ></Route>
+      <Route
+        path="/serviceprovider/servicerequest/:id"
+        exact
+        component={MyServiceRequests}
       ></Route>
     </Router>
   );
