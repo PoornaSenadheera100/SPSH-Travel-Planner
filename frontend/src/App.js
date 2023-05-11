@@ -10,7 +10,6 @@ import UserHome from "./components/UserHome";
 import UserRequests from "./components/UserRequests";
 import UserViewService from "./components/UserViewService";
 import AllServices from "./components/AllServices";
-import AddService from "./components/AddService";
 import SingleService from "./components/SingleService";
 import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
