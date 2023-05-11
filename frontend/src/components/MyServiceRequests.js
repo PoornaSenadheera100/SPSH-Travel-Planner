@@ -41,9 +41,7 @@ export default function MyServiceRequests() {
           whiteSpace: "nowrap",
         }}
         onClick={() => {
-          //history.push moves from the current page.
-          //history.push(`/update/${student._id}`);
-          //window.location also redirects to another page.(delete page with the ID)
+          //moves to this url.
           window.location.replace(`http://localhost:3000/serviceprovider/`);
         }}
       >
