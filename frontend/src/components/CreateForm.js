@@ -33,6 +33,7 @@ export default function CreateForm(props) {
     createSP();
     updateSP();
     updateTourist();
+    TouristUpdateProfile();
   }
 
   function createTourist() {
@@ -160,7 +161,6 @@ export default function CreateForm(props) {
       } else {
         const newSP = {
           name,
-
           nic,
           email,
           phone,
@@ -235,6 +235,55 @@ export default function CreateForm(props) {
           })
           .catch((err) => {
             alert("Network Error...");
+          });
+      }
+    }
+  }
+
+  function TouristUpdateProfile() {
+    if (props.title == "Update tourist profile") {
+      //Check of the Email is updated or not
+      // if (paramemail != email) {
+      //   alert("Sorry you cannot edit the Email!");
+      // } else {
+      //check if both passwords are matching and then update
+      if (password != rePassword) {
+        alert("Sorry passwords are not matching!");
+      } else if (password === "" && rePassword === "") {
+        const updateTouristWithoutPassword = {
+          name,
+          nic,
+          phone,
+          email,
+        };
+        axios
+          .put(
+            `http://localhost:8070/tourist/update/${paramemail}`,
+            updateTouristWithoutPassword
+          )
+          .then(() => {
+            alert("Profile updated");
+            window.location.replace("http://localhost:3000/tourist/");
+          })
+          .catch((err) => {
+            alert("Sorry unable to update tourist");
+          });
+      } else {
+        const newTourist = {
+          name,
+          nic,
+          phone,
+          email,
+          password,
+        };
+        axios
+          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .then(() => {
+            alert("Profile updated");
+            window.location.replace("http://localhost:3000/tourist/");
+          })
+          .catch((err) => {
+            alert("Update failure occured ! ");
           });
       }
     }

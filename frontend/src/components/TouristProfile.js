@@ -1,13 +1,15 @@
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
 
 export default function TouristProfile() {
+
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
 
-  //adding a background image
+//adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
 
   const style = {
@@ -16,6 +18,18 @@ export default function TouristProfile() {
     backgroundPosition: "center",
     height: "100vh",
   };
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(${profileBackground})`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.height = "100vh";
+    return () => {
+      document.body.style.backgroundImage = null;
+      document.body.style.backgroundSize = null;
+      document.body.style.backgroundPosition = null;
+      document.body.style.height = null;
+    };
+  }, []);
 
   //creating variables for each function
   const email = sessionStorage.getItem("touristEmail");
@@ -41,28 +55,7 @@ export default function TouristProfile() {
       });
   }, []);
 
-  // //Function to update the data
-  // function updateProfile(e) {
-  //   e.preventDefault();
-
-  //   const newTourist = {
-  //     name,
-  //     address,
-  //     nic,
-  //     phone,
-  //     email,
-  //     password,
-  //   };
-  //   axios
-  //     .put(`http://localhost:8070/tourist/update/${email}`, newTourist)
-  //     .then(() => {
-  //       alert("Profile updated");
-  //       window.location.replace("http://localhost:3000/tourist/");
-  //     })
-  //     .catch((err) => {
-  //       alert("Update failure occured ! ");
-  //     });
-  // }
+ 
 
   //Function for creating  a prop for Form
   function Label({ formLabel, value }) {
@@ -83,7 +76,7 @@ export default function TouristProfile() {
           padding: "100px",
           textAlign: "justify",
           borderRadius: "10px",
-          height: "600px",
+          height: "550px",
           width: "600px",
           borderRadius: "50% 50% 0 0",
           backgroundColor: "rgba(255, 255, 255, 0.7)",
@@ -116,13 +109,15 @@ export default function TouristProfile() {
                 Back
               </button>
             </a>
-            <button
-              type="button"
-              class="btn btn-dark"
-              style={{ float: "right" }}
-            >
-              Update
-            </button>
+            <a href={`/tourist/updateprofile/${email}`}>
+              <button
+                type="button"
+                class="btn btn-dark"
+                style={{ float: "right" }}
+              >
+                Update
+              </button>
+            </a>
           </form>
         </CurvedBorder>
       </div>
