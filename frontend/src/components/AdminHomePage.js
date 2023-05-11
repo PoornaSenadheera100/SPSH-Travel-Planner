@@ -150,7 +150,7 @@ export default function AdminHomePage() {
 
           {/* Manage Requests  */}
           <Route
-            path="/admin/managerequests/view/"
+            path="/admin/managerequests/view"
             exact
             render={(props) => (
               <AdminRequestApproval {...props} title="Approvals" />
@@ -159,7 +159,7 @@ export default function AdminHomePage() {
 
           {/* Admin View Single Requests  */}
           <Route
-            path="/admin/managerequests/view/search/single"
+            path="/admin/managerequests/view/search/single/:bookingId"
             exact
             component={AdminRequestApprovalSingle}
           />

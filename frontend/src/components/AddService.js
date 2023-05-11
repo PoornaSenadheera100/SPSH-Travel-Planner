@@ -53,6 +53,7 @@ export default function AddService() {
       .catch((err) => {
         alert(err.message);
       });
+    console.log("Hi");
   }, []);
 
   function handleProductImageChange(event) {
