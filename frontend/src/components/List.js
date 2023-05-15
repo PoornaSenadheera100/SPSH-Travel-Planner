@@ -16,7 +16,7 @@ export default function List(props) {
         });
     }
     getList();
-  }, []);
+  }, [props.getURL]);
   return (
     <>
       <center>

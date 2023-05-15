@@ -4,15 +4,6 @@ import { useState } from "react";
 import elephant from "../images/elephant.png";
 
 export default function CreateService(props) {
-  const backgroundImageUrl = `url(${elephant})`;
-
-  const style = {
-    backgroundImage: backgroundImageUrl,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "100vh",
-  };
-
   const Service_ProviderId = sessionStorage.getItem("serviceProviderEmail");
 
   const [ServiceId, setServiceId] = useState({});
@@ -24,7 +15,6 @@ export default function CreateService(props) {
   const [AvailableDates, setAvailableDates] = useState({});
   const [Capacity, setCapacity] = useState({});
   const [Image, setImage] = useState("");
-  const [serviceIds, setServiceIds] = useState({});
 
   const [block, setBlock] = useState(false);
 
@@ -121,23 +111,6 @@ export default function CreateService(props) {
     } else {
       alert("This Service ID is already existing!");
     }
-  }
-
-  function checkServiceCode(serviceCode) {
-    axios
-      // .get(`http://localhost:8070/service/getservice/${serviceCode}`)
-      .get(
-        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceCode}/${Service_ProviderId}`
-      )
-      .then((res) => {
-        if (res.data.length !== 0) {
-          console.log(serviceCode);
-          setBlock(true);
-        } else {
-          setBlock(false);
-        }
-      });
-    console.log(block);
   }
 
   return (
