@@ -92,7 +92,7 @@ export default function AllServices() {
           //history.push(`/update/${student._id}`);
           //window.location also redirects to another page.(delete page with the ID)
           window.location.replace(
-            `http://localhost:3000/serviceprovider/servicerequest/${Service_ProviderId}`
+            `/serviceprovider/servicerequest/${Service_ProviderId}`
           );
         }}
       >

@@ -19,7 +19,10 @@ export default function UserViewService() {
 
   function getServiceInfo() {
     axios
-      .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      // .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/bookingId/${bookingId}`
+      )
       .then((res) => {
         console.log(res.data);
         setServiceName(res.data[0].serviceName);
@@ -38,12 +41,15 @@ export default function UserViewService() {
 
   function deleteService() {
     axios
+      // .delete(
+      //   `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
+      // )
       .delete(
-        `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/delete/bookingId/${bookingId}`
       )
       .then(() => {
         alert("Service Request Deleted");
-        window.location.replace("http://localhost:3000/tourist/requests/");
+        window.location.replace("/tourist/requests");
       })
       .catch((err) => {
         alert(err);
@@ -157,9 +163,7 @@ export default function UserViewService() {
               onClick={() => {
                 if (window.confirm("Are you sure you want to cancel?")) {
                   deleteService();
-                  window.location.replace(
-                    "http://localhost:3000/tourist/requests/"
-                  );
+                  window.location.replace("/tourist/requests");
                 }
               }}
             >

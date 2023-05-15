@@ -26,7 +26,10 @@ export default function UserHome() {
 
   function getServices() {
     axios
-      .get(`http://localhost:8070/service/get/servicedetails/`)
+      // .get(`http://localhost:8070/service/get/servicedetails/`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/service/get/servicedetails/`
+      )
       .then((res) => {
         // console.log(res.data);
 

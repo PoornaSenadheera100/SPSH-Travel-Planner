@@ -20,7 +20,10 @@ export default function AdminRequestApprovalSingle() {
 
   function getServiceInfo() {
     axios
-      .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      // .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/bookingId/${bookingId}`
+      )
       .then((res) => {
         console.log(res.data);
         setName(res.data[0].name);
@@ -42,8 +45,12 @@ export default function AdminRequestApprovalSingle() {
     };
 
     axios
+      // .put(
+      //   `http://localhost:8070/servicerequest/update/bookingId/${bookingId}`,
+      //   updateStatus
+      // )
       .put(
-        `http://localhost:8070/servicerequest/update/bookingId/${bookingId}`,
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/update/bookingId/${bookingId}`,
         updateStatus
       )
       .then((res) => {
@@ -147,10 +154,7 @@ export default function AdminRequestApprovalSingle() {
                 marginBottom: "75px",
               }}
             >
-              <a
-                className="btn btn-dark"
-                href="http://localhost:3000/admin/managerequests/view/"
-              >
+              <a className="btn btn-dark" href="/admin/managerequests/view">
                 Back
               </a>
               <div>

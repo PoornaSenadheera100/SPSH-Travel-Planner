@@ -7,7 +7,8 @@ export default function AdminRequestApproval(props) {
 
   function getAllBookings() {
     axios
-      .get(`http://localhost:8070/servicerequest/`)
+      // .get(`http://localhost:8070/servicerequest/`)
+      .get(`https://spsh-travel-planner-backend.onrender.com/servicerequest/`)
       .then((res) => {
         console.log("hi");
         console.log(res.data);
@@ -24,8 +25,12 @@ export default function AdminRequestApproval(props) {
     };
 
     axios
+      // .put(
+      //   `http://localhost:8070/servicerequest/update/bookingId/${bookingId}`,
+      //   updateStatus
+      // )
       .put(
-        `http://localhost:8070/servicerequest/update/bookingId/${bookingId}`,
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/update/bookingId/${bookingId}`,
         updateStatus
       )
       .then((res) => {

@@ -36,7 +36,10 @@ export default function UserServiceBookingForm(props) {
 
   function getTouristInformation() {
     axios
-      .get(`http://localhost:8070/tourist/get/email/${email}`)
+      // .get(`http://localhost:8070/tourist/get/email/${email}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
+      )
       .then((res) => {
         console.log("getting tourist info");
         // console.log(res.data);
@@ -50,8 +53,11 @@ export default function UserServiceBookingForm(props) {
 
   function getServiceDetails() {
     axios
+      // .get(
+      //   `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
+      // )
       .get(
-        `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
+        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceId}/${serviceProviderId}`
       )
       .then((res) => {
         console.log("hi i was just now called");
@@ -89,10 +95,14 @@ export default function UserServiceBookingForm(props) {
     };
 
     axios
-      .post(`http://localhost:8070/servicerequest/add`, newBooking)
+      // .post(`http://localhost:8070/servicerequest/add`, newBooking)
+      .post(
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/add`,
+        newBooking
+      )
       .then(() => {
         alert("Booking Successful");
-        window.location.replace("http://localhost:3000/tourist");
+        window.location.replace("/tourist");
       });
   }
 
@@ -211,11 +221,7 @@ export default function UserServiceBookingForm(props) {
             />
           </div>
           <div style={{ marginBottom: "75px" }}>
-            <a
-              class="btn btn-dark"
-              href="http://localhost:3000/tourist"
-              style={{ float: "left" }}
-            >
+            <a class="btn btn-dark" href="/tourist" style={{ float: "left" }}>
               Back
             </a>
             <button

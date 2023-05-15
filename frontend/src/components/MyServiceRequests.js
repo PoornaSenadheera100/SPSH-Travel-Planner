@@ -12,8 +12,11 @@ export default function MyServiceRequests() {
   useEffect(() => {
     const getServiceRequests = async () => {
       try {
+        // const response = await axios.get(
+        //   `http://localhost:8070/servicerequest/myrequest/${Service_ProviderId}`
+        // );
         const response = await axios.get(
-          `http://localhost:8070/servicerequest/myrequest/${Service_ProviderId}`
+          `https://spsh-travel-planner-backend.onrender.com/servicerequest/myrequest/${Service_ProviderId}`
         );
         const acceptedServiceRequests = response.data.filter(
           (serviceRequest) => serviceRequest.status === "Approved"
@@ -42,7 +45,7 @@ export default function MyServiceRequests() {
         }}
         onClick={() => {
           //moves to this url.
-          window.location.replace(`http://localhost:3000/serviceprovider/`);
+          window.location.replace(`/serviceprovider`);
         }}
       >
         Back

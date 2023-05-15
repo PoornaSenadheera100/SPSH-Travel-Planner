@@ -9,8 +9,11 @@ export default function AdminServiceSearch(props) {
     e.preventDefault();
 
     axios
+      // .get(
+      //   `http://localhost:8070/servicerequest/get/bookingId/${props.bookingId}`
+      // )
       .get(
-        `http://localhost:8070/servicerequest/get/bookingId/${props.bookingId}`
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/bookingId/${props.bookingId}`
       )
       .then((res) => {
         console.log(res.data);

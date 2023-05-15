@@ -257,13 +257,17 @@ export default function CreateForm(props) {
           email,
         };
         axios
+          // .put(
+          //   `http://localhost:8070/tourist/update/${paramemail}`,
+          //   updateTouristWithoutPassword
+          // )
           .put(
-            `http://localhost:8070/tourist/update/${paramemail}`,
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
             updateTouristWithoutPassword
           )
           .then(() => {
             alert("Profile updated");
-            window.location.replace("http://localhost:3000/tourist/");
+            window.location.replace("/tourist");
           })
           .catch((err) => {
             alert("Sorry unable to update tourist");
@@ -277,10 +281,14 @@ export default function CreateForm(props) {
           password,
         };
         axios
-          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          // .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
+            newTourist
+          )
           .then(() => {
             alert("Profile updated");
-            window.location.replace("http://localhost:3000/tourist/");
+            window.location.replace("/tourist");
           })
           .catch((err) => {
             alert("Update failure occured ! ");

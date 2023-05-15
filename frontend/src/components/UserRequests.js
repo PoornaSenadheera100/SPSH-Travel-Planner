@@ -17,7 +17,10 @@ export default function UserRequests() {
   useEffect(() => {
     function getRequest() {
       axios
-        .get(`http://localhost:8070/servicerequest/get/email/${touristEmail}`)
+        // .get(`http://localhost:8070/servicerequest/get/email/${touristEmail}`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/email/${touristEmail}`
+        )
         .then((res) => {
           console.log(res.data);
           setRequests(res.data);
@@ -79,7 +82,7 @@ export default function UserRequests() {
                 style={{ float: "right" }}
                 onClick={() =>
                   window.location.replace(
-                    `http://localhost:3000/tourist/requests/view/${request.bookingId}`
+                    `/tourist/requests/view/${request.bookingId}`
                   )
                 }
               >
