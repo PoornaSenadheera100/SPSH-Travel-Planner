@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import UserViewService from "./UserViewService";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default function UserRequests() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
@@ -11,8 +8,6 @@ export default function UserRequests() {
 
   const touristEmail = sessionStorage.getItem("touristEmail");
   const [requests, setRequests] = useState([]);
-
-  let [status, setStatus] = useState(["Approved", "Rejected", "Pending"]);
 
   useEffect(() => {
     function getRequest() {
@@ -30,7 +25,7 @@ export default function UserRequests() {
         });
     }
     getRequest();
-  }, []);
+  }, [touristEmail]);
 
   return (
     <div
@@ -77,7 +72,7 @@ export default function UserRequests() {
               >
                 Status: {request.status}
               </h4>
-              <a
+              <button
                 className="btn btn-secondary"
                 style={{ float: "right" }}
                 onClick={() =>
@@ -87,7 +82,7 @@ export default function UserRequests() {
                 }
               >
                 View
-              </a>
+              </button>
             </div>
           ))}
         </div>

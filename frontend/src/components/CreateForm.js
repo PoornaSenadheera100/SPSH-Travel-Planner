@@ -25,7 +25,7 @@ export default function CreateForm(props) {
         setNic(res.data[0].nic);
       });
     }
-  }, [props.getURL, paramemail]);
+  }, [props.disableEmail, props.getURL, paramemail]);
 
   function proceed(e) {
     e.preventDefault();
@@ -241,13 +241,13 @@ export default function CreateForm(props) {
   }
 
   function TouristUpdateProfile() {
-    if (props.title == "Update tourist profile") {
+    if (props.title === "Update tourist profile") {
       //Check of the Email is updated or not
       // if (paramemail != email) {
       //   alert("Sorry you cannot edit the Email!");
       // } else {
       //check if both passwords are matching and then update
-      if (password != rePassword) {
+      if (password !== rePassword) {
         alert("Sorry passwords are not matching!");
       } else if (password === "" && rePassword === "") {
         const updateTouristWithoutPassword = {

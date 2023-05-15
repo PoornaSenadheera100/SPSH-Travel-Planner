@@ -17,7 +17,24 @@ export default function UserViewService() {
   const [price, setPrice] = useState("");
   const [status, setStatus] = useState("");
 
-  function getServiceInfo() {
+  function deleteService() {
+    axios
+      // .delete(
+      //   `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
+      // )
+      .delete(
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/delete/bookingId/${bookingId}`
+      )
+      .then(() => {
+        alert("Service Request Deleted");
+        window.location.replace("/tourist/requests");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
+  useEffect(() => {
     axios
       // .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
       .get(
@@ -37,28 +54,7 @@ export default function UserViewService() {
       .catch((err) => {
         alert(err.message);
       });
-  }
-
-  function deleteService() {
-    axios
-      // .delete(
-      //   `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
-      // )
-      .delete(
-        `https://spsh-travel-planner-backend.onrender.com/servicerequest/delete/bookingId/${bookingId}`
-      )
-      .then(() => {
-        alert("Service Request Deleted");
-        window.location.replace("/tourist/requests");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
-
-  useEffect(() => {
-    getServiceInfo();
-  }, []);
+  }, [bookingId]);
 
   return (
     <div style={{ width: 500, margin: "auto" }}>

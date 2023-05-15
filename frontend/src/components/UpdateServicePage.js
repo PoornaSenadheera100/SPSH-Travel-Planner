@@ -17,9 +17,8 @@ export default function UpdateServicePage() {
   const [AvailableTime, setAvailableTime] = useState("");
   const [AvailableDates, setAvailableDates] = useState("");
   const [Capacity, setCapacity] = useState();
-  const [Image, setImage] = useState("");
 
-  const { update, id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     axios
@@ -37,12 +36,11 @@ export default function UpdateServicePage() {
         setAvailableTime(res.data.service[0].AvailableTime);
         setAvailableDates(res.data.service[0].AvailableDates);
         setCapacity(res.data.service[0].Capacity);
-        setImage(res.data.service[0].Image);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [Service_ProviderId, id]);
   return (
     <div>
       <ElAdd

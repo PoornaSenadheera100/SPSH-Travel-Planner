@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import AdminServiceSearch from "./AdminServiceSearch";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function AdminRequestApprovalSingle() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
     window.location.replace("/");
   }
-
-  const history = useHistory();
 
   const { bookingId } = useParams();
   const [name, setName] = useState();
@@ -18,25 +16,29 @@ export default function AdminRequestApprovalSingle() {
   const [quantity, setQuantity] = useState();
   const [price, setPrice] = useState();
 
-  function getServiceInfo() {
-    axios
-      // .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
-      .get(
-        `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/bookingId/${bookingId}`
-      )
-      .then((res) => {
-        console.log(res.data);
-        setName(res.data[0].name);
-        setContactNo(res.data[0].contactNo);
-        setDate(res.data[0].date);
-        setTime(res.data[0].time);
-        setQuantity(res.data[0].quantity);
-        setPrice(res.data[0].price);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  }
+  useEffect(() => {
+    function getServiceInfo() {
+      axios
+        // .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/bookingId/${bookingId}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          setName(res.data[0].name);
+          setContactNo(res.data[0].contactNo);
+          setDate(res.data[0].date);
+          setTime(res.data[0].time);
+          setQuantity(res.data[0].quantity);
+          setPrice(res.data[0].price);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
+
+    getServiceInfo();
+  }, [bookingId]);
 
   function updateServiceStatus(e, status, bookingId) {
     e.preventDefault();
@@ -63,10 +65,6 @@ export default function AdminRequestApprovalSingle() {
         alert(err.message);
       });
   }
-
-  useEffect(() => {
-    getServiceInfo();
-  }, []);
 
   return (
     <div style={{ width: 800 }}>

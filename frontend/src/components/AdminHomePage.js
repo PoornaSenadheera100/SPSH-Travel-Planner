@@ -5,7 +5,6 @@ import List from "./List";
 import ViewUser from "./ViewUser";
 import AdminRequestApproval from "./AdminRequestApproval";
 import AdminRequestApprovalSingle from "./AdminRequestApprovalSingle";
-import AdminServiceSearch from "./AdminServiceSearch";
 
 export default function AdminHomePage() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {

@@ -18,7 +18,7 @@ export default function MyServiceRequests() {
         const response = await axios.get(
           `https://spsh-travel-planner-backend.onrender.com/servicerequest/myrequest/${Service_ProviderId}`
         );
-        const acceptedServiceRequests = response.data.filter(
+        response.data.filter(
           (serviceRequest) => serviceRequest.status === "Approved"
         );
         //To check if data is fetched properly.
@@ -30,7 +30,7 @@ export default function MyServiceRequests() {
     };
 
     getServiceRequests();
-  }, []);
+  }, [Service_ProviderId]);
 
   return (
     <div>

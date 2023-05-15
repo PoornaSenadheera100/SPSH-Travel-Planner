@@ -34,48 +34,53 @@ export default function UserServiceBookingForm(props) {
     d.getMinutes().toString() +
     d.getSeconds().toString();
 
-  function getTouristInformation() {
-    axios
-      // .get(`http://localhost:8070/tourist/get/email/${email}`)
-      .get(
-        `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
-      )
-      .then((res) => {
-        console.log("getting tourist info");
-        // console.log(res.data);
-        setName(res.data[0].name);
-        setPhone(res.data[0].phone);
-      })
-      .catch((err) => {
-        alert("Error in fetching tourist data");
-      });
-  }
+  useEffect(() => {
+    function getTouristInformation() {
+      axios
+        // .get(`http://localhost:8070/tourist/get/email/${email}`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
+        )
+        .then((res) => {
+          console.log("getting tourist info");
+          // console.log(res.data);
+          setName(res.data[0].name);
+          setPhone(res.data[0].phone);
+        })
+        .catch((err) => {
+          alert("Error in fetching tourist data");
+        });
+    }
 
-  function getServiceDetails() {
-    axios
-      // .get(
-      //   `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
-      // )
-      .get(
-        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceId}/${serviceProviderId}`
-      )
-      .then((res) => {
-        console.log("hi i was just now called");
-        console.log(serviceId);
-        console.log(serviceProviderId);
-        console.log(serviceName);
-        // console.log(res.data);
-        // console.log(serviceProviderId);
-        setServicePrice(res.data[0].ServicePrice);
-        setAvailableTime(res.data[0].AvailableTime);
-        setAvailableDates(res.data[0].AvailableDates);
-        setServiceName(serviceNames[0]);
-        setImage(res.data[0].Image);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+    function getServiceDetails() {
+      axios
+        // .get(
+        //   `http://localhost:8070/service/getservice/${serviceId}/${serviceProviderId}`
+        // )
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceId}/${serviceProviderId}`
+        )
+        .then((res) => {
+          console.log("hi i was just now called");
+          console.log(serviceId);
+          console.log(serviceProviderId);
+          console.log(serviceName);
+          // console.log(res.data);
+          // console.log(serviceProviderId);
+          setServicePrice(res.data[0].ServicePrice);
+          setAvailableTime(res.data[0].AvailableTime);
+          setAvailableDates(res.data[0].AvailableDates);
+          setServiceName(serviceNames[0]);
+          setImage(res.data[0].Image);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    getTouristInformation();
+    getServiceDetails();
+  }, [email, serviceId, serviceProviderId, serviceName, serviceNames]);
 
   function makeBooking(e) {
     e.preventDefault();
@@ -106,12 +111,6 @@ export default function UserServiceBookingForm(props) {
       });
   }
 
-  useEffect(() => {
-    getTouristInformation();
-    getServiceDetails();
-    console.log("Hi");
-  }, []);
-
   const getImageSource = (imageData, imageType) => {
     // Set the MIME type based on the image type
     const mimeType = imageType === "jpeg" ? "image/jpeg" : "image/png";
@@ -128,12 +127,13 @@ export default function UserServiceBookingForm(props) {
     return imageSource;
   };
 
-  if (Image != "") {
+  if (Image !== "") {
     return (
       <div style={{ width: 500, margin: "auto" }}>
         <div style={{ textAlign: "center" }}>
           <img
             src={getImageSource(Image)}
+            alt="Service"
             style={{
               maxWidth: "500px",
               height: "400px",

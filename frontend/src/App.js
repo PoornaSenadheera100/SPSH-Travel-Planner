@@ -15,7 +15,6 @@ import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
 import TouristProfileUpdatePage from "./components/TouristProfileUpdatePage";
 import MyServiceRequests from "./components/MyServiceRequests";
-import AdminRequestApprovalSingle from "./components/AdminRequestApprovalSingle";
 
 function App() {
   return (

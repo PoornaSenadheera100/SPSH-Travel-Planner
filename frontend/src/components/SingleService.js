@@ -47,7 +47,7 @@ export default function SingleService() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [Service_ProviderId, id]);
 
   //Get the image source.
   const getImageSource = (imageData) => {
@@ -78,7 +78,7 @@ export default function SingleService() {
             <th scope="col">Capacity</th>
             <th scope="col">Image</th>
           </tr>
-          <tr scope="row">
+          <tr>
             <td class="text-uppercase">{ServiceId}</td>
             <td class="text-uppercase">{ServiceName}</td>
             <td class="text-uppercase">{ServiceLocation}</td>
