@@ -27,7 +27,7 @@ export default function AdminHomePage() {
         <p style={{ color: "white" }}>Invisible</p>
       </div>
       <div className="col-4">
-        <a href="/admin/managerequests/view/">
+        <a href="/admin/managerequests/view">
           <button
             type="button"
             class="btn btn-info btn-lg"
