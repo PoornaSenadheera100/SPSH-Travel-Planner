@@ -30,11 +30,25 @@ export default function UserRequests() {
   }, []);
 
   return (
-    <div className="container" style={{ marginTop: "20px" }}>
+    <div
+      className="container"
+      style={{ marginTop: "20px", paddingBottom: "20px" }}
+    >
       <div>
-        {requests.map((request) => (
-          <div>
-            <h1 style={{ paddingBottom: "20px" }}>My Requests</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h1 style={{ paddingBottom: "20px" }}>My Requests</h1>
+          <a class="btn btn-dark" href="/tourist/">
+            Back
+          </a>
+        </div>
+        <div>
+          {requests.map((request) => (
             <div
               style={{
                 display: "flex",
@@ -46,8 +60,8 @@ export default function UserRequests() {
                 padding: "20px",
               }}
             >
-              <h3>Request</h3>
-              {request.bookingId}
+              <h3>ID {request.bookingId}</h3>
+
               <h4
                 style={{
                   color:
@@ -61,24 +75,20 @@ export default function UserRequests() {
                 Status: {request.status}
               </h4>
               <a
-                href="/tourist/requests/view"
                 className="btn btn-secondary"
                 style={{ float: "right" }}
+                onClick={() =>
+                  window.location.replace(
+                    `http://localhost:3000/tourist/requests/view/${request.bookingId}`
+                  )
+                }
               >
                 View
               </a>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      {/* pass status as prop to show cancel button according to that */}
-      {/* <Router>
-        <Route
-          path="/userHome/requests/view"
-          exact
-          render={(props) => <UserViewService {...props} status={status} />}
-        />
-      </Router> */}
     </div>
   );
 }

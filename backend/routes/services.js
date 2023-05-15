@@ -182,4 +182,24 @@ router
       });
   });
 
+// get service locations
+router.route("/get/servicedetails/").get(async (req, res) => {
+  await Service.find(
+    {},
+    {
+      ServiceLocation: 1,
+      ServiceName: 1,
+      Service_ProviderId: 1,
+      ServiceId: 1,
+      _id: 0,
+    }
+  )
+    .then((serviceDetails) => {
+      res.json(serviceDetails);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;

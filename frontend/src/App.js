@@ -15,6 +15,7 @@ import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
 import TouristProfileUpdatePage from "./components/TouristProfileUpdatePage";
 import MyServiceRequests from "./components/MyServiceRequests";
+import AdminRequestApprovalSingle from "./components/AdminRequestApprovalSingle";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
       <Route path="/tourist/requests/" exact component={UserRequests} />
       {/* Remove this and implement UserRequests component line 47 */}
       <Route
-        path="/tourist/requests/view"
+        path="/tourist/requests/view/:bookingId"
         exact
         component={UserViewService}
       />{" "}
