@@ -1,14 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import UserServicesComponent from "./UserServicesComponent";
+import axios from "axios";
+// import userHomeBG from "../images/userHomeBG.jpg";
 
 export default function UserHome() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
 
-  let [location, setLocation] = useState("");
-  const locations = ["Nuwara Eliya", "Colombo", "Kandy"]; //get the locations from DB to here
+  //adding a background image
+  // const backgroundImageUrl = `url(${userHomeBG})`;
+
+  // const style = {
+  //   backgroundImage: backgroundImageUrl,
+  //   backgroundSize: "cover",
+  //   backgroundPosition: "center",
+  //   height: "100vh",
+  // };
+
+  const [location, setLocation] = useState("");
+  const [locations, setLocations] = useState([]);
+  const [serviceNames, setServiceNames] = useState([]);
+  let locationsFetched = false;
+
+  function getServices() {
+    axios
+      .get(`http://localhost:8070/service/get/servicedetails/`)
+      .then((res) => {
+        // console.log(res.data);
+
+        if (locationsFetched == false) {
+          for (let i = 0; i < res.data.length; i++) {
+            locations.push({
+              location: res.data[i].ServiceLocation,
+              name: res.data[i].ServiceName,
+              serviceId: res.data[i].ServiceId,
+              serviceProviderId: res.data[i].Service_ProviderId,
+            });
+            // locations.push(res.data[i].ServiceLocation);
+            // serviceNames.push(res.data[i].ServiceName);
+          }
+          locationsFetched = true;
+        }
+        // console.log(locations);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
+
+  useEffect(() => {
+    getServices();
+    console.log("Hi");
+  }, []);
 
   return (
     <div class="container">
@@ -65,11 +110,16 @@ export default function UserHome() {
       <div>
         {/* Display Component based on location */}
         {locations.map((city) => {
-          if (
-            city.toLowerCase().includes(location.toLowerCase()) &&
-            location.toLowerCase() != ""
-          ) {
-            return <UserServicesComponent city={city} />;
+          let cityName = city.location ? city.location.toLowerCase() : "";
+          if (cityName.includes(location.toLowerCase()) && location !== "") {
+            return (
+              <UserServicesComponent
+                city={city.location}
+                serviceName={city.name}
+                serviceId={city.serviceId}
+                serviceProviderId={city.serviceProviderId}
+              />
+            );
           }
         })}
       </div>

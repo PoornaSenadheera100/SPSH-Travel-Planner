@@ -10,12 +10,12 @@ import UserHome from "./components/UserHome";
 import UserRequests from "./components/UserRequests";
 import UserViewService from "./components/UserViewService";
 import AllServices from "./components/AllServices";
-import AddService from "./components/AddService";
 import SingleService from "./components/SingleService";
-import Slideshow from "./components/Slideshow";
-import UpdateService from "./components/UpdateServices";
 import AddServicePage from "./components/AddServicePage";
 import UpdateServicePage from "./components/UpdateServicePage";
+import TouristProfileUpdatePage from "./components/TouristProfileUpdatePage";
+import MyServiceRequests from "./components/MyServiceRequests";
+import AdminRequestApprovalSingle from "./components/AdminRequestApprovalSingle";
 
 function App() {
   return (
@@ -26,13 +26,18 @@ function App() {
       <Route path="/admin/" component={AdminHomePage} />
       <Route path="/serviceprovider/" component={ServiceProviderHomePage} />
       <Route path="/tourist/userprofile" exact component={TouristProfile} />
+      <Route
+        path="/tourist/updateprofile/:paramemail"
+        exact
+        component={TouristProfileUpdatePage}
+      />
       {/* <Route path="/userHome" exact component={UserHome} /> */}
       <Route path="/tourist" exact component={UserHome} />
       {/* <Route path="/userHome/requests/:id" exact component={UserRequests} /> */}
       <Route path="/tourist/requests/" exact component={UserRequests} />
       {/* Remove this and implement UserRequests component line 47 */}
       <Route
-        path="/tourist/requests/view"
+        path="/tourist/requests/view/:bookingId"
         exact
         component={UserViewService}
       />{" "}
@@ -52,6 +57,11 @@ function App() {
         path="/serviceprovider/getservice/:id"
         exact
         component={SingleService}
+      ></Route>
+      <Route
+        path="/serviceprovider/servicerequest/:id"
+        exact
+        component={MyServiceRequests}
       ></Route>
     </Router>
   );

@@ -3,11 +3,23 @@ import CreateForm from "./CreateForm";
 import Button from "react-bootstrap/Button";
 import List from "./List";
 import ViewUser from "./ViewUser";
+import AdminRequestApproval from "./AdminRequestApproval";
+import AdminRequestApprovalSingle from "./AdminRequestApprovalSingle";
+import AdminServiceSearch from "./AdminServiceSearch";
 
 export default function AdminHomePage() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
     window.location.replace("/");
   }
+
+  const pwdChangeWarning = (
+    <>
+      <br />
+      <h4>
+        Leave the fields below blank if you do not want to change the password!
+      </h4>
+    </>
+  );
 
   return (
     <div className="row" style={{ height: "100%" }}>
@@ -15,7 +27,7 @@ export default function AdminHomePage() {
         <p style={{ color: "white" }}>Invisible</p>
       </div>
       <div className="col-4">
-        <a href="/admin/managerequests">
+        <a href="/admin/managerequests/view">
           <button
             type="button"
             class="btn btn-info btn-lg"
@@ -75,7 +87,11 @@ export default function AdminHomePage() {
             path="/admin/addserviceprovider"
             exact
             render={(props) => (
-              <CreateForm {...props} title="Add Service Provider" />
+              <CreateForm
+                {...props}
+                title="Add Service Provider"
+                backBtnURL="/admin/addserviceprovider"
+              />
             )}
           />
 
@@ -89,10 +105,11 @@ export default function AdminHomePage() {
                 title="Manage Service Providers"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
-                viewURL="http://localhost:3000/admin/manageserviceproviders/view"
-                updateURL=""
-                deleteURL=""
-                afterDeleteURL="http://localhost:3000/admin/manageserviceproviders"
+                viewURL="/admin/manageserviceproviders/view"
+                updateURL="/admin/manageserviceproviders/update"
+                deleteURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/delete/email"
+                afterDeleteURL="/admin/manageserviceproviders"
+                deleteMsg="Service Provider Deleted"
               />
             )}
           />
@@ -107,7 +124,23 @@ export default function AdminHomePage() {
                 title="Service Provider"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
-                backBtnURL="http://localhost:3000/admin/manageserviceproviders"
+                backBtnURL="/admin/manageserviceproviders"
+              />
+            )}
+          />
+
+          {/* Update a Service Provider */}
+          <Route
+            path="/admin/manageserviceproviders/update/:paramemail"
+            exact
+            render={(props) => (
+              <CreateForm
+                {...props}
+                title="Update Service Provider"
+                pwdChangeWarning={pwdChangeWarning}
+                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
+                backBtnURL="/admin/manageserviceproviders"
+                disableEmail="true"
               />
             )}
           />
@@ -122,10 +155,11 @@ export default function AdminHomePage() {
                 title="Manage Tourists"
                 // getURL="http://localhost:8070/tourists/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
-                viewURL="http://localhost:3000/admin/managetourists/view"
-                updateURL=""
-                deleteURL=""
-                afterDeleteURL=""
+                viewURL="/admin/managetourists/view"
+                updateURL="/admin/managetourists/update"
+                deleteURL="https://spsh-travel-planner-backend.onrender.com/tourist/delete/email"
+                afterDeleteURL="/admin/managetourists"
+                deleteMsg="Tourist Deleted"
               />
             )}
           />
@@ -140,10 +174,48 @@ export default function AdminHomePage() {
                 title="Tourist"
                 // getURL="http://localhost:8070/serviceprovider/"
                 getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
-                backBtnURL="http://localhost:3000/admin/managetourists"
+                backBtnURL="/admin/managetourists"
               />
             )}
           />
+
+          {/* Update a Tourist */}
+          <Route
+            path="/admin/managetourists/update/:paramemail"
+            exact
+            render={(props) => (
+              <CreateForm
+                {...props}
+                title="Update Tourist"
+                pwdChangeWarning={pwdChangeWarning}
+                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
+                backBtnURL="/admin/managetourists"
+                disableEmail="true"
+              />
+            )}
+          />
+
+          {/* Manage Requests  */}
+          <Route
+            path="/admin/managerequests/view"
+            exact
+            render={(props) => (
+              <AdminRequestApproval {...props} title="Approvals" />
+            )} //check if props are passed
+          />
+
+          {/* Admin View Single Requests  */}
+          <Route
+            path="/admin/managerequests/view/search/single/:bookingId"
+            exact
+            component={AdminRequestApprovalSingle}
+          />
+
+          {/* Admin Search Service Availability */}
+          {/* <Route
+            path="/admin/managerequests/view/search"
+            component={AdminServiceSearch}
+          /> */}
         </Router>
       </div>
       <div style={{ width: "1px" }}>

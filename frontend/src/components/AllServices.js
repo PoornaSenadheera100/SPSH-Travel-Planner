@@ -19,10 +19,6 @@ export default function AllServices() {
     window.location.replace("/");
   }
 
-  //Creating an array that passes 2 values.
-  //First value of "students" returns the state.
-  //Second value of "setStudents" returns the method that sets the values to the statae, or the one that changes the value of the state.
-  //The initial/default value of the useState is an empty array.([])
   const [services, setService] = useState([]);
   const [ServiceId, setServiceId] = useState("");
 
@@ -36,14 +32,15 @@ export default function AllServices() {
   useEffect(() => {
     //There's another function called getStudents defined inside the arrow function.
     function getService() {
-      //axois can go to the mentioned URL and get the backend data.
-      //axois uses the "get" method --> when retrieving data from the DB --> since that is the http request that is specified in the BACKEND
-      //If data was successfully fetched, then ---> the data objects sent as an array is passed to the seStudent method.
       axios
-        .get(`http://localhost:8070/service/${Service_ProviderId}`)
+        // .get(`http://localhost:8070/service/${Service_ProviderId}`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/service/${Service_ProviderId}`
+        )
         .then((res) => {
           console.log(res.data);
           setService(res.data);
+          console.log(services[0]);
 
           //if it wasn't successfully fetched, then the error is displayed and handled as an exception.
         })
@@ -88,9 +85,20 @@ export default function AllServices() {
 
   return (
     <div className="container">
-      <a href="/service">
-        <button class="btn btn-dark">Back</button>
-      </a>
+      <button
+        class="btn btn-dark"
+        onClick={() => {
+          //history.push moves from the current page.
+          //history.push(`/update/${student._id}`);
+          //window.location also redirects to another page.(delete page with the ID)
+          window.location.replace(
+            `http://localhost:3000/serviceprovider/servicerequest/${Service_ProviderId}`
+          );
+        }}
+      >
+        Accepted Requests
+      </button>
+
       <center>
         <h1>All Services</h1>
       </center>
@@ -111,9 +119,7 @@ export default function AllServices() {
                 //history.push moves from the current page.
                 //history.push(`/update/${student._id}`);
                 //window.location also redirects to another page.(delete page with the ID)
-                window.location.replace(
-                  `http://localhost:3000/serviceprovider/add`
-                );
+                window.location.replace(`/serviceprovider/add`);
               }}
             >
               Add Service
@@ -133,7 +139,7 @@ export default function AllServices() {
             <div
               style={{
                 display: "flex",
-                background: "linear-gradient(to bottom, #28282B, white)",
+                background: "#020317",
                 color: "white",
                 flexDirection: "column",
                 alignItems: "center",
@@ -186,7 +192,7 @@ export default function AllServices() {
                   }}
                   onClick={() => {
                     window.location.replace(
-                      `http://localhost:3000/serviceprovider/getservice/${service.ServiceId}`
+                      `/serviceprovider/getservice/${service.ServiceId}`
                     );
                   }}
                 >
@@ -204,7 +210,7 @@ export default function AllServices() {
                     }}
                     onClick={() => {
                       window.location.replace(
-                        `http://localhost:3000/serviceprovider/update/${service.ServiceId}`
+                        `/serviceprovider/update/${service.ServiceId}`
                       );
                     }}
                   >
@@ -227,14 +233,15 @@ export default function AllServices() {
                       );
                       if (response) {
                         axios
+                          // .delete(
+                          //   `http://localhost:8070/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
+                          // )
                           .delete(
-                            `http://localhost:8070/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
+                            `https://spsh-travel-planner-backend.onrender.com/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
                           )
                           .then(() => {
                             alert("Service Deleted");
-                            window.location.replace(
-                              "http://localhost:3000/serviceprovider/"
-                            );
+                            window.location.replace("/serviceprovider/");
                           })
                           .catch((err) => {
                             alert(err);
