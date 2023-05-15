@@ -68,7 +68,7 @@ export default function Login(props) {
         console.log(res.data);
         if (res.data[0].password === password) {
           sessionStorage.setItem("sTravPlaNimda", Math.random().toString());
-          window.location.replace(`/admin/addserviceprovider`);
+          window.location.replace(`/admin/managerequests/view`);
         } else {
           alert("Invalid Credentials!");
         }

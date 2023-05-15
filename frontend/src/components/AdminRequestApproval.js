@@ -30,9 +30,7 @@ export default function AdminRequestApproval(props) {
       )
       .then((res) => {
         console.log(res.data);
-        window.location.replace(
-          "http://localhost:3000/admin/managerequests/view/"
-        );
+        window.location.replace("/admin/managerequests/view");
       })
       .catch((err) => {
         console.log(err.message);

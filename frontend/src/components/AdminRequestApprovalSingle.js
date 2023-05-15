@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import AdminServiceSearch from "./AdminServiceSearch";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function AdminRequestApprovalSingle() {
   if (sessionStorage.getItem("sTravPlaNimda") === null) {
     window.location.replace("/");
   }
+
+  const history = useHistory();
 
   const { bookingId } = useParams();
   const [name, setName] = useState();
@@ -33,7 +35,8 @@ export default function AdminRequestApprovalSingle() {
       });
   }
 
-  function updateServiceStatus(status, bookingId) {
+  function updateServiceStatus(e, status, bookingId) {
+    e.preventDefault();
     const updateStatus = {
       status,
     };
@@ -44,8 +47,9 @@ export default function AdminRequestApprovalSingle() {
         updateStatus
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         window.location.replace("/admin/managerequests/view");
+        // history.push("/admin/managerequests/view");
       })
       .catch((err) => {
         console.log(err.message);
@@ -153,11 +157,10 @@ export default function AdminRequestApprovalSingle() {
                 <button
                   className="btn btn-success"
                   style={{ marginRight: "10px" }}
-                  onClick={() => {
+                  onClick={(e) => {
                     if (window.confirm("Are you sure you want to approve?")) {
                       const status = "Approved";
-                      updateServiceStatus(status, bookingId);
-                      window.location.replace("/admin/managerequests/view");
+                      updateServiceStatus(e, status, bookingId);
                     }
                   }}
                 >
@@ -166,10 +169,10 @@ export default function AdminRequestApprovalSingle() {
 
                 <button
                   className="btn btn-danger"
-                  onClick={() => {
+                  onClick={(e) => {
                     if (window.confirm("Are you sure you want to reject?")) {
                       const status = "Rejected";
-                      updateServiceStatus(status, bookingId);
+                      updateServiceStatus(e, status, bookingId);
                     }
                   }}
                 >
