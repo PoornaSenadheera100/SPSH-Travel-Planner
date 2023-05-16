@@ -33,10 +33,10 @@ export default function AllServices() {
     //There's another function called getStudents defined inside the arrow function.
     function getService() {
       axios
-        // .get(`http://localhost:8070/service/${Service_ProviderId}`)
-        .get(
-          `https://spsh-travel-planner-backend.onrender.com/service/${Service_ProviderId}`
-        )
+        .get(`http://localhost:8070/service/${Service_ProviderId}`)
+        // .get(
+        //   `https://spsh-travel-planner-backend.onrender.com/service/${Service_ProviderId}`
+        // )
         .then((res) => {
           console.log(res.data);
           setService(res.data);
@@ -233,12 +233,12 @@ export default function AllServices() {
                       );
                       if (response) {
                         axios
-                          // .delete(
-                          //   `http://localhost:8070/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
-                          // )
                           .delete(
-                            `https://spsh-travel-planner-backend.onrender.com/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
+                            `http://localhost:8070/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
                           )
+                          // .delete(
+                          //   `https://spsh-travel-planner-backend.onrender.com/service/delete/${service.Service_ProviderId}/${service.ServiceId}`
+                          // )
                           .then(() => {
                             alert("Service Deleted");
                             window.location.replace("/serviceprovider/");

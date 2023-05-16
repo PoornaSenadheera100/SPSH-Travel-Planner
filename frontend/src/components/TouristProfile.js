@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
 
 export default function TouristProfile() {
-
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
 
-//adding a background image
+  //adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
 
   const style = {
@@ -40,10 +39,10 @@ export default function TouristProfile() {
   //Use effect to fetch data which is in DB and display them in the form
   useEffect(() => {
     axios
-      // .get(`http://localhost:8070/tourist/get/email/${email}`)
-      .get(
-        `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
-      )
+      .get(`http://localhost:8070/tourist/get/email/${email}`)
+      // .get(
+      //   `https://spsh-travel-planner-backend.onrender.com/tourist/get/email/${email}`
+      // )
       .then((res) => {
         console.log(res.data);
         setName(res.data[0].name);
@@ -54,8 +53,6 @@ export default function TouristProfile() {
         alert("Error in fetching tourist data");
       });
   }, []);
-
- 
 
   //Function for creating  a prop for Form
   function Label({ formLabel, value }) {

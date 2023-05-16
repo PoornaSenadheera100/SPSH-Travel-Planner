@@ -103,11 +103,12 @@ export default function AdminHomePage() {
               <List
                 {...props}
                 title="Manage Service Providers"
-                // getURL="http://localhost:8070/serviceprovider/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
+                getURL="http://localhost:8070/serviceprovider/"
+                // getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/"
                 viewURL="/admin/manageserviceproviders/view"
                 updateURL="/admin/manageserviceproviders/update"
-                deleteURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/delete/email"
+                // deleteURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/delete/email"
+                deleteURL="http://localhost:8070/serviceprovider/delete/email"
                 afterDeleteURL="/admin/manageserviceproviders"
                 deleteMsg="Service Provider Deleted"
               />
@@ -122,8 +123,8 @@ export default function AdminHomePage() {
               <ViewUser
                 {...props}
                 title="Service Provider"
-                // getURL="http://localhost:8070/serviceprovider/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
+                getURL="http://localhost:8070/serviceprovider/get/email"
+                // getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
                 backBtnURL="/admin/manageserviceproviders"
               />
             )}
@@ -138,7 +139,8 @@ export default function AdminHomePage() {
                 {...props}
                 title="Update Service Provider"
                 pwdChangeWarning={pwdChangeWarning}
-                getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
+                // getURL="https://spsh-travel-planner-backend.onrender.com/serviceprovider/get/email"
+                getURL="http://localhost:8070/serviceprovider/get/email"
                 backBtnURL="/admin/manageserviceproviders"
                 disableEmail="true"
               />
@@ -153,11 +155,12 @@ export default function AdminHomePage() {
               <List
                 {...props}
                 title="Manage Tourists"
-                // getURL="http://localhost:8070/tourists/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
+                getURL="http://localhost:8070/tourist/"
+                // getURL="https://spsh-travel-planner-backend.onrender.com/tourist/"
                 viewURL="/admin/managetourists/view"
                 updateURL="/admin/managetourists/update"
-                deleteURL="https://spsh-travel-planner-backend.onrender.com/tourist/delete/email"
+                // deleteURL="https://spsh-travel-planner-backend.onrender.com/tourist/delete/email"
+                deleteURL="http://localhost:8070/tourist/delete/email"
                 afterDeleteURL="/admin/managetourists"
                 deleteMsg="Tourist Deleted"
               />
@@ -172,8 +175,8 @@ export default function AdminHomePage() {
               <ViewUser
                 {...props}
                 title="Tourist"
-                // getURL="http://localhost:8070/serviceprovider/"
-                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
+                getURL="http://localhost:8070/tourist/get/email"
+                // getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
                 backBtnURL="/admin/managetourists"
               />
             )}
@@ -188,7 +191,8 @@ export default function AdminHomePage() {
                 {...props}
                 title="Update Tourist"
                 pwdChangeWarning={pwdChangeWarning}
-                getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
+                // getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
+                getURL="http://localhost:8070/tourist/get/email"
                 backBtnURL="/admin/managetourists"
                 disableEmail="true"
               />
