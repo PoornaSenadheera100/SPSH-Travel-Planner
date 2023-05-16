@@ -15,14 +15,14 @@ export default function CreateService(props) {
 
   const Service_ProviderId = sessionStorage.getItem("serviceProviderEmail");
 
-  const [ServiceId, setServiceId] = useState({});
-  const [ServiceName, setServiceName] = useState({});
-  const [ServiceLocation, setServiceLocation] = useState({});
-  const [ServicePrice, setServicePrice] = useState({});
-  const [ServiceDuration, setServiceDuration] = useState({});
-  const [AvailableTime, setAvailableTime] = useState({});
-  const [AvailableDates, setAvailableDates] = useState({});
-  const [Capacity, setCapacity] = useState({});
+  const [ServiceId, setServiceId] = useState(props.ServiceId);
+  const [ServiceName, setServiceName] = useState(props.ServiceName);
+  const [ServiceLocation, setServiceLocation] = useState(props.ServiceLocation);
+  const [ServicePrice, setServicePrice] = useState(props.ServicePrice);
+  const [ServiceDuration, setServiceDuration] = useState(props.ServiceDuration);
+  const [AvailableTime, setAvailableTime] = useState(props.AvailableTime);
+  const [AvailableDates, setAvailableDates] = useState(props.AvailableDates);
+  const [Capacity, setCapacity] = useState(props.Capacity);
   const [Image, setImage] = useState("");
   const [serviceIds, setServiceIds] = useState({});
 
@@ -43,7 +43,9 @@ export default function CreateService(props) {
 
   function checkServiceCode(serviceCode) {
     axios
-      .get(`http://localhost:8070/service/getservice/${serviceCode}`)
+      .get(
+        `http://localhost:8070/service/getservice/${serviceCode}/${Service_ProviderId}`
+      )
       // .get(
       //   `https://spsh-travel-planner-backend.onrender.com/service/getservice/${serviceCode}`
       // )
@@ -62,64 +64,91 @@ export default function CreateService(props) {
     //The below code prevents the normal behaviour of the submit button.
     e.preventDefault();
 
-    //Create a javascript object. That passes the 3 attributes.
-    const newService = {
-      Service_ProviderId,
-      ServiceId,
-      ServiceName,
-      ServiceLocation,
-      ServicePrice,
-      ServiceDuration,
-      AvailableTime,
-      AvailableDates,
-      Capacity,
-      Image,
-    };
+    if (props.forUpdate) {
+      const updatedService = {
+        Service_ProviderId,
+        ServiceId,
+        ServiceName,
+        ServiceLocation,
+        ServicePrice,
+        ServiceDuration,
+        AvailableTime,
+        AvailableDates,
+        Capacity,
+      };
 
-    //We pass the data from the frontend to the backend using the post http request.
-    //Then the backend server responds with another http request.
-    //This http response coming from the backend is handled using a seperate npm package called "axios" --> this is imported at the top following the installation.
-    //axios has a method called post that passes 3 arguments usually, if there is authentication(No authentication meaning --> only 2 parameters)
-    //Pass the backend URL as the first parameter.
-    //Pass the JS object next as the second parameter, that holds the 3 attributes passed through the form.
-
-    if (block === false) {
       axios
-        .post(`http://localhost:8070/service/add/`, newService)
-        // .post(
-        //   `https://spsh-travel-planner-backend.onrender.com/service/add/`,
-        //   newService
-        // )
+        .put(
+          `http://localhost:8070/service/update/${Service_ProviderId}/${ServiceId}`,
+          updatedService
+        )
         .then(() => {
-          //After sending the data --> backend server responds --> if successfully added then an alert message is sent.
-          alert(`Service Added`);
+          alert("Service Updated");
           window.location.replace("/serviceprovider");
-
-          //After submitting the details ---> the values should be taken off from the fields ---> to do this --> the setters are assigned with ("")
-          setServiceId("");
-          setServiceName("");
-          setServiceLocation("");
-          setServicePrice();
-          setServiceDuration("");
-          setAvailableTime("");
-          setAvailableDates("");
-          setCapacity();
-          setImage("");
-
-          //Can move to the home page after deleting the data
-          // window.location.replace("http://localhost:3000/item");
-
-          //can move to the add student page after deleting the data.
-          //window.location.replace("http://localhost:3000/inventory/add");
         })
         .catch((err) => {
-          //After sending the data --> backend server responds --> if it wasn't successfully added --> the error is handled as an exception.
-          alert(err);
+          alert("Network Error...");
         });
-      //Pass the js object that we created in the console.(This will display the name, age,gender that's passed).
-      //console.log(newStudent);
     } else {
-      alert("This Service ID is already existing!");
+      //Create a javascript object. That passes the 3 attributes.
+      const newService = {
+        Service_ProviderId,
+        ServiceId,
+        ServiceName,
+        ServiceLocation,
+        ServicePrice,
+        ServiceDuration,
+        AvailableTime,
+        AvailableDates,
+        Capacity,
+        Image,
+      };
+
+      //We pass the data from the frontend to the backend using the post http request.
+      //Then the backend server responds with another http request.
+      //This http response coming from the backend is handled using a seperate npm package called "axios" --> this is imported at the top following the installation.
+      //axios has a method called post that passes 3 arguments usually, if there is authentication(No authentication meaning --> only 2 parameters)
+      //Pass the backend URL as the first parameter.
+      //Pass the JS object next as the second parameter, that holds the 3 attributes passed through the form.
+
+      if (block === false) {
+        axios
+          .post(`http://localhost:8070/service/add/`, newService)
+          // .post(
+          //   `https://spsh-travel-planner-backend.onrender.com/service/add/`,
+          //   newService
+          // )
+          .then(() => {
+            //After sending the data --> backend server responds --> if successfully added then an alert message is sent.
+            alert(`Service Added`);
+            window.location.replace("/serviceprovider");
+
+            //After submitting the details ---> the values should be taken off from the fields ---> to do this --> the setters are assigned with ("")
+            setServiceId("");
+            setServiceName("");
+            setServiceLocation("");
+            setServicePrice();
+            setServiceDuration("");
+            setAvailableTime("");
+            setAvailableDates("");
+            setCapacity();
+            setImage("");
+
+            //Can move to the home page after deleting the data
+            // window.location.replace("http://localhost:3000/item");
+
+            //can move to the add student page after deleting the data.
+            //window.location.replace("http://localhost:3000/inventory/add");
+          })
+          .catch((err) => {
+            //After sending the data --> backend server responds --> if it wasn't successfully added --> the error is handled as an exception.
+            alert(err);
+          });
+        //Pass the js object that we created in the console.(This will display the name, age,gender that's passed).
+        //console.log(newStudent);
+      } else {
+        alert("This Service ID is already existing!");
+      }
     }
   }
 
@@ -195,7 +224,7 @@ export default function CreateService(props) {
             <input
               type="text"
               style={{ fontWeight: "bold", fontSize: "20px" }}
-              value={props.ServiceId}
+              value={ServiceId}
               className="form-control"
               required
               pattern="[S][0-9]{3}"
@@ -222,7 +251,7 @@ export default function CreateService(props) {
               type="text"
               style={{ fontWeight: "bold", fontSize: "20px" }}
               className="form-control"
-              value={props.ServiceName}
+              value={ServiceName}
               id="name"
               pattern="[a-zA-Z\s]+"
               required
@@ -252,7 +281,7 @@ export default function CreateService(props) {
             <input
               type="text"
               style={{ fontWeight: "bold", fontSize: "20px" }}
-              value={props.ServiceLocation}
+              value={ServiceLocation}
               className="form-control"
               required
               id="location"
@@ -274,7 +303,7 @@ export default function CreateService(props) {
             <input
               type="number"
               style={{ fontWeight: "bold", fontSize: "20px" }}
-              value={props.ServicePrice}
+              value={ServicePrice}
               className="form-control"
               required
               id="price"
@@ -300,7 +329,7 @@ export default function CreateService(props) {
             <input
               type="text"
               style={{ fontWeight: "bold", fontSize: "20px" }}
-              value={props.ServiceDuration}
+              value={ServiceDuration}
               className="form-control"
               required
               id="duration"
@@ -326,7 +355,7 @@ export default function CreateService(props) {
             <input
               type="text"
               style={{ fontWeight: "bold", fontSize: "20px" }}
-              value={props.AvailableTime}
+              value={AvailableTime}
               className="form-control"
               required
               id="time"
@@ -352,7 +381,7 @@ export default function CreateService(props) {
             <input
               type="text"
               style={{ fontWeight: "bold", fontSize: "20px", width: "100%" }}
-              value={props.AvailableDates}
+              value={AvailableDates}
               className="form-control"
               required
               id="dates"
@@ -378,7 +407,7 @@ export default function CreateService(props) {
             <input
               type="number"
               style={{ fontWeight: "bold", fontSize: "20px" }}
-              value={props.Capacity}
+              value={Capacity}
               className="form-control"
               required
               id="capacity"

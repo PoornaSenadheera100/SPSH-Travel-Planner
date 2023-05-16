@@ -23,21 +23,23 @@ export default function UpdateServicePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/service/get/${Service_ProviderId}/${id}`)
+      .get(
+        `http://localhost:8070/service/getservice/${id}/${Service_ProviderId}`
+      )
       // .get(
       //   `https://spsh-travel-planner-backend.onrender.com/service/get/${Service_ProviderId}/${id}`
       // )
       .then((res) => {
-        console.log(res.data.service);
-        setServiceId(res.data.service[0].ServiceId);
-        setServiceName(res.data.service[0].ServiceName);
-        setServiceLocation(res.data.service[0].ServiceLocation);
-        setServicePrice(res.data.service[0].ServicePrice);
-        setServiceDuration(res.data.service[0].ServiceDuration);
-        setAvailableTime(res.data.service[0].AvailableTime);
-        setAvailableDates(res.data.service[0].AvailableDates);
-        setCapacity(res.data.service[0].Capacity);
-        setImage(res.data.service[0].Image);
+        console.log(res.data);
+        setServiceId(res.data[0].ServiceId);
+        setServiceName(res.data[0].ServiceName);
+        setServiceLocation(res.data[0].ServiceLocation);
+        setServicePrice(res.data[0].ServicePrice);
+        setServiceDuration(res.data[0].ServiceDuration);
+        setAvailableTime(res.data[0].AvailableTime);
+        setAvailableDates(res.data[0].AvailableDates);
+        setCapacity(res.data[0].Capacity);
+        // setImage(res.data[0].Image);
       })
       .catch((err) => {
         console.log(err);
@@ -45,17 +47,20 @@ export default function UpdateServicePage() {
   }, []);
   return (
     <div>
-      <ElAdd
-        hidden="true"
-        ServiceId={ServiceId}
-        ServiceName={ServiceName}
-        ServiceLocation={ServiceLocation}
-        ServicePrice={ServicePrice}
-        ServiceDuration={ServiceDuration}
-        AvailableTime={AvailableTime}
-        AvailableDates={AvailableDates}
-        Capacity={Capacity}
-      />
+      {ServiceId && (
+        <ElAdd
+          hidden="true"
+          ServiceId={ServiceId}
+          ServiceName={ServiceName}
+          ServiceLocation={ServiceLocation}
+          ServicePrice={ServicePrice}
+          ServiceDuration={ServiceDuration}
+          AvailableTime={AvailableTime}
+          AvailableDates={AvailableDates}
+          Capacity={Capacity}
+          forUpdate="true"
+        />
+      )}
     </div>
   );
 }
