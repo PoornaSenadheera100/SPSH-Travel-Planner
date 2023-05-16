@@ -17,7 +17,8 @@ export default function UserViewService() {
   const [price, setPrice] = useState("");
   const [status, setStatus] = useState("");
 
-  function deleteService() {
+  function deleteService(e) {
+    e.preventDefault();
     axios
       // .delete(
       //   `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
@@ -156,10 +157,10 @@ export default function UserViewService() {
             <button
               class="btn btn-danger"
               style={{ float: "right" }}
-              onClick={() => {
+              onClick={(e) => {
                 if (window.confirm("Are you sure you want to cancel?")) {
-                  deleteService();
-                  window.location.replace("/tourist/requests");
+                  deleteService(e);
+                  // window.location.replace("/tourist/requests");
                 }
               }}
             >
