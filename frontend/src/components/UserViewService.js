@@ -36,14 +36,15 @@ export default function UserViewService() {
       });
   }
 
-  function deleteService() {
+  function deleteService(e) {
+    e.preventDefault();
     axios
       .delete(
         `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
       )
       .then(() => {
         alert("Service Request Deleted");
-        window.location.replace("http://localhost:3000/tourist/requests/");
+        window.location.replace("/tourist/requests");
       })
       .catch((err) => {
         alert(err);
@@ -154,12 +155,12 @@ export default function UserViewService() {
             <button
               class="btn btn-danger"
               style={{ float: "right" }}
-              onClick={() => {
+              onClick={(e) => {
                 if (window.confirm("Are you sure you want to cancel?")) {
-                  deleteService();
-                  window.location.replace(
-                    "http://localhost:3000/tourist/requests/"
-                  );
+                  deleteService(e);
+                  // window.location.replace(
+                  //   "http://localhost:3000/tourist/requests/"
+                  // );
                 }
               }}
             >
