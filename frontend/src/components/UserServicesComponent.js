@@ -26,8 +26,12 @@ export default function UserServicesComponent(props) {
               }}
             >
               <button
-                href="#"
-                style={{ textDecoration: "none" }}
+                // href="#"
+                style={{
+                  textDecoration: "none",
+                  border: "none",
+                  background: "none",
+                }}
                 onClick={() => handleServiceClick(index)}
               >
                 <div
