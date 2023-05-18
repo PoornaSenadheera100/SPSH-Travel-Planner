@@ -10,9 +10,6 @@ import { Buffer } from "buffer";
 //Import the axios pacakge to read the data from the backend to the frontend.
 import axios from "axios";
 
-//Used for navigation purposes(after clicking on update button --> moves to update page)
-import { useHistory } from "react-router-dom";
-
 //export the function of "AllServices"
 export default function AllServices() {
   if (sessionStorage.getItem("sTravPlaVresVorp") === null) {
@@ -20,12 +17,8 @@ export default function AllServices() {
   }
 
   const [services, setService] = useState([]);
-  const [ServiceId, setServiceId] = useState("");
 
   const Service_ProviderId = sessionStorage.getItem("serviceProviderEmail");
-
-  //assigning the method of useHistory to the variable "history"
-  let history = useHistory();
 
   //const Service_ProviderId = sessionStorage.getService("sellerEmail");
 
@@ -51,7 +44,7 @@ export default function AllServices() {
 
     //Invoke the function once its implemented.
     getService();
-  }, []);
+  }, [Service_ProviderId, services]);
 
   //Get the image source.
   /*
@@ -92,7 +85,7 @@ export default function AllServices() {
           //history.push(`/update/${student._id}`);
           //window.location also redirects to another page.(delete page with the ID)
           window.location.replace(
-            `http://localhost:3000/serviceprovider/servicerequest/${Service_ProviderId}`
+            `/serviceprovider/servicerequest/${Service_ProviderId}`
           );
         }}
       >
@@ -150,6 +143,7 @@ export default function AllServices() {
             >
               <img
                 src={getImageSource(service.Image)}
+                alt="service"
                 style={{ maxWidth: "150px", height: "150px" }}
               />
               <div

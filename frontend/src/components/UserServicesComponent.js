@@ -4,7 +4,7 @@ import UserServiceBookingForm from "./UserServiceBookingForm";
 export default function UserServicesComponent(props) {
   let { city, serviceName, serviceId, serviceProviderId } = props;
 
-  let [serviceNames, setServiceName] = useState([serviceName]);
+  let [serviceNames] = useState([serviceName]);
 
   let [showServiceComponents, setShowServiceComponents] = useState(true);
 
@@ -25,9 +25,13 @@ export default function UserServicesComponent(props) {
                 alignItems: "center",
               }}
             >
-              <a
-                href="#"
-                style={{ textDecoration: "none" }}
+              <button
+                // href="#"
+                style={{
+                  textDecoration: "none",
+                  border: "none",
+                  background: "none",
+                }}
                 onClick={() => handleServiceClick(index)}
               >
                 <div
@@ -45,7 +49,7 @@ export default function UserServicesComponent(props) {
                     {name}
                   </h3>
                 </div>
-              </a>
+              </button>
             </div>
           ))}
       </ul>

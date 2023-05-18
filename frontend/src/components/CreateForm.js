@@ -25,7 +25,7 @@ export default function CreateForm(props) {
         setNic(res.data[0].nic);
       });
     }
-  }, [props.getURL, paramemail]);
+  }, [props.disableEmail, props.getURL, paramemail]);
 
   function proceed(e) {
     e.preventDefault();
@@ -241,13 +241,13 @@ export default function CreateForm(props) {
   }
 
   function TouristUpdateProfile() {
-    if (props.title == "Update tourist profile") {
+    if (props.title === "Update tourist profile") {
       //Check of the Email is updated or not
       // if (paramemail != email) {
       //   alert("Sorry you cannot edit the Email!");
       // } else {
       //check if both passwords are matching and then update
-      if (password != rePassword) {
+      if (password !== rePassword) {
         alert("Sorry passwords are not matching!");
       } else if (password === "" && rePassword === "") {
         const updateTouristWithoutPassword = {
@@ -257,13 +257,17 @@ export default function CreateForm(props) {
           email,
         };
         axios
+          // .put(
+          //   `http://localhost:8070/tourist/update/${paramemail}`,
+          //   updateTouristWithoutPassword
+          // )
           .put(
-            `http://localhost:8070/tourist/update/${paramemail}`,
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
             updateTouristWithoutPassword
           )
           .then(() => {
             alert("Profile updated");
-            window.location.replace("http://localhost:3000/tourist/");
+            window.location.replace("/tourist");
           })
           .catch((err) => {
             alert("Sorry unable to update tourist");
@@ -277,10 +281,14 @@ export default function CreateForm(props) {
           password,
         };
         axios
-          .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          // .put(`http://localhost:8070/tourist/update/${paramemail}`, newTourist)
+          .put(
+            `https://spsh-travel-planner-backend.onrender.com/tourist/update/${paramemail}`,
+            newTourist
+          )
           .then(() => {
             alert("Profile updated");
-            window.location.replace("http://localhost:3000/tourist/");
+            window.location.replace("/tourist");
           })
           .catch((err) => {
             alert("Update failure occured ! ");

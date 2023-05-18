@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import UserServicesComponent from "./UserServicesComponent";
 import axios from "axios";
@@ -20,40 +20,43 @@ export default function UserHome() {
   // };
 
   const [location, setLocation] = useState("");
-  const [locations, setLocations] = useState([]);
-  const [serviceNames, setServiceNames] = useState([]);
-  let locationsFetched = false;
+  const [locations] = useState([]);
 
-  function getServices() {
-    axios
-      .get(`http://localhost:8070/service/get/servicedetails/`)
-      .then((res) => {
-        // console.log(res.data);
-
-        if (locationsFetched == false) {
-          for (let i = 0; i < res.data.length; i++) {
-            locations.push({
-              location: res.data[i].ServiceLocation,
-              name: res.data[i].ServiceName,
-              serviceId: res.data[i].ServiceId,
-              serviceProviderId: res.data[i].Service_ProviderId,
-            });
-            // locations.push(res.data[i].ServiceLocation);
-            // serviceNames.push(res.data[i].ServiceName);
-          }
-          locationsFetched = true;
-        }
-        // console.log(locations);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  }
+  // let locationsFetched = false;
+  const locationsFetched = useRef(false);
 
   useEffect(() => {
+    function getServices() {
+      axios
+        // .get(`http://localhost:8070/service/get/servicedetails/`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/service/get/servicedetails/`
+        )
+        .then((res) => {
+          // console.log(res.data);
+
+          if (locationsFetched.current === false) {
+            for (let i = 0; i < res.data.length; i++) {
+              locations.push({
+                location: res.data[i].ServiceLocation,
+                name: res.data[i].ServiceName,
+                serviceId: res.data[i].ServiceId,
+                serviceProviderId: res.data[i].Service_ProviderId,
+              });
+              // locations.push(res.data[i].ServiceLocation);
+              // serviceNames.push(res.data[i].ServiceName);
+            }
+            locationsFetched.current = true;
+          }
+          // console.log(locations);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
+
     getServices();
-    console.log("Hi");
-  }, []);
+  }, [locations]);
 
   return (
     <div class="container">
@@ -120,6 +123,8 @@ export default function UserHome() {
                 serviceProviderId={city.serviceProviderId}
               />
             );
+          } else {
+            return <></>;
           }
         })}
       </div>

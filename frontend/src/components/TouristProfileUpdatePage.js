@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CreateForm from "./CreateForm";
 
 export default function TouristProfileUpdatePage() {
@@ -15,7 +14,8 @@ export default function TouristProfileUpdatePage() {
     <div className="container">
       <CreateForm
         title="Update tourist profile"
-        getURL="http://localhost:8070/tourist/get/email"
+        // getURL="http://localhost:8070/tourist/get/email"
+        getURL="https://spsh-travel-planner-backend.onrender.com/tourist/get/email"
         pwdChangeWarning={pwdChangeWarning}
         disableEmail="true"
         backBtnURL="/tourist/userprofile"

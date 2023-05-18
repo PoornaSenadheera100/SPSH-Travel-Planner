@@ -17,9 +17,30 @@ export default function UserViewService() {
   const [price, setPrice] = useState("");
   const [status, setStatus] = useState("");
 
-  function getServiceInfo() {
+  function deleteService(e) {
+    e.preventDefault();
     axios
-      .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      // .delete(
+      //   `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
+      // )
+      .delete(
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/delete/bookingId/${bookingId}`
+      )
+      .then(() => {
+        alert("Service Request Deleted");
+        window.location.replace("/tourist/requests");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
+  useEffect(() => {
+    axios
+      // .get(`http://localhost:8070/servicerequest/get/bookingId/${bookingId}`)
+      .get(
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/bookingId/${bookingId}`
+      )
       .then((res) => {
         console.log(res.data);
         setServiceName(res.data[0].serviceName);
@@ -34,25 +55,7 @@ export default function UserViewService() {
       .catch((err) => {
         alert(err.message);
       });
-  }
-
-  function deleteService() {
-    axios
-      .delete(
-        `http://localhost:8070/servicerequest/delete/bookingId/${bookingId}`
-      )
-      .then(() => {
-        alert("Service Request Deleted");
-        window.location.replace("http://localhost:3000/tourist/requests/");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
-
-  useEffect(() => {
-    getServiceInfo();
-  }, []);
+  }, [bookingId]);
 
   return (
     <div style={{ width: 500, margin: "auto" }}>
@@ -154,12 +157,10 @@ export default function UserViewService() {
             <button
               class="btn btn-danger"
               style={{ float: "right" }}
-              onClick={() => {
+              onClick={(e) => {
                 if (window.confirm("Are you sure you want to cancel?")) {
-                  deleteService();
-                  window.location.replace(
-                    "http://localhost:3000/tourist/requests/"
-                  );
+                  deleteService(e);
+                  // window.location.replace("/tourist/requests");
                 }
               }}
             >

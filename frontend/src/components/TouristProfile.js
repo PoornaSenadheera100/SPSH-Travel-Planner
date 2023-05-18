@@ -1,15 +1,13 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import profileBackground from "../images/profileBackground.jpg";
 
 export default function TouristProfile() {
-
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
     window.location.replace("/");
   }
 
-//adding a background image
+  //adding a background image
   const backgroundImageUrl = `url(${profileBackground})`;
 
   const style = {
@@ -53,9 +51,7 @@ export default function TouristProfile() {
       .catch((err) => {
         alert("Error in fetching tourist data");
       });
-  }, []);
-
- 
+  }, [email]);
 
   //Function for creating  a prop for Form
   function Label({ formLabel, value }) {
@@ -75,7 +71,6 @@ export default function TouristProfile() {
           border: "1px solid black",
           padding: "100px",
           textAlign: "justify",
-          borderRadius: "10px",
           height: "550px",
           width: "600px",
           borderRadius: "50% 50% 0 0",

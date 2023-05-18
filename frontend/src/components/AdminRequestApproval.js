@@ -7,9 +7,9 @@ export default function AdminRequestApproval(props) {
 
   function getAllBookings() {
     axios
-      .get(`http://localhost:8070/servicerequest/`)
+      // .get(`http://localhost:8070/servicerequest/`)
+      .get(`https://spsh-travel-planner-backend.onrender.com/servicerequest/`)
       .then((res) => {
-        console.log("hi");
         console.log(res.data);
         setBookings(res.data);
       })
@@ -24,8 +24,12 @@ export default function AdminRequestApproval(props) {
     };
 
     axios
+      // .put(
+      //   `http://localhost:8070/servicerequest/update/bookingId/${bookingId}`,
+      //   updateStatus
+      // )
       .put(
-        `http://localhost:8070/servicerequest/update/bookingId/${bookingId}`,
+        `https://spsh-travel-planner-backend.onrender.com/servicerequest/update/bookingId/${bookingId}`,
         updateStatus
       )
       .then((res) => {
@@ -60,7 +64,7 @@ export default function AdminRequestApproval(props) {
           }}
         >
           <h3>Request {booking.bookingId}</h3>
-          <a
+          <button
             className="btn btn-secondary"
             style={{ float: "right" }}
             onClick={() =>
@@ -70,8 +74,8 @@ export default function AdminRequestApproval(props) {
             }
           >
             View
-          </a>
-          <a
+          </button>
+          <button
             // href="/tourist/requests/view"
             className="btn btn-success"
             style={{ float: "right" }}
@@ -83,8 +87,8 @@ export default function AdminRequestApproval(props) {
             }}
           >
             Approve
-          </a>
-          <a
+          </button>
+          <button
             className="btn btn-danger"
             style={{ float: "right" }}
             onClick={() => {
@@ -95,7 +99,7 @@ export default function AdminRequestApproval(props) {
             }}
           >
             Reject
-          </a>
+          </button>
         </div>
       ))}
     </div>

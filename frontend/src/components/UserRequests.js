@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import UserViewService from "./UserViewService";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default function UserRequests() {
   if (sessionStorage.getItem("sTravPlaTsirout") === null) {
@@ -12,12 +9,13 @@ export default function UserRequests() {
   const touristEmail = sessionStorage.getItem("touristEmail");
   const [requests, setRequests] = useState([]);
 
-  let [status, setStatus] = useState(["Approved", "Rejected", "Pending"]);
-
   useEffect(() => {
     function getRequest() {
       axios
-        .get(`http://localhost:8070/servicerequest/get/email/${touristEmail}`)
+        // .get(`http://localhost:8070/servicerequest/get/email/${touristEmail}`)
+        .get(
+          `https://spsh-travel-planner-backend.onrender.com/servicerequest/get/email/${touristEmail}`
+        )
         .then((res) => {
           console.log(res.data);
           setRequests(res.data);
@@ -27,7 +25,7 @@ export default function UserRequests() {
         });
     }
     getRequest();
-  }, []);
+  }, [touristEmail]);
 
   return (
     <div
@@ -74,17 +72,17 @@ export default function UserRequests() {
               >
                 Status: {request.status}
               </h4>
-              <a
+              <button
                 className="btn btn-secondary"
                 style={{ float: "right" }}
                 onClick={() =>
                   window.location.replace(
-                    `http://localhost:3000/tourist/requests/view/${request.bookingId}`
+                    `/tourist/requests/view/${request.bookingId}`
                   )
                 }
               >
                 View
-              </a>
+              </button>
             </div>
           ))}
         </div>

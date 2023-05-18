@@ -17,45 +17,46 @@ export default function UpdateServicePage() {
   const [AvailableTime, setAvailableTime] = useState("");
   const [AvailableDates, setAvailableDates] = useState("");
   const [Capacity, setCapacity] = useState();
-  const [Image, setImage] = useState("");
 
-  const { update, id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     axios
       // .get(`http://localhost:8070/service/get/${Service_ProviderId}/${id}`)
       .get(
-        `https://spsh-travel-planner-backend.onrender.com/service/get/${Service_ProviderId}/${id}`
+        `https://spsh-travel-planner-backend.onrender.com/service/getservice/${id}/${Service_ProviderId}`
       )
       .then((res) => {
-        console.log(res.data.service);
-        setServiceId(res.data.service[0].ServiceId);
-        setServiceName(res.data.service[0].ServiceName);
-        setServiceLocation(res.data.service[0].ServiceLocation);
-        setServicePrice(res.data.service[0].ServicePrice);
-        setServiceDuration(res.data.service[0].ServiceDuration);
-        setAvailableTime(res.data.service[0].AvailableTime);
-        setAvailableDates(res.data.service[0].AvailableDates);
-        setCapacity(res.data.service[0].Capacity);
-        setImage(res.data.service[0].Image);
+        console.log(res.data);
+        setServiceId(res.data[0].ServiceId);
+        setServiceName(res.data[0].ServiceName);
+        setServiceLocation(res.data[0].ServiceLocation);
+        setServicePrice(res.data[0].ServicePrice);
+        setServiceDuration(res.data[0].ServiceDuration);
+        setAvailableTime(res.data[0].AvailableTime);
+        setAvailableDates(res.data[0].AvailableDates);
+        setCapacity(res.data[0].Capacity);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [Service_ProviderId, id]);
   return (
     <div>
-      <ElAdd
-        hidden="true"
-        ServiceId={ServiceId}
-        ServiceName={ServiceName}
-        ServiceLocation={ServiceLocation}
-        ServicePrice={ServicePrice}
-        ServiceDuration={ServiceDuration}
-        AvailableTime={AvailableTime}
-        AvailableDates={AvailableDates}
-        Capacity={Capacity}
-      />
+      {ServiceId && (
+        <ElAdd
+          hidden="true"
+          ServiceId={ServiceId}
+          ServiceName={ServiceName}
+          ServiceLocation={ServiceLocation}
+          ServicePrice={ServicePrice}
+          ServiceDuration={ServiceDuration}
+          AvailableTime={AvailableTime}
+          AvailableDates={AvailableDates}
+          Capacity={Capacity}
+          forUpdate="true"
+        />
+      )}
     </div>
   );
 }
