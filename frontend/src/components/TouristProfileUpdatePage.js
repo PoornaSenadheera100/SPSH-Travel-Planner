@@ -1,6 +1,10 @@
 import CreateForm from "./CreateForm";
 
 export default function TouristProfileUpdatePage() {
+  if (sessionStorage.getItem("sTravPlaTsirout") === null) {
+    window.location.replace("/");
+  }
+
   const pwdChangeWarning = (
     <>
       <br></br>
