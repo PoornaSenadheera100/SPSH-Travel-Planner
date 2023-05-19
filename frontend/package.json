@@ -50,9 +50,9 @@
     "esm": "^3.2.25",
     "jest": "^27.5.1"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "axios": "axios/dist/node/axios.cjs"
-    }
+  // "jest": {
+  //   "moduleNameMapper": {
+  //     "axios": "axios/dist/node/axios.cjs"
+  //   }
   }
 }
